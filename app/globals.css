@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Bad+Script&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Manrope:wght@400;500;600;700&family=Marck+Script&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bad+Script&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Manrope:wght@400;500;600;700&family=Marck+Script&family=Montserrat:ital,wght@1,300;1,400&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "../vendor/shadcn-tailwind-4.13.0.css";
@@ -219,24 +219,52 @@ button { font: inherit; cursor: pointer; }
 .payment-dialog [data-slot="dialog-description"], .plan-dialog [data-slot="dialog-description"] { color: #735849!important; line-height: 1.6; }
 .payment-dialog [data-slot="dialog-close"], .plan-dialog [data-slot="dialog-close"] { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%; color: #573526; }
 body:has(.document-dialog) [data-slot="dialog-overlay"] { background: rgba(20,8,4,.76); backdrop-filter: blur(2px); }
-.document-dialog { width: min(530px, calc(100% - 28px))!important; max-width: 530px!important; max-height: calc(100dvh - 14px); overflow-y: auto; scrollbar-width: none; gap: 0!important; padding: 27px clamp(26px, 7vw, 48px) 24px!important; border: 1px solid rgba(239,193,158,.28)!important; border-radius: 12px!important; background: radial-gradient(circle at -8% 55%, rgba(255,133,69,.86) 0, rgba(213,88,37,.42) 18%, transparent 42%), radial-gradient(circle at 108% 56%, rgba(255,137,73,.82) 0, rgba(213,88,37,.38) 18%, transparent 43%), linear-gradient(180deg, #502819 0%, #482116 100%)!important; color: #f9eadf!important; box-shadow: 0 28px 84px rgba(13,4,2,.62), inset 0 0 0 1px rgba(255,227,204,.025)!important; }
-.document-dialog::-webkit-scrollbar { display: none; }
-.document-dialog-header { align-items: center; gap: 0!important; text-align: center!important; }
-.document-dialog-title { margin: 0; color: #fff0e5; font: 400 clamp(1.9rem, 5.6vw, 2.25rem)/.78 "Bad Script", cursive; letter-spacing: -.02em; text-align: center; text-wrap: balance; }
+.document-dialog {
+  container-type: size;
+  width: min(85.91vw, 1649px, calc((100dvh - 14px) * 1.2297))!important;
+  max-width: 1649px!important;
+  aspect-ratio: 1649 / 1341;
+  max-height: calc(100dvh - 14px);
+  overflow: hidden;
+  gap: 0!important;
+  padding: 0!important;
+  border: 0!important;
+  border-radius: 1.82cqi!important;
+  background:
+    radial-gradient(circle 43.4cqi at -11.83% 50.04%, #ffffc9 0%, rgba(255,59,0,.9) 58%, transparent 100%),
+    radial-gradient(circle 43.4cqi at 111.52% 50.04%, #ffffc9 0%, rgba(255,59,0,.9) 58%, transparent 100%),
+    #482817!important;
+  color: #fff4ed!important;
+  box-shadow: 0 28px 84px rgba(13,4,2,.62)!important;
+  isolation: isolate;
+}
+.document-dialog::before,
+.document-dialog::after {
+  content: none;
+}
+.document-dialog-header,
+.document-links,
+.document-continue,
+.document-consents { z-index: 1; }
+.document-dialog-header { position: absolute; inset: 0; display: block; }
+.document-dialog-title { position: absolute; top: 7.46cqh; left: 23.47cqi; width: 53.06cqi; height: 10.44cqh; margin: 0; color: #fff4ed; font-family: "Snell Roundhand", "Bad Script", cursive; font-size: 6.06cqi; font-weight: 500; font-style: normal; line-height: 70%; letter-spacing: 0; text-align: center; text-wrap: balance; }
 .document-dialog-title:focus { outline: none; }
-.document-links { display: grid; justify-items: center; gap: 0; margin: 40px 0 36px; }
-.document-links a { min-height: 26px; display: inline-flex; align-items: center; justify-content: center; padding: 3px 8px; color: #f2ddd0; font: italic 500 .96rem/1.2 "Cormorant Garamond", Georgia, serif; text-align: center; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; transition: color .18s ease, text-shadow .18s ease; }
+.document-links { position: absolute; top: 29.08cqh; left: 0; width: 100%; display: grid; justify-items: center; gap: 2.24cqh; margin: 0; }
+.document-links a { height: 3.65cqh; display: inline-flex; align-items: center; justify-content: center; padding: 0; color: #fff4ed; font-family: "Montserrat", Arial, sans-serif; font-size: 2.43cqi; font-weight: 300; font-style: italic; line-height: 100%; letter-spacing: 0; text-align: center; text-decoration: underline; text-decoration-thickness: from-font; text-underline-offset: 0; transition: color .18s ease, text-shadow .18s ease; }
 .document-links a:hover { color: #fff8f2; text-shadow: 0 0 16px rgba(255,190,142,.5); }
 .document-links a:focus-visible { outline: 2px solid #f6d3b9; outline-offset: 3px; border-radius: 5px; }
-.document-continue { min-width: 146px; min-height: 48px; margin-inline: auto; padding: 8px 28px; border: 1px solid rgba(255,237,223,.9); background: rgba(61,25,15,.3); color: #f8e6d9; box-shadow: inset 0 0 0 4px #4a2216, inset 0 0 0 5px rgba(255,237,223,.72); font: 400 1rem "Bad Script", cursive; }
-.document-continue:enabled:hover { border-color: #fff8f2; background: rgba(255,255,255,.06); box-shadow: inset 0 0 0 4px #4a2216, inset 0 0 0 5px #fff8f2, 0 8px 24px rgba(9,3,1,.28); }
-.document-continue:disabled { cursor: not-allowed; opacity: .68; }
+.document-continue { position: absolute; top: 67.49cqh; left: 36.39cqi; width: 27.47cqi; min-width: 0; height: 10.81cqh; min-height: 0; margin: 0; padding: 0; border: max(1px, .12cqi) solid #fff4ed; border-radius: 6.06cqi; background: transparent; color: #fff4ed; box-shadow: none; font-family: "Snell Roundhand", "Bad Script", cursive; font-size: 3.03cqi; font-weight: 500; font-style: normal; line-height: 100%; letter-spacing: 0; }
+.document-continue::before { content: ""; position: absolute; inset: .97cqh .97cqi; border: max(1px, .12cqi) solid #fff4ed; border-radius: 6.06cqi; pointer-events: none; }
+.document-continue:enabled:hover { border-color: #fff8f2; background: rgba(255,255,255,.035); box-shadow: 0 8px 24px rgba(9,3,1,.28); }
+.document-continue:disabled { cursor: not-allowed; opacity: 1; }
 .document-continue:disabled:hover { transform: none; }
-.document-consents { display: grid; justify-items: center; gap: 0; width: 100%; margin: 12px auto 0; }
-.document-consent { width: fit-content; max-width: 100%; min-height: 30px; display: grid; grid-template-columns: 14px minmax(0, auto); align-items: center; gap: 8px; padding: 3px 0; color: rgba(235,216,202,.64); cursor: pointer; font-size: .76rem; font-style: italic; line-height: 1.2; text-align: left; }
-.document-consent span { max-width: 330px; }
-.document-checkbox { width: 12px!important; height: 12px!important; border: 1px solid rgba(238,216,199,.55)!important; border-radius: 0!important; background: transparent!important; color: #4a2216!important; box-shadow: none!important; }
-.document-checkbox[data-state="checked"] { border-color: #f1d8c5!important; background: #f1d8c5!important; }
+.document-consents { position: absolute; inset: 0; width: 100%; margin: 0; }
+.document-consent { position: absolute; display: grid; grid-template-columns: 1.88cqi minmax(0, 1fr); align-items: center; gap: 1.21cqi; padding: 0; color: rgba(255,244,237,.5); cursor: pointer; font-family: "Montserrat", Arial, sans-serif; font-size: 1.82cqi; font-weight: 400; font-style: italic; line-height: 100%; letter-spacing: 0; text-align: center; }
+.document-consent:nth-child(1) { top: 82.03cqh; left: 26.86cqi; width: 43.12cqi; min-height: 2.76cqh; }
+.document-consent:nth-child(2) { top: 87.02cqh; left: 16.62cqi; width: 63.61cqi; min-height: 5.52cqh; }
+.document-consent span { max-width: none; }
+.document-checkbox { width: 1.88cqi!important; height: 1.88cqi!important; border: max(1px, .12cqi) solid rgba(255,244,237,.5)!important; border-radius: .3cqi!important; background: transparent!important; color: #482817!important; box-shadow: none!important; }
+.document-checkbox[data-state="checked"] { border-color: #fff4ed!important; background: #fff4ed!important; }
 .document-checkbox:focus-visible { outline: 2px solid #f6d3b9!important; outline-offset: 3px!important; }
 
 .account-page, .course-page, .admin-page, .gate-page, .legal-page { min-height: 100vh; }
@@ -400,9 +428,7 @@ body:has(.document-dialog) [data-slot="dialog-overlay"] { background: rgba(20,8,
   .footer-socials { grid-column: auto; }
   .footer-legal { flex-direction: column; }
   .payment-dialog, .plan-dialog { padding: 24px!important; border-radius: 18px!important; }
-  .document-dialog { width: min(530px, calc(100% - 20px))!important; padding: 27px clamp(22px, 7vw, 40px) 23px!important; border-radius: 12px!important; }
-  .document-links { margin-block: 38px 33px; }
-  .document-consent { min-height: 36px; }
+  .document-dialog { width: min(calc(100vw - 16px), calc((100dvh - 14px) * 1.2297))!important; }
   .account-main, .admin-main { padding-top: 52px; }
   .account-card { padding: 24px 18px; }
   .tariff-option { grid-template-columns: 18px 1fr; }
@@ -428,9 +454,6 @@ body:has(.document-dialog) [data-slot="dialog-overlay"] { background: rgba(20,8,
 }
 
 @media (max-width: 440px) {
-  .document-links { margin-block: 24px 25px; }
-  .document-links a { min-height: 44px; }
-  .document-consent { min-height: 44px; }
   .program-grid { grid-template-columns: 1fr; }
   .hero h1 { letter-spacing: -.07em; }
   .hero h1 span { padding-left: .15em; }
