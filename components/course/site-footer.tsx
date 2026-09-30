@@ -1,0 +1,30 @@
+import { Camera, Send } from "lucide-react";
+import { siteConfig } from "@/config/site";
+
+export function SiteFooter() {
+  return (
+    <footer className="site-footer">
+      <div className="footer-main">
+        <div>
+          <p className="footer-signature">Эмиль</p>
+          <p>{siteConfig.author.name}</p>
+        </div>
+        <div className="footer-contacts">
+          <span className="footer-label">Контакты</span>
+          <a href={`mailto:${siteConfig.contacts.email}`}>{siteConfig.contacts.email}</a>
+          <a href={`tel:${siteConfig.contacts.phone.replace(/[^+\d]/g, "")}`}>{siteConfig.contacts.phone}</a>
+          <span>{siteConfig.contacts.location}</span>
+        </div>
+        <div className="footer-socials" aria-label="Социальные сети">
+          <a href={siteConfig.socials[0].href} aria-label="ВКонтакте">VK</a>
+          <a href={siteConfig.socials[1].href} aria-label="Telegram"><Send /></a>
+          <a href={siteConfig.socials[2].href} aria-label="Instagram"><Camera /></a>
+        </div>
+      </div>
+      <div className="footer-legal">
+        <div>{siteConfig.documents.map((document) => <a href={document.href} key={document.href}>{document.label}</a>)}</div>
+        <span>© {new Date().getFullYear()} {siteConfig.author.name}. Все права защищены.</span>
+      </div>
+    </footer>
+  );
+}

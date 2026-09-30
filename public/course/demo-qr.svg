@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="480" viewBox="0 0 480 480" role="img" aria-labelledby="t d">
+  <title id="t">Демонстрационный QR-код</title><desc id="d">Не предназначен для оплаты</desc>
+  <rect width="480" height="480" rx="32" fill="#fff8f0"/>
+  <g fill="#4c2517"><path d="M42 42h126v126H42zm28 28v70h70V70zM312 42h126v126H312zm28 28v70h70V70zM42 312h126v126H42zm28 28v70h70v-70z"/><path d="M205 55h27v27h-27zm42 0h27v27h-27zm-42 42h69v27h-69zm0 43h27v27h-27zm42 0h27v69h-27zm-42 84h27v27h-27zm42 0h69v27h-69zm84-42h27v69h-27zm42 0h55v27h-55zm0 42h27v27h-27zM205 267h69v27h-69zm111 0h27v27h-27zm42 0h70v27h-70zM205 309h27v69h-27zm42 0h69v27h-69zm84 0h27v69h-27zm42 0h55v27h-55zm-126 42h27v27h-27zm42 0h27v69h-27zm84 0h27v27h-27zm-168 42h69v27h-69zm126 0h27v27h-27zm42 0h55v27h-55z"/></g>
+  <rect x="92" y="208" width="296" height="64" rx="14" fill="#fff8f0" stroke="#c57c49" stroke-width="4"/>
+  <text x="240" y="235" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#4c2517">ДЕМО</text>
+  <text x="240" y="258" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" fill="#7b4c34">НЕ ОПЛАЧИВАТЬ</text>
+</svg>

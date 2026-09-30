@@ -1,0 +1,52 @@
+{
+  "version": "6",
+  "dialect": "sqlite",
+  "id": "3b4d8301-fc20-4415-9f41-d3c864f6a7b5",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "tables": {
+    "payment_requests": {
+      "name": "payment_requests",
+      "columns": {
+        "id": { "name": "id", "type": "text", "primaryKey": true, "notNull": true, "autoincrement": false },
+        "user_id": { "name": "user_id", "type": "text", "primaryKey": false, "notNull": true, "autoincrement": false },
+        "plan_id": { "name": "plan_id", "type": "text", "primaryKey": false, "notNull": true, "autoincrement": false },
+        "amount": { "name": "amount", "type": "integer", "primaryKey": false, "notNull": true, "autoincrement": false },
+        "status": { "name": "status", "type": "text", "primaryKey": false, "notNull": true, "autoincrement": false, "default": "'pending'" },
+        "created_at": { "name": "created_at", "type": "text", "primaryKey": false, "notNull": true, "autoincrement": false, "default": "CURRENT_TIMESTAMP" },
+        "updated_at": { "name": "updated_at", "type": "text", "primaryKey": false, "notNull": true, "autoincrement": false, "default": "CURRENT_TIMESTAMP" }
+      },
+      "indexes": {
+        "idx_payment_requests_user_id": { "name": "idx_payment_requests_user_id", "columns": ["user_id"], "isUnique": false },
+        "idx_payment_requests_status": { "name": "idx_payment_requests_status", "columns": ["status"], "isUnique": false }
+      },
+      "foreignKeys": {
+        "payment_requests_user_id_users_id_fk": { "name": "payment_requests_user_id_users_id_fk", "tableFrom": "payment_requests", "tableTo": "users", "columnsFrom": ["user_id"], "columnsTo": ["id"], "onDelete": "cascade", "onUpdate": "no action" }
+      },
+      "compositePrimaryKeys": {}, "uniqueConstraints": {}, "checkConstraints": {}
+    },
+    "users": {
+      "name": "users",
+      "columns": {
+        "id": { "name": "id", "type": "text", "primaryKey": true, "notNull": true, "autoincrement": false },
+        "email": { "name": "email", "type": "text", "primaryKey": false, "notNull": true, "autoincrement": false },
+        "name": { "name": "name", "type": "text", "primaryKey": false, "notNull": true, "autoincrement": false, "default": "''" },
+        "phone": { "name": "phone", "type": "text", "primaryKey": false, "notNull": true, "autoincrement": false, "default": "''" },
+        "selected_plan": { "name": "selected_plan", "type": "text", "primaryKey": false, "notNull": false, "autoincrement": false },
+        "payment_status": { "name": "payment_status", "type": "text", "primaryKey": false, "notNull": true, "autoincrement": false, "default": "'not_paid'" },
+        "access_granted": { "name": "access_granted", "type": "integer", "primaryKey": false, "notNull": true, "autoincrement": false, "default": false },
+        "access_granted_at": { "name": "access_granted_at", "type": "text", "primaryKey": false, "notNull": false, "autoincrement": false },
+        "access_expires_at": { "name": "access_expires_at", "type": "text", "primaryKey": false, "notNull": false, "autoincrement": false },
+        "created_at": { "name": "created_at", "type": "text", "primaryKey": false, "notNull": true, "autoincrement": false, "default": "CURRENT_TIMESTAMP" },
+        "updated_at": { "name": "updated_at", "type": "text", "primaryKey": false, "notNull": true, "autoincrement": false, "default": "CURRENT_TIMESTAMP" }
+      },
+      "indexes": {
+        "idx_users_email": { "name": "idx_users_email", "columns": ["email"], "isUnique": true },
+        "idx_users_payment_status": { "name": "idx_users_payment_status", "columns": ["payment_status"], "isUnique": false }
+      },
+      "foreignKeys": {}, "compositePrimaryKeys": {}, "uniqueConstraints": {}, "checkConstraints": {}
+    }
+  },
+  "views": {}, "enums": {},
+  "_meta": { "schemas": {}, "tables": {}, "columns": {} },
+  "internal": { "indexes": {} }
+}
