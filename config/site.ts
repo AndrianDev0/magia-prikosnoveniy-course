@@ -1,4 +1,4 @@
-export const DOCUMENT_VERSION = "2026-09-30";
+export const DOCUMENT_VERSION = "2026-10-01-documents-v2";
 
 export const plans = [
   {
@@ -76,9 +76,11 @@ export const siteConfig = {
     introVideoUrl: "",
   },
   documents: [
-    { label: "Политика конфиденциальности", href: "/documents/privacy" },
-    { label: "Пользовательское соглашение", href: "/documents/agreement" },
     { label: "Публичная оферта", href: "/documents/offer" },
+    { label: "Политика обработки персональных данных", href: "/documents/privacy" },
+    { label: "Согласие на обработку персональных данных", href: "/documents/consent" },
+    { label: "Правила курса 18+", href: "/documents/rules-18" },
+    { label: "Правила возврата денежных средств", href: "/documents/refunds" },
   ],
   contacts: {
     // TODO: заменить демонстрационные контакты на реальные.
