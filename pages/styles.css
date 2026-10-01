@@ -23,6 +23,5 @@
   .documents-layer{padding:max(7px,env(safe-area-inset-top)) 7px max(7px,env(safe-area-inset-bottom))}
   .plan-modal{width:min(85vw,calc((100dvh - 14px)*1.4292));aspect-ratio:969/678;border-radius:14px}
   .plan-modal::backdrop{background:rgba(12,5,2,.74);backdrop-filter:none}
-  .documents-reopen{display:none}
 }
 .plan-modal[open]{position:fixed;inset:0}
