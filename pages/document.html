@@ -5,22 +5,30 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#482817">
   <title>Документ — Магия прикосновений</title>
-  <link rel="stylesheet" href="./styles.css?v=mobile-docs-v3">
+  <link rel="stylesheet" href="./styles.css?v=legal-v2">
 </head>
 <body class="legal-body">
   <main class="legal-card">
     <p class="legal-brand">Эмиль</p>
-    <p class="legal-eyebrow">Демонстрационный документ</p>
-    <h1 id="document-title">Документ курса</h1>
-    <p id="document-intro"></p>
-    <section><h2>Общие положения</h2><p>Эта страница доступна для проверки структуры сайта. Перед коммерческим запуском текст должен быть заменён юридической редакцией для выбранной юрисдикции, формата оплаты и способа обработки персональных данных.</p></section>
-    <section><h2>Контакты</h2><p>Актуальные реквизиты исполнителя, адрес для обращений и сроки ответа добавляет владелец курса перед запуском.</p></section>
+    <p class="legal-eyebrow">Официальный документ · редакция 2.0</p>
+    <h1 id="document-title">Загрузка документа…</h1>
+    <div class="legal-content" id="document-content" aria-live="polite"></div>
     <a class="legal-back" href="./">Вернуться на главную</a>
   </main>
   <script>
-    const docs={offer:['Публичная оферта','Условия приобретения доступа к онлайн-курсу.'],privacy:['Политика обработки персональных данных','Как будут обрабатываться персональные данные участников курса.'],consent:['Согласие на обработку персональных данных','Условия предоставления согласия на обработку персональных данных.'],rules:['Правила курса 18+','Возрастные ограничения и правила участия в онлайн-курсе.'],refunds:['Правила возврата денежных средств','Порядок и условия возврата денежных средств за доступ к курсу.']};
-    const data=docs[new URLSearchParams(location.search).get('doc')]||['Документ курса','Информация для участников курса.'];
-    document.title=data[0]+' — Магия прикосновений'; document.querySelector('#document-title').textContent=data[0]; document.querySelector('#document-intro').textContent=data[1];
+    const aliases={rules:'rules-18',agreement:'user-agreement'};
+    const slug=aliases[new URLSearchParams(location.search).get('doc')]||new URLSearchParams(location.search).get('doc')||'offer';
+    const escapeHtml=value=>String(value).replace(/[&<>"']/g,match=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[match]));
+    fetch('./course/legal-documents.json').then(response=>{if(!response.ok)throw new Error('Документ не найден');return response.json()}).then(data=>{
+      const legalDocument=data.documents[slug]; if(!legalDocument) throw new Error('Документ не найден');
+      document.title=legalDocument.title+' — Магия прикосновений';
+      document.querySelector('#document-title').textContent=legalDocument.title;
+      document.querySelector('#document-content').innerHTML=legalDocument.blocks.map(block=>{
+        if(block.type==='table')return `<div class="legal-table-wrap"><table class="legal-table"><thead><tr>${block.rows[0].map(cell=>`<th>${escapeHtml(cell)}</th>`).join('')}</tr></thead><tbody>${block.rows.slice(1).map(row=>`<tr>${row.map(cell=>`<td>${escapeHtml(cell)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+        if(/^\d+\.\s/.test(block.text)||/Heading/i.test(block.style||''))return `<h2>${escapeHtml(block.text)}</h2>`;
+        return `<p>${escapeHtml(block.text).replace(/\n/g,'<br>')}</p>`;
+      }).join('');
+    }).catch(error=>{document.querySelector('#document-title').textContent='Не удалось открыть документ';document.querySelector('#document-content').textContent=error.message});
   </script>
 </body>
 </html>

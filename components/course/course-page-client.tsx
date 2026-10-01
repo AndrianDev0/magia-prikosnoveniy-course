@@ -12,7 +12,7 @@ export function CoursePageClient({ header }: { header: Header }) {
     <div className="figma-artwork-shell">
       <main className="figma-artwork-page figma-lessons-artwork">
         <picture className="figma-artwork-picture">
-          <source media="(max-width: 600px)" srcSet="/course/lessons-mobile.svg" width="380" height="3107" />
+          <source media="(max-width: 600px)" srcSet="/course/lessons-mobile-figma.png" width="1140" height="9321" />
           <img className="figma-artwork-image" src="/course/lessons-desktop.svg" alt="" aria-hidden="true" width="1920" height="12334" fetchPriority="high" />
         </picture>
         <h1 className="sr-only">Курс по Тантрическому массажу</h1>

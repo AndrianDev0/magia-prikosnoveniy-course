@@ -146,6 +146,9 @@ button { font: inherit; cursor: pointer; }
 .button-ink { border-color: #6e412e; background: transparent; color: #4a281d; box-shadow: inset 0 0 0 4px #fff5eb, 0 0 0 1px #9b6d55; }
 .button-ink:hover { background: #4a281d; color: #fff7ee; }
 .button-disabled { pointer-events: none; opacity: .48; background: rgba(255,255,255,.08); color: #fff; }
+.payment-contact { min-height: 250px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 16px; padding: 26px; border: 1px solid rgba(255,231,211,.24); border-radius: 18px; background: rgba(255,255,255,.04); text-align: center; }
+.payment-contact > span { color: #f0b27f; font-size: .72rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.payment-contact > a:last-child { color: #f4ddcb; text-decoration: underline; text-underline-offset: 4px; }
 .text-link, .plan-link { min-height: 44px; display: inline-flex; align-items: center; border-bottom: 1px solid rgba(255,222,195,.42); font-size: .86rem; color: #f4ddcb; }
 .hero-media { position: relative; }
 .hero-media::before { content: ""; position: absolute; inset: -10% -7%; z-index: -1; border-radius: 50%; background: radial-gradient(circle, rgba(255,153,90,.34), transparent 66%); filter: blur(15px); }
@@ -218,6 +221,18 @@ button { font: inherit; cursor: pointer; }
 .footer-signature { margin: 0; font: 2.2rem "Marck Script", cursive; color: #f1b483; }
 .footer-main p:last-child { margin: 0; color: #dbc2af; font-size: .8rem; }
 .footer-contacts { display: grid; gap: 4px; color: #ddc8b8; font-size: .8rem; }
+.legal-main { max-width: 980px; }
+.legal-main > .display-title { max-width: 900px; white-space: pre-line; font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.02; }
+.legal-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+.legal-actions-bottom { margin-top: 52px; }
+.legal-document-content { margin-top: 46px; padding: clamp(22px, 5vw, 58px); border: 1px solid rgba(255,231,210,.2); border-radius: 24px; background: rgba(41,20,14,.68); box-shadow: 0 26px 70px rgba(18,8,3,.25); }
+.legal-document-content h2 { margin: 38px 0 14px; font: italic 600 clamp(1.45rem, 3vw, 2.1rem)/1.15 "Cormorant Garamond", Georgia, serif; color: #fff4ed; }
+.legal-document-content p { margin: 14px 0; white-space: pre-line; color: #ead8cc; line-height: 1.75; }
+.legal-document-content .legal-revision { color: #f0b27f; font-weight: 600; }
+.legal-table-wrap { margin: 26px 0; overflow-x: auto; }
+.legal-table { width: 100%; min-width: 620px; border-collapse: collapse; color: #ead8cc; line-height: 1.45; }
+.legal-table th,.legal-table td { padding: 13px 15px; border: 1px solid rgba(255,231,210,.22); text-align: left; vertical-align: top; }
+.legal-table th { background: rgba(255,255,255,.07); color: #fff4ed; }
 .footer-contacts a:hover, .footer-legal a:hover { color: #fff; }
 .footer-socials a { width: 40px; height: 40px; }
 .footer-legal { margin-top: 34px; padding-top: 18px; display: flex; justify-content: space-between; gap: 20px; border-top: 1px solid rgba(255,233,216,.12); color: #a99080; font-size: .68rem; }
@@ -435,7 +450,8 @@ body:has(.document-dialog) [data-slot="dialog-overlay"] { background: rgba(20,8,
   isolation: isolate;
 }
 .document-dialog::before, .document-dialog::after { content: none; }
-.document-artwork { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; user-select: none; }
+.document-artwork-picture,.document-artwork { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; user-select: none; }
+.document-artwork-picture { display: block; }
 .document-dialog-header { position: absolute; pointer-events: none; }
 .document-links, .document-consents { position: absolute; inset: 0; pointer-events: none; }
 .document-links a, .document-consent, .document-continue { position: absolute; z-index: 1; pointer-events: auto; }
@@ -998,6 +1014,13 @@ body:has(.document-dialog) [data-slot="dialog-overlay"] { background: rgba(20,8,
   .course-plan-grid span { margin-top: 4px; font-size: .48rem; line-height: 1.2; }
   .course-plan-continue { min-width: 150px; min-height: 48px; margin-top: 30px; font-size: 1.2rem; }
   .account-main, .admin-main { padding-top: 52px; }
+  .legal-main { width: min(100% - 24px, 980px); padding-top: 42px; }
+  .legal-main > .display-title { max-width: 100%; font-size: clamp(1.75rem, 9vw, 2.5rem); overflow-wrap: anywhere; }
+  .legal-actions { display: grid; grid-template-columns: 1fr; }
+  .legal-actions .button { width: 100%; padding-inline: 14px; }
+  .legal-document-content { margin-top: 30px; border-radius: 18px; overflow: hidden; }
+  .legal-document-content h2 { overflow-wrap: anywhere; }
+  .legal-document-content p { overflow-wrap: anywhere; }
   .account-card { padding: 24px 18px; }
   .tariff-option { grid-template-columns: 18px 1fr; }
   .tariff-option b { grid-column: 2; }

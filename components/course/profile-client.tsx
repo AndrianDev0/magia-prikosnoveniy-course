@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import Image from "next/image";
 import { BadgeCheck, Clock3, CreditCard, ShieldCheck, XCircle } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -180,12 +179,12 @@ export function ProfileClient({ identity, profile: initial, requestedPlan, reque
 
       <Dialog open={payOpen} onOpenChange={setPayOpen}>
         <DialogContent className="payment-dialog">
-          <DialogHeader><span className="dialog-kicker">Демонстрационная оплата</span><DialogTitle className="display-title">{plan.name}</DialogTitle><DialogDescription>Проверьте сумму и отсканируйте QR-код. Реальные реквизиты будут добавлены перед публикацией.</DialogDescription></DialogHeader>
+          <DialogHeader><span className="dialog-kicker">Оплата курса</span><DialogTitle className="display-title">{plan.name}</DialogTitle><DialogDescription>Свяжитесь с автором для получения актуального QR-кода, затем отправьте заявку на подтверждение оплаты.</DialogDescription></DialogHeader>
           <div className="payment-layout">
-            <Image src={siteConfig.payment.qrImage} alt="Демонстрационный QR-код — не оплачивать" width={480} height={480} sizes="(max-width: 600px) 78vw, 280px" />
+            <div className="payment-contact"><span>Получить QR-код</span><a className="button button-outline" href={`mailto:${siteConfig.contacts.email}?subject=${encodeURIComponent(`Оплата курса — ${plan.name}`)}`}>Написать на e-mail</a><a href={`tel:${siteConfig.contacts.phone.replace(/[^+\d]/g, "")}`}>{siteConfig.contacts.phone}</a></div>
             <div><span>Сумма</span><strong>{plan.priceLabel}</strong><dl><div><dt>Получатель</dt><dd>{siteConfig.payment.recipient}</dd></div><div><dt>Назначение</dt><dd>{siteConfig.payment.purpose}</dd></div></dl></div>
           </div>
-          <p className="demo-warning">Это демонстрационный экран. Не отправляйте деньги по этим данным.</p>
+          <p className="form-hint">После перевода нажмите «Я оплатил». Администратор вручную проверит платёж и откроет доступ.</p>
           <button className="button button-primary" type="button" disabled={busy} onClick={() => void submitPayment()}>Я оплатил</button>
         </DialogContent>
       </Dialog>

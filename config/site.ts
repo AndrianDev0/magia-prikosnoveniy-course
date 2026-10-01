@@ -1,4 +1,4 @@
-export const DOCUMENT_VERSION = "2026-10-01-documents-v10";
+export const DOCUMENT_VERSION = "2026-10-01-legal-package-v2";
 
 export const plans = [
   {
@@ -32,7 +32,7 @@ export const plans = [
     features: [
       "7 видеоуроков",
       "4 индивидуальные онлайн-консультации по 60 минут",
-      "1 бесплатное групповое обучение",
+      "1 бесплатное очное занятие в течение года",
       "Доступ без ограничений",
     ],
     featured: false,
@@ -42,12 +42,12 @@ export const plans = [
 export type PlanId = (typeof plans)[number]["id"];
 
 export const courseLessons = [
-  { number: "01", slug: "hands", title: "Подготовка рук", short: "Подготовка рук к практике", description: "Подготовка рук к практике: разогрев, пробуждение чувствительности и настройка внимания на прикосновение.", videoUrl: "", poster: "/course/course-poster.png" },
-  { number: "02", slug: "preparation", title: "Подготовка к массажу", short: "Пространство, масло и музыка", description: "Практика помогает замедлиться, настроиться друг на друга и создать ощущение доверия, присутствия и контакта перед массажем.", videoUrl: "", poster: "/course/course-poster.png" },
-  { number: "03", slug: "touches", title: "Типы прикосновений", short: "Разные качества контакта", description: "Последовательная работа со спиной, шеей, плечами, ногами и другими зонами тела. Осваиваем различные виды прикосновений, поглаживаний и массажных движений.", videoUrl: "", poster: "/course/course-poster.png" },
-  { number: "04", slug: "attunement", title: "Сонастройка", short: "Ритуал присутствия", description: "Продолжаем практику с передней частью тела: руки, грудь, живот и другие зоны. Особое внимание уделяется мягкости, чувствительности и вниманию к реакции партнёра.", videoUrl: "", poster: "/course/course-poster.png" },
-  { number: "05", slug: "prone", title: "Практика на животе", short: "Задняя поверхность тела", description: "Техники работы с ногами, внутренней и внешней поверхностью бёдер, тазовой областью и всем телом, объединяющие отдельные элементы массажа в единую практику.", videoUrl: "", poster: "/course/course-poster.png" },
-  { number: "06", slug: "supine", title: "Практика на спине", short: "Передняя поверхность тела", description: "Переходим к более чувственной части массажа, сохраняя внимание к дыханию, прикосновениям и ощущениям партнёра.", videoUrl: "", poster: "/course/course-poster.png" },
+  { number: "01", slug: "hands", title: "Подготовка рук", short: "Подготовка рук к практике", description: "Подготовка рук к практике. Упражнения для активизации энергетических каналов и разогрева ладоней перед прикосновениями.", videoUrl: "", poster: "/course/course-poster.png" },
+  { number: "02", slug: "preparation", title: "Подготовка к массажу", short: "Пространство, масло и музыка", description: "Подготовка пространства. Выбор масла и музыки.", videoUrl: "", poster: "/course/course-poster.png" },
+  { number: "03", slug: "touches", title: "Типы прикосновений", short: "Разные качества контакта", description: "Различные типы прикосновений, используемых в Тантрическом массаже.", videoUrl: "", poster: "/course/course-poster.png" },
+  { number: "04", slug: "attunement", title: "Сонастройка", short: "Ритуал присутствия", description: "Очень важный этап перед Тантрическим массажем. Красивый ритуал, помогающий войти в состояние любящего служения божественному телу партнёра.", videoUrl: "", poster: "/course/course-poster.png" },
+  { number: "05", slug: "prone", title: "Практика на животе", short: "Задняя поверхность тела", description: "Работа с задней поверхностью тела. Активация энергетических центров и усиление тока энергии в теле. Демонстрация и объяснение движений.", videoUrl: "", poster: "/course/course-poster.png" },
+  { number: "06", slug: "supine", title: "Практика на спине", short: "Передняя поверхность тела", description: "Работа с передней поверхностью тела. Работа с грудью. Запуск и усиление тока энергии во всём теле. Демонстрация и объяснение движений.", videoUrl: "", poster: "/course/course-poster.png" },
   { number: "07", slug: "completion", title: "Завершение", short: "Замедление и расслабление", description: "Финальная часть практики: замедление, расслабление, контакт и мягкое завершение массажа.", videoUrl: "", poster: "/course/course-poster.png" },
 ] as const;
 
@@ -64,7 +64,7 @@ export const bonusLesson = {
 export const siteConfig = {
   title: "Магия прикосновений",
   subtitle: "Курс по тантрическому массажу",
-  description: "Практический курс Эмиля Баткуллина о внимании, доверии и искусстве тантрического массажа.",
+  description: "«Магия прикосновений» — практический курс по Тантрическому массажу о внимании, доверии, чувственности и близости в отношениях.",
   author: {
     name: "Эмиль Баткуллин",
     bio: "Телесный психолог, телесно-ориентированный психотерапевт и Тантра-практик с более чем 10-летним опытом. Автор курса «Исцеление Женской Сексуальности», соавтор и ведущий программы «Два мира — Мужчина и Женщина».",
@@ -82,22 +82,25 @@ export const siteConfig = {
     { label: "Правила курса 18+", href: "/documents/rules-18" },
     { label: "Правила возврата денежных средств", href: "/documents/refunds" },
   ],
-  contacts: {
-    // TODO: заменить демонстрационные контакты на реальные.
-    email: "hello@example.invalid",
-    phone: "+7 (000) 000-00-00",
-    location: "Санкт-Петербург",
-  },
-  socials: [
-    { label: "ВКонтакте", href: "https://vk.com/example" },
-    { label: "Telegram", href: "https://t.me/example" },
-    { label: "Instagram", href: "https://instagram.com/example" },
+  legalDocuments: [
+    { label: "Публичная оферта", href: "/documents/offer" },
+    { label: "Политика обработки персональных данных", href: "/documents/privacy" },
+    { label: "Согласие на обработку персональных данных", href: "/documents/consent" },
+    { label: "Пользовательское соглашение", href: "/documents/user-agreement" },
+    { label: "Правила курса 18+", href: "/documents/rules-18" },
+    { label: "Правила возврата денежных средств", href: "/documents/refunds" },
+    { label: "Согласие на использование отзыва", href: "/documents/testimonial-consent" },
   ],
+  contacts: {
+    email: "emil_ka@list.ru",
+    phone: "+7 911 213-69-22",
+    location: "Санкт-Петербург, ул. Есенина, д. 1, корп. 1А, кв. 663",
+  },
+  socials: [] as ReadonlyArray<{ label: string; href: string }>,
   payment: {
-    // TODO: заменить QR-код и реквизиты. Демонстрационные значения не предназначены для оплаты.
-    qrImage: "/course/demo-qr.svg",
-    recipient: "ДЕМО — НЕ ОПЛАЧИВАТЬ",
-    purpose: "Демонстрационная заявка на курс",
+    qrImage: "",
+    recipient: "ИП Фаткуллин Эмиль Салихович",
+    purpose: "Оплата доступа к курсу «Магия прикосновений»",
   },
 } as const;
 

@@ -11,7 +11,7 @@ export function PlanModal({ onOpenChange, open }: PlanModalProps) {
     <Dialog onOpenChange={onOpenChange} open={open}>
       <DialogContent className="course-plan-dialog figma-plan-dialog" showCloseButton={false}>
         <picture className="figma-plan-picture">
-          <source media="(max-width: 720px)" srcSet="/course/plan-modal-mobile.svg" width="323" height="226" />
+          <source media="(max-width: 720px)" srcSet="/course/plan-modal-mobile-figma.png" width="969" height="678" />
           <Image className="figma-plan-artwork" src="/course/plan-modal.svg" alt="" aria-hidden="true" width={1649} height={1150} unoptimized />
         </picture>
         <DialogTitle className="sr-only">План курса</DialogTitle>

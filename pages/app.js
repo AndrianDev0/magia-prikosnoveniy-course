@@ -1,3 +1,4 @@
+if(typeof document!=="undefined"){
 const documents=document.querySelector('#documents');
 const plan=document.querySelector('#plan-modal');
 const checks=[...document.querySelectorAll('.consent input')];
@@ -21,3 +22,4 @@ document.querySelector('[data-next]')?.addEventListener('click',()=>select(index
 document.querySelectorAll('[data-dot]').forEach((dot,i)=>dot.addEventListener('click',()=>select(i)));
 carousel?.addEventListener('touchstart',event=>{start=event.touches[0]?.clientX??null},{passive:true});
 carousel?.addEventListener('touchend',event=>{const end=event.changedTouches[0]?.clientX;if(start===null||end===undefined||Math.abs(end-start)<35)return;select(index+(end<start?1:-1));start=null},{passive:true});
+}
