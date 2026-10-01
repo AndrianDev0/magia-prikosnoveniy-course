@@ -13,7 +13,7 @@
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate",
     "typecheck": "tsc --noEmit",
-    "seed:local": "wrangler d1 execute DB --local --persist-to .wrangler/state --file scripts/seed-local.sql"
+    "seed:local": "wrangler d1 execute DB --config dist/server/wrangler.json --local --persist-to .wrangler/state --file scripts/seed-local.sql"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

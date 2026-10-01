@@ -1,7 +1,9 @@
 "use client";
 
 import Image from "next/image";
+import { useState } from "react";
 import { DocumentsModal } from "@/components/course/documents-modal";
+import { PlanModal } from "@/components/course/plan-modal";
 import { SiteFooter } from "@/components/course/site-footer";
 import { SiteHeader } from "@/components/course/site-header";
 import { plans, siteConfig, type PlanId } from "@/config/site";
@@ -15,9 +17,12 @@ type HomeClientProps = {
 };
 
 export function HomeClient(props: HomeClientProps) {
+  const [planOpen, setPlanOpen] = useState(false);
+
   return (
     <div className="site-shell">
       <DocumentsModal />
+      <PlanModal open={planOpen} onOpenChange={setPlanOpen} />
       <div className="ambient ambient-one" aria-hidden="true" />
       <div className="ambient ambient-two" aria-hidden="true" />
       <SiteHeader {...props} />
@@ -53,13 +58,13 @@ export function HomeClient(props: HomeClientProps) {
                 <div className="figma-plan-rule" aria-hidden="true" />
                 <ul>{plan.features.filter((feature) => !feature.startsWith("Доступ")).map((feature) => <li key={feature}>{feature}</li>)}</ul>
                 <p className="figma-plan-price">{plan.priceLabel.replace("₽", "руб.")}</p>
-                <a className="figma-plan-link" href={`/documents/offer?plan=${plan.id}`}>План курса</a>
+                <button className="figma-plan-link" type="button" onClick={() => setPlanOpen(true)}>План курса</button>
                 <a className="figma-card-hit" href={props.planPaths[plan.id]} target={props.user ? undefined : "_top"} aria-label={`Оплатить тариф ${plan.name}`} />
               </article>
             ))}
           </div>
           <div className="figma-course-entry">
-            <a href="/course">Перейти к курсу *</a>
+            <a href={props.user ? "/course" : props.signInPath} target={props.user ? undefined : "_top"}>Перейти к курсу *</a>
             <span>*доступен после покупки</span>
           </div>
         </section>
