@@ -96,6 +96,22 @@ export async function submitPaymentRequest(userId: string, planId: PlanId) {
   return { status: "pending" as const, alreadyPending: false };
 }
 
+export async function submitPublicPaymentLead(values: { name: string; email: string; phone: string; planId: PlanId }) {
+  const db = getDb();
+  const email = values.email.trim().toLowerCase();
+  const [existing] = await db.select().from(users).where(eq(users.email, email)).limit(1);
+  if (existing?.paymentStatus === "pending") return { status: "pending" as const, alreadyPending: true };
+  if (existing && existing.paymentStatus === "confirmed" && hasLiveAccess(existing)) throw new Error("Для этой почты оплата уже подтверждена");
+
+  const userId = existing?.id ?? crypto.randomUUID();
+  if (existing) {
+    await db.update(users).set({ name: values.name, phone: values.phone, selectedPlan: values.planId, paymentStatus: "not_paid", accessGranted: false, accessGrantedAt: null, accessExpiresAt: null, updatedAt: new Date().toISOString() }).where(eq(users.id, userId));
+  } else {
+    await db.insert(users).values({ id: userId, email, name: values.name, phone: values.phone, selectedPlan: values.planId });
+  }
+  return submitPaymentRequest(userId, values.planId);
+}
+
 export async function listCourseUsers() {
   return getDb().select().from(users).orderBy(desc(users.createdAt));
 }

@@ -45,10 +45,10 @@ export const courseLessons = [
   { number: "01", slug: "hands", title: "Подготовка рук", short: "Подготовка рук к практике", description: "Подготовка рук к практике. Упражнения для активизации энергетических каналов и разогрева ладоней перед прикосновениями.", videoUrl: "", poster: "/course/course-poster.png" },
   { number: "02", slug: "preparation", title: "Подготовка к массажу", short: "Пространство, масло и музыка", description: "Подготовка пространства. Выбор масла и музыки.", videoUrl: "", poster: "/course/course-poster.png" },
   { number: "03", slug: "touches", title: "Типы прикосновений", short: "Разные качества контакта", description: "Различные типы прикосновений, используемых в Тантрическом массаже.", videoUrl: "", poster: "/course/course-poster.png" },
-  { number: "04", slug: "attunement", title: "Сонастройка", short: "Ритуал присутствия", description: "Очень важный этап перед Тантрическим массажем. Красивый ритуал, помогающий войти в состояние любящего служения божественному телу партнёра.", videoUrl: "", poster: "/course/course-poster.png" },
-  { number: "05", slug: "prone", title: "Практика на животе", short: "Задняя поверхность тела", description: "Работа с задней поверхностью тела. Активация энергетических центров и усиление тока энергии в теле. Демонстрация и объяснение движений.", videoUrl: "", poster: "/course/course-poster.png" },
-  { number: "06", slug: "supine", title: "Практика на спине", short: "Передняя поверхность тела", description: "Работа с передней поверхностью тела. Работа с грудью. Запуск и усиление тока энергии во всём теле. Демонстрация и объяснение движений.", videoUrl: "", poster: "/course/course-poster.png" },
-  { number: "07", slug: "completion", title: "Завершение", short: "Замедление и расслабление", description: "Финальная часть практики: замедление, расслабление, контакт и мягкое завершение массажа.", videoUrl: "", poster: "/course/course-poster.png" },
+  { number: "04", slug: "attunement", title: "Сонастройка", short: "Ритуал присутствия", description: "Очень важный этап перед Тантрическим массажем. Красивый ритуал, помогающий войти в состояние любящего служения божественному телу партнера.", videoUrl: "", poster: "/course/course-poster.png" },
+  { number: "05", slug: "prone", title: "Практика в положении «на животе»", short: "Задняя поверхность тела", description: "Работа с задней поверхностью тела. Активация энергетических центров и усиление тока энергии в теле. Демонстрация и объяснение движений.", videoUrl: "", poster: "/course/course-poster.png" },
+  { number: "06", slug: "supine", title: "Практика в положении «на спине»", short: "Передняя поверхность тела", description: "Работа с передней поверхностью тела. Работа с грудью. Запуск и усиление тока энергии во всём теле. Демонстрация и объяснение движений.", videoUrl: "", poster: "/course/course-poster.png" },
+  { number: "07", slug: "completion", title: "Завершение", short: "Замедление и расслабление", description: "Заключительная фаза массажа. Замедление и совместное расслабление.", videoUrl: "", poster: "/course/course-poster.png" },
 ] as const;
 
 export const bonusLesson = {
@@ -56,7 +56,7 @@ export const bonusLesson = {
   slug: "full-massage",
   title: "Полная версия массажа",
   short: "Непрерывная практика",
-  description: "цельная запись всей последовательности массажа от начала до конца без остановок и подробных объяснений, чтобы использовать её как практический ориентир.",
+  description: "Непрерывная последовательность движений без остановок и объяснений. Можно просто повторять все движения за мной. Запоминать ничего не нужно, я веду голосом.",
   videoUrl: "",
   poster: "/course/course-poster.png",
 };

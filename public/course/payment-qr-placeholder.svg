@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" role="img" aria-labelledby="title desc">
+  <title id="title">Заглушка QR-кода оплаты</title>
+  <desc id="desc">Декоративный QR-код, который будет заменён на рабочий</desc>
+  <rect width="480" height="480" rx="36" fill="#fff7ef"/>
+  <g fill="#4b291b">
+    <path d="M40 40h130v130H40zm28 28v74h74V68zM310 40h130v130H310zm28 28v74h74V68zM40 310h130v130H40zm28 28v74h74v-74z"/>
+    <path d="M202 42h34v34h-34zm54 0h28v56h-28zm-54 58h82v28h-82zm0 52h34v34h-34zm54 0h28v62h-28zM42 202h58v28H42zm86 0h58v28h-58zm-86 54h28v28H42zm54 0h90v28H96zm106-42h34v70h-34zm54 26h28v44h-28zm54-38h34v34h-34zm54 0h56v28h-56zm-54 56h110v28H310zm-108 52h34v34h-34zm54 0h28v82h-28zm54 0h34v34h-34zm54 0h56v28h-56zm-162 56h34v74h-34zm108 0h28v28h-28zm54 0h66v28h-66zm-54 46h34v28h-34zm54 0h28v28h-28z"/>
+  </g>
+  <rect x="184" y="184" width="112" height="112" rx="28" fill="#fff7ef" stroke="#c8794a" stroke-width="8"/>
+  <text x="240" y="232" text-anchor="middle" fill="#9b4e2e" font-family="Georgia,serif" font-size="24" font-style="italic">QR</text>
+  <text x="240" y="260" text-anchor="middle" fill="#6b4433" font-family="Arial,sans-serif" font-size="13">ЗАГЛУШКА</text>
+</svg>

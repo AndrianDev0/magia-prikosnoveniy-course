@@ -1,0 +1,36 @@
+/* Decoration only: retain the original typography, imagery and button hit area. */
+.figma-plan-picture::after,
+.plan-modal picture::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--plan-steps-image) center / 100% 100% no-repeat;
+  pointer-events: none;
+}
+.figma-plan-picture { --plan-steps-image: url("/course/plan-steps.svg"); }
+.plan-modal picture { --plan-steps-image: url("./plan-steps.svg"); }
+
+/* Match the inside of the original Figma button, not an approximate hit box. */
+.course-plan-dialog.figma-plan-dialog .figma-plan-close,
+.plan-modal .plan-close {
+  left: calc(618 / 1649 * 100%);
+  top: calc(920 / 1150 * 100%);
+  bottom: auto;
+  width: calc(417 / 1649 * 100%);
+  height: calc(115 / 1150 * 100%);
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border-radius: 999px;
+  overflow: hidden;
+  background: transparent;
+}
+.course-plan-dialog.figma-plan-dialog .figma-plan-close:hover,
+.plan-modal .plan-close:hover {
+  background: rgba(109, 63, 42, .08);
+}
+.course-plan-dialog.figma-plan-dialog .figma-plan-close:focus-visible,
+.plan-modal .plan-close:focus-visible {
+  outline: 2px solid #8f5b44;
+  outline-offset: -2px;
+}

@@ -1,0 +1,69 @@
+.artwork-menu-cover {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  right: 12%;
+  width: 9%;
+  aspect-ratio: .98;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  line-height: 1.4;
+}
+.artwork-menu { position: static; color: #fff4ed; font: 400 16px/1.4 "Montserrat", Arial, sans-serif; }
+.artwork-menu > summary {
+  display: grid;
+  place-items: center;
+  width: clamp(44px, 4vw, 64px);
+  height: clamp(44px, 4vw, 64px);
+  cursor: pointer;
+  border-radius: 50%;
+  list-style: none;
+}
+.artwork-menu summary::-webkit-details-marker { display: none; }
+.artwork-menu > summary:hover { background: rgba(255,244,237,.07); }
+.artwork-menu-icon { position: relative; display: block; width: 26px; height: 20px; }
+.artwork-menu-icon i { position: absolute; left: 0; width: 100%; height: 1.5px; border-radius: 2px; background: currentColor; transition: transform .2s, opacity .2s; }
+.artwork-menu-icon i:nth-child(1) { top: 0; }
+.artwork-menu-icon i:nth-child(2) { top: 9px; }
+.artwork-menu-icon i:nth-child(3) { top: 18px; }
+.artwork-menu[open] > summary .artwork-menu-icon i:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+.artwork-menu[open] > summary .artwork-menu-icon i:nth-child(2) { opacity: 0; }
+.artwork-menu[open] > summary .artwork-menu-icon i:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+.artwork-menu-panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: min(310px, calc(100vw - 32px));
+  max-height: min(70dvh, 580px);
+  overflow-y: auto;
+  padding: 12px;
+  border: 1px solid rgba(255,244,237,.25);
+  border-radius: 16px;
+  background: linear-gradient(145deg, #57321f, #382014);
+  box-shadow: 0 14px 42px rgba(20,8,4,.3);
+}
+.artwork-menu-panel a, .artwork-menu-documents > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 44px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  color: #fff4ed;
+  text-decoration: none;
+  cursor: pointer;
+}
+.artwork-menu-panel a:hover, .artwork-menu-documents > summary:hover { background: rgba(255,244,237,.08); }
+.artwork-menu-panel a:focus-visible, .artwork-menu summary:focus-visible { outline: 2px solid #ffd1a6; outline-offset: 2px; }
+.artwork-menu-documents { margin-top: 6px; padding-top: 6px; border-top: 1px solid rgba(255,244,237,.18); }
+.artwork-menu-documents a { font-size: 13px; padding-left: 20px; }
+.artwork-tariffs-anchor { position: absolute; top: 45%; left: 0; width: 1px; height: 1px; scroll-margin-top: 20px; pointer-events: none; }
+@media (max-width: 600px) {
+  .artwork-menu-cover { right: 18%; width: 14%; aspect-ratio: 1.02; }
+  .artwork-menu-panel { right: -44px; }
+  .artwork-tariffs-anchor { top: 36%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .artwork-menu-icon i { transition: none; }
+}

@@ -1,0 +1,69 @@
+/* Frame the light tariff cards against the warm background glows. */
+/* Label coordinates from the 1920 × 5657 Figma export, below each card. */
+@media (min-width: 601px) {
+  .figma-hotspot.home-plan-details,
+  .hotspot.plan {
+    z-index: 3;
+    width: calc(250 / 1920 * 100%);
+    height: calc(60 / 5657 * 100%);
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .figma-hotspot.home-plan-details-1,
+  .hotspot.plan-1 { left: calc(267 / 1920 * 100%); top: calc(3318 / 5657 * 100%); }
+  .figma-hotspot.home-plan-details-2,
+  .hotspot.plan-2 { left: calc(834 / 1920 * 100%); top: calc(3458 / 5657 * 100%); }
+  .figma-hotspot.home-plan-details-3,
+  .hotspot.plan-3 { left: calc(1402 / 1920 * 100%); top: calc(3716 / 5657 * 100%); }
+  .figma-hotspot.home-plan-details:hover,
+  .hotspot.plan:hover { background: rgba(255,244,237,.1); }
+  .hotspot.plan:focus-visible { outline: 2px solid #fff4ed; outline-offset: 2px; }
+}
+.figma-hotspot.home-plan-card,
+.hotspot.plan-card-link {
+  border: 2px solid #63391f;
+  box-shadow: 0 0 0 4px rgba(53, 26, 13, .24), 0 16px 32px rgba(30, 12, 5, .4);
+}
+.figma-hotspot.home-plan-card::after,
+.hotspot.plan-card-link::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px solid #bd8a65;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.figma-hotspot.home-plan-card-1,
+.hotspot.plan-card-link-1 { border-radius: 7.4627% / 5.8651%; }
+.figma-hotspot.home-plan-card-2,
+.hotspot.plan-card-link-2 { border-radius: 7.4627% / 4.6404%; }
+.figma-hotspot.home-plan-card-3,
+.hotspot.plan-card-link-3 { border-radius: 7.4627% / 3.7383%; }
+.mobile-plan-slide > a,
+.mobile-plan-slide > .mobile-plan-purchase,
+.mobile-carousel .slide > a {
+  position: relative;
+  display: block;
+  border-radius: 12px;
+  box-shadow: 0 0 0 3px rgba(53, 26, 13, .24), 0 12px 22px rgba(30, 12, 5, .4);
+}
+.mobile-plan-slide > a::before,
+.mobile-plan-slide > .mobile-plan-purchase::before,
+.mobile-carousel .slide > a::before,
+.mobile-plan-slide > a::after,
+.mobile-plan-slide > .mobile-plan-purchase::after,
+.mobile-carousel .slide > a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px solid #63391f;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.mobile-plan-slide > a::after,
+.mobile-plan-slide > .mobile-plan-purchase::after,
+.mobile-carousel .slide > a::after {
+  inset: 6px;
+  border: 1px solid #bd8a65;
+  border-radius: 7px;
+}

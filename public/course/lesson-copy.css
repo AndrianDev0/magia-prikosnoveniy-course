@@ -1,0 +1,231 @@
+.figma-lessons-artwork,
+.course-artwork { container-type: inline-size; }
+@font-face {
+  font-family: "Miama Nueva Course";
+  src: url("/course/miama-nueva.otf") format("opentype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+.lesson-description-copy {
+  position: absolute;
+  z-index: 2;
+  top: calc(1840 / 12334 * 100%);
+  left: 0;
+  width: 100%;
+  height: calc(250 / 12334 * 100%);
+  color: #fff4ed;
+  font: italic 300 1.458333cqw / 1.34 "Montserrat", Arial, sans-serif;
+}
+.lesson-description-copy::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--lesson-copy-background-desktop) center / 100% 100% no-repeat;
+  mask-image: linear-gradient(to bottom, transparent, #000 6%, #000 94%, transparent);
+  pointer-events: none;
+}
+.lesson-description-copy-2 {
+  top: calc(3250 / 12334 * 100%);
+}
+.lesson-description-copy-2::before {
+  background-image: var(--lesson-2-copy-background-desktop);
+}
+.lesson-description-copy-4 { top: calc(6070 / 12334 * 100%); }
+.lesson-description-copy-4::before { background-image: var(--lesson-4-copy-background-desktop); }
+.lesson-description-copy-5 { top: calc(7480 / 12334 * 100%); }
+.lesson-description-copy-5::before { background-image: var(--lesson-5-description-background-desktop); }
+.lesson-description-copy-6 { top: calc(8890 / 12334 * 100%); }
+.lesson-description-copy-6::before { background-image: var(--lesson-6-description-background-desktop); }
+.lesson-description-copy-7 { top: calc(10210 / 12334 * 100%); }
+.lesson-description-copy-7::before { background-image: var(--lesson-7-description-background-desktop); }
+.bonus-description-copy { top: calc(11590 / 12334 * 100%); height: calc(300 / 12334 * 100%); }
+.bonus-description-copy::before { background-image: var(--bonus-description-background-desktop); }
+.lesson-title-copy {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  width: 100%;
+  height: calc(240 / 12334 * 100%);
+  color: #fff4ed;
+}
+.lesson-title-copy-5 { top: calc(6390 / 12334 * 100%); }
+.lesson-title-copy-6 { top: calc(7800 / 12334 * 100%); }
+.lesson-title-copy-7 { top: calc(9110 / 12334 * 100%); }
+.bonus-title-copy { top: calc(10540 / 12334 * 100%); }
+.lesson-title-copy::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  mask-image: linear-gradient(to bottom, transparent, #000 7%, #000 93%, transparent);
+}
+.lesson-title-copy-5::before { background-image: var(--lesson-5-title-background-desktop); }
+.lesson-title-copy-6::before { background-image: var(--lesson-6-title-background-desktop); }
+.lesson-title-copy-7::before { background-image: var(--lesson-7-title-background-desktop); }
+.bonus-title-copy::before { background-image: var(--bonus-title-background-desktop); }
+.lesson-title-copy span {
+  position: absolute;
+  top: 26%;
+  left: 5.2%;
+  width: 90%;
+  font: 400 3.3cqw / .95 "Miama Nueva Course", "Bad Script", cursive;
+  white-space: nowrap;
+}
+.figma-lessons-artwork {
+  --lesson-copy-background-desktop: url("/course/lesson-description-background-desktop.svg");
+  --lesson-copy-background-mobile: url("/course/lesson-description-background-mobile.svg");
+  --lesson-2-copy-background-desktop: url("/course/lesson-2-description-background-desktop.svg");
+  --lesson-2-copy-background-mobile: url("/course/lesson-2-description-background-mobile.svg");
+  --lesson-4-copy-background-desktop: url("/course/lesson-4-description-background-desktop.svg");
+  --lesson-4-copy-background-mobile: url("/course/lesson-4-description-background-mobile.svg");
+  --lesson-5-description-background-desktop: url("/course/lesson-5-description-background-desktop.svg");
+  --lesson-5-description-background-mobile: url("/course/lesson-5-description-background-mobile.svg");
+  --lesson-5-title-background-desktop: url("/course/lesson-5-title-background-desktop.svg");
+  --lesson-5-title-background-mobile: url("/course/lesson-5-title-background-mobile.svg");
+  --lesson-6-description-background-desktop: url("/course/lesson-6-description-background-desktop.svg");
+  --lesson-6-description-background-mobile: url("/course/lesson-6-description-background-mobile.svg");
+  --lesson-6-title-background-desktop: url("/course/lesson-6-title-background-desktop.svg");
+  --lesson-6-title-background-mobile: url("/course/lesson-6-title-background-mobile.svg");
+  --lesson-7-description-background-desktop: url("/course/lesson-7-description-background-desktop.svg");
+  --lesson-7-description-background-mobile: url("/course/lesson-7-description-background-mobile.svg");
+  --lesson-7-title-background-desktop: url("/course/lesson-7-title-background-desktop.svg");
+  --lesson-7-title-background-mobile: url("/course/lesson-7-title-background-mobile.svg");
+  --bonus-description-background-desktop: url("/course/bonus-description-background-desktop.svg");
+  --bonus-description-background-mobile: url("/course/bonus-description-background-mobile.svg");
+  --bonus-title-background-desktop: url("/course/bonus-title-background-desktop.svg");
+  --bonus-title-background-mobile: url("/course/bonus-title-background-mobile.svg");
+}
+.course-artwork {
+  --lesson-copy-background-desktop: url("./lesson-description-background-desktop.svg");
+  --lesson-copy-background-mobile: url("./lesson-description-background-mobile.svg");
+  --lesson-2-copy-background-desktop: url("./lesson-2-description-background-desktop.svg");
+  --lesson-2-copy-background-mobile: url("./lesson-2-description-background-mobile.svg");
+  --lesson-4-copy-background-desktop: url("./lesson-4-description-background-desktop.svg");
+  --lesson-4-copy-background-mobile: url("./lesson-4-description-background-mobile.svg");
+  --lesson-5-description-background-desktop: url("./lesson-5-description-background-desktop.svg");
+  --lesson-5-description-background-mobile: url("./lesson-5-description-background-mobile.svg");
+  --lesson-5-title-background-desktop: url("./lesson-5-title-background-desktop.svg");
+  --lesson-5-title-background-mobile: url("./lesson-5-title-background-mobile.svg");
+  --lesson-6-description-background-desktop: url("./lesson-6-description-background-desktop.svg");
+  --lesson-6-description-background-mobile: url("./lesson-6-description-background-mobile.svg");
+  --lesson-6-title-background-desktop: url("./lesson-6-title-background-desktop.svg");
+  --lesson-6-title-background-mobile: url("./lesson-6-title-background-mobile.svg");
+  --lesson-7-description-background-desktop: url("./lesson-7-description-background-desktop.svg");
+  --lesson-7-description-background-mobile: url("./lesson-7-description-background-mobile.svg");
+  --lesson-7-title-background-desktop: url("./lesson-7-title-background-desktop.svg");
+  --lesson-7-title-background-mobile: url("./lesson-7-title-background-mobile.svg");
+  --bonus-description-background-desktop: url("./bonus-description-background-desktop.svg");
+  --bonus-description-background-mobile: url("./bonus-description-background-mobile.svg");
+  --bonus-title-background-desktop: url("./bonus-title-background-desktop.svg");
+  --bonus-title-background-mobile: url("./bonus-title-background-mobile.svg");
+}
+.lesson-description-copy p {
+  position: absolute;
+  top: 22%;
+  left: calc(151 / 1920 * 100%);
+  width: calc(1020 / 1920 * 100%);
+  margin: 0;
+}
+.lesson-description-copy p::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  bottom: auto;
+  height: 7.65625cqw;
+  left: -1.6%;
+  width: 1.041667cqw;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='120 1895 20 147' preserveAspectRatio='none' fill='none'%3E%3Cpath d='M129.255 1895C129.255 1895 119.621 1926.81 124.266 1947.82C128.353 1966.31 131.953 1972.67 136.736 1991.09C141.97 2011.24 129.255 2042 129.255 2042' stroke='url(%23fade)' stroke-width='3' stroke-linecap='round'/%3E%3Cdefs%3E%3ClinearGradient id='fade' x1='126.421' y1='1895' x2='126.421' y2='2042' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='white' stop-opacity='0'/%3E%3Cstop offset='.5' stop-color='white'/%3E%3Cstop offset='1' stop-color='white' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+.lesson-video-placeholders { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.lesson-video-placeholder {
+  position: absolute;
+  left: 5.2%;
+  width: 89.6%;
+  height: calc(940 / 12334 * 100%);
+  padding: 0;
+  border: 0;
+  border-radius: 2.4cqw;
+  background: transparent;
+  color: #fff4ed;
+  pointer-events: auto;
+  cursor: pointer;
+}
+.lesson-video-placeholder span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: grid;
+  width: clamp(48px, 5cqw, 92px);
+  aspect-ratio: 1;
+  place-items: center;
+  padding-left: .35em;
+  border: 1px solid rgba(255,244,237,.68);
+  border-radius: 50%;
+  background: rgba(62,31,20,.5);
+  box-shadow: 0 10px 30px rgba(20,8,3,.28);
+  font: 400 clamp(18px, 1.55cqw, 30px)/1 Arial, sans-serif;
+  opacity: .7;
+  transform: translate(-50%,-50%);
+  transition: opacity .2s ease, transform .2s ease, background .2s ease;
+}
+.lesson-video-placeholder:hover span,
+.lesson-video-placeholder:focus-visible span { opacity: 1; transform: translate(-50%,-50%) scale(1.08); background: rgba(100,48,28,.72); }
+.lesson-video-placeholder:focus-visible { outline: 3px solid #fff4ed; outline-offset: 5px; }
+.lesson-video-placeholder-1 { top: calc(800 / 12334 * 100%); }
+.lesson-video-placeholder-2 { top: calc(2210 / 12334 * 100%); }
+.lesson-video-placeholder-3 { top: calc(3620 / 12334 * 100%); }
+.lesson-video-placeholder-4 { top: calc(5030 / 12334 * 100%); }
+.lesson-video-placeholder-5 { top: calc(6440 / 12334 * 100%); }
+.lesson-video-placeholder-6 { top: calc(7850 / 12334 * 100%); }
+.lesson-video-placeholder-7 { top: calc(9260 / 12334 * 100%); }
+.lesson-video-placeholder-8 { top: calc(10690 / 12334 * 100%); }
+@media (max-width: 600px) {
+  .lesson-description-copy {
+    top: calc(425 / 3107 * 100%);
+    height: calc(75 / 3107 * 100%);
+    font-size: 2.631579cqw;
+    line-height: 1.4;
+  }
+  .lesson-description-copy::before {
+    background-image: var(--lesson-copy-background-mobile);
+    mask-image: linear-gradient(to bottom, transparent, #000 5%, #000 95%, transparent);
+  }
+  .lesson-description-copy p { top: 18.7%; left: 7.9%; width: 87%; }
+  .lesson-description-copy p::before { left: -3.4%; width: 1.8cqw; height: 11.842105cqw; }
+  .lesson-description-copy-2 { top: calc(750 / 3107 * 100%); }
+  .lesson-description-copy-2::before { background-image: var(--lesson-2-copy-background-mobile); }
+  .lesson-description-copy-4 { top: calc(1390 / 3107 * 100%); height: calc(90 / 3107 * 100%); }
+  .lesson-description-copy-4::before { background-image: var(--lesson-4-copy-background-mobile); }
+  .lesson-description-copy-5 { top: calc(1730 / 3107 * 100%); height: calc(100 / 3107 * 100%); }
+  .lesson-description-copy-5::before { background-image: var(--lesson-5-description-background-mobile); }
+  .lesson-description-copy-6 { top: calc(2045 / 3107 * 100%); height: calc(100 / 3107 * 100%); }
+  .lesson-description-copy-6::before { background-image: var(--lesson-6-description-background-mobile); }
+  .lesson-description-copy-7 { top: calc(2330 / 3107 * 100%); height: calc(100 / 3107 * 100%); }
+  .lesson-description-copy-7::before { background-image: var(--lesson-7-description-background-mobile); }
+  .bonus-description-copy { top: calc(2630 / 3107 * 100%); height: calc(125 / 3107 * 100%); }
+  .bonus-description-copy::before { background-image: var(--bonus-description-background-mobile); }
+  .lesson-title-copy-5 { top: calc(1470 / 3107 * 100%); height: calc(120 / 3107 * 100%); }
+  .lesson-title-copy-5::before { background-image: var(--lesson-5-title-background-mobile); }
+  .lesson-title-copy-6 { top: calc(1810 / 3107 * 100%); height: calc(120 / 3107 * 100%); }
+  .lesson-title-copy-6::before { background-image: var(--lesson-6-title-background-mobile); }
+  .lesson-title-copy-7 { top: calc(2130 / 3107 * 100%); height: calc(120 / 3107 * 100%); }
+  .lesson-title-copy-7::before { background-image: var(--lesson-7-title-background-mobile); }
+  .bonus-title-copy { top: calc(2390 / 3107 * 100%); height: calc(100 / 3107 * 100%); }
+  .bonus-title-copy::before { background-image: var(--bonus-title-background-mobile); }
+  .lesson-title-copy span { top: 19%; left: 5%; width: 90%; font-size: 7.1cqw; line-height: .9; white-space: normal; }
+  .lesson-video-placeholder { left: 5.25%; width: 89.5%; height: calc(205 / 3107 * 100%); border-radius: 3.2cqw; }
+  .lesson-video-placeholder span { width: clamp(44px, 14cqw, 58px); font-size: clamp(16px, 4.8cqw, 20px); }
+  .lesson-video-placeholder-1 { top: calc(210 / 3107 * 100%); }
+  .lesson-video-placeholder-2 { top: calc(535 / 3107 * 100%); }
+  .lesson-video-placeholder-3 { top: calc(860 / 3107 * 100%); }
+  .lesson-video-placeholder-4 { top: calc(1180 / 3107 * 100%); }
+  .lesson-video-placeholder-5 { top: calc(1500 / 3107 * 100%); }
+  .lesson-video-placeholder-6 { top: calc(1820 / 3107 * 100%); }
+  .lesson-video-placeholder-7 { top: calc(2140 / 3107 * 100%); }
+  .lesson-video-placeholder-8 { top: calc(2410 / 3107 * 100%); }
+}

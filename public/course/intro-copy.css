@@ -1,0 +1,52 @@
+.figma-home-artwork, .home-artwork { container-type: inline-size; }
+.home-intro-copy {
+  position: absolute;
+  top: calc(1700 / 5657 * 100%);
+  left: 0;
+  width: 100%;
+  height: calc(850 / 5657 * 100%);
+  color: #fff4ed;
+  font: 400 2.083333cqw / 1.36 "Montserrat", Arial, sans-serif;
+}
+.home-intro-copy::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--intro-background-desktop) center / 100% 100% no-repeat;
+  mask-image: linear-gradient(to bottom, transparent, #000 5%, #000 95%, transparent);
+  pointer-events: none;
+}
+.figma-home-artwork {
+  --intro-background-desktop: url("/course/intro-background-desktop.svg");
+  --intro-background-mobile: url("/course/intro-background-mobile.svg");
+}
+.home-artwork {
+  --intro-background-desktop: url("./intro-background-desktop.svg");
+  --intro-background-mobile: url("./intro-background-mobile.svg");
+}
+.home-intro-copy p { position: absolute; margin: 0; padding-left: 1.5%; }
+/* Original Figma curve and fade, scaled to each paragraph's height. */
+.home-intro-copy p::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 -.45cqw;
+  width: 1.041667cqw;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='120 1757 20 343' preserveAspectRatio='none' fill='none'%3E%3Cpath d='M129.255 1757C129.255 1757 119.621 1831.22 124.266 1880.24C128.353 1923.38 131.953 1938.23 136.736 1981.21C141.97 2028.24 129.255 2100 129.255 2100' stroke='url(%23fade)' stroke-width='3' stroke-linecap='round'/%3E%3Cdefs%3E%3ClinearGradient id='fade' x1='126.421' y1='1757' x2='126.421' y2='2100' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='white' stop-opacity='0'/%3E%3Cstop offset='.5' stop-color='white'/%3E%3Cstop offset='1' stop-color='white' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  pointer-events: none;
+}
+.home-intro-copy strong { font-weight: 700; }
+.home-intro-copy .intro-description { top: 5%; left: 6.5%; width: 74%; }
+.home-intro-copy .intro-outcome { top: 57%; left: 38%; width: 55.5%; font-size: 1.979167cqw; }
+@media (max-width: 600px) {
+  .home-intro-copy {
+    top: calc(400 / 1806 * 100%);
+    height: calc(255 / 1806 * 100%);
+    font-size: 3.157895cqw;
+    line-height: 1.35;
+  }
+  .home-intro-copy::before { background-image: var(--intro-background-mobile); mask-image: linear-gradient(to bottom, transparent, #000 3%, #000 96%, transparent); }
+  .home-intro-copy p { padding-left: 3%; }
+  .home-intro-copy p::before { width: 1.8cqw; }
+  .home-intro-copy .intro-description { top: 4%; left: 5%; width: 90%; }
+  .home-intro-copy .intro-outcome { top: 58%; left: 5%; width: 90%; font-size: inherit; }
+}
