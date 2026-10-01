@@ -59,8 +59,8 @@ export function ProfileClient({ identity, profile: initial, requestedPlan, reque
   const hasCourseAccess = profile.accessGranted && !accessExpired;
   const paymentLocked = profile.paymentStatus === "pending" || (profile.paymentStatus === "confirmed" && hasCourseAccess);
 
-  async function saveProfile(openPayment = false): Promise<ProfileData | null> {
-    setBusy(true);
+  async function saveProfile(openPayment = false, manageBusy = true): Promise<ProfileData | null> {
+    if (manageBusy) setBusy(true);
     setMessage("");
     try {
       const response = await fetch("/api/profile", {
@@ -78,7 +78,7 @@ export function ProfileClient({ identity, profile: initial, requestedPlan, reque
       setMessage(error instanceof Error ? error.message : "Не удалось сохранить профиль");
       return null;
     } finally {
-      setBusy(false);
+      if (manageBusy) setBusy(false);
     }
   }
 
@@ -91,7 +91,7 @@ export function ProfileClient({ identity, profile: initial, requestedPlan, reque
     setBusy(true);
     setMessage("");
     try {
-      const saved = await saveProfile(false);
+      const saved = await saveProfile(false, false);
       if (!saved) return;
       const response = await fetch("/api/payment-request", {
         method: "POST",

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import {
   Dialog,
   DialogClose,
@@ -60,11 +61,20 @@ export function DocumentsModal() {
           if (!canContinue) event.preventDefault();
         }}
       >
+        {/* Original outlined Figma artwork; semantic controls remain above it. */}
+        <Image
+          className="document-artwork"
+          src="/course/documents-frame.svg"
+          alt=""
+          aria-hidden="true"
+          width={1649}
+          height={1341}
+          unoptimized
+          priority
+        />
         <DialogHeader className="document-dialog-header">
-          <DialogTitle ref={titleRef} tabIndex={-1} className="document-dialog-title">
-            Сначала ознакомьтесь
-            <br />
-            с документами:
+          <DialogTitle ref={titleRef} tabIndex={-1} className="sr-only">
+            Сначала ознакомьтесь с документами:
           </DialogTitle>
           <DialogDescription className="sr-only">
             Откройте документы, примите условия оферты и согласие на обработку
@@ -80,23 +90,10 @@ export function DocumentsModal() {
               rel="noreferrer"
               aria-label={`${document.label} (откроется в новой вкладке)`}
             >
-              {document.label}
+              <span className="sr-only">{document.label}</span>
             </a>
           ))}
         </nav>
-        <DialogClose asChild>
-          <button
-            className="button document-continue"
-            type="button"
-            disabled={!canContinue}
-            aria-describedby="document-consent-hint"
-          >
-            Продолжить
-          </button>
-        </DialogClose>
-        <span id="document-consent-hint" className="sr-only">
-          Чтобы продолжить, отметьте оба согласия.
-        </span>
         <div className="document-consents" role="group" aria-label="Обязательные согласия">
           <label className="document-consent">
             <Checkbox
@@ -104,7 +101,7 @@ export function DocumentsModal() {
               checked={offerAccepted}
               onCheckedChange={(checked) => setOfferAccepted(checked === true)}
             />
-            <span>Я принимаю условия Публичной оферты.</span>
+            <span className="sr-only">Я принимаю условия Публичной оферты.</span>
           </label>
           <label className="document-consent">
             <Checkbox
@@ -112,12 +109,25 @@ export function DocumentsModal() {
               checked={dataProcessingAccepted}
               onCheckedChange={(checked) => setDataProcessingAccepted(checked === true)}
             />
-            <span>
+            <span className="sr-only">
               Я даю согласие на обработку моих персональных данных в соответствии с
               Политикой обработки персональных данных.
             </span>
           </label>
         </div>
+        <DialogClose asChild>
+          <button
+            className="document-continue"
+            type="button"
+            disabled={!canContinue}
+            aria-describedby="document-consent-hint"
+          >
+            <span className="sr-only">Продолжить</span>
+          </button>
+        </DialogClose>
+        <span id="document-consent-hint" className="sr-only">
+          Чтобы продолжить, отметьте оба согласия.
+        </span>
       </DialogContent>
     </Dialog>
   );

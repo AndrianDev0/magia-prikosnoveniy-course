@@ -1,89 +1,32 @@
 "use client";
 
-import Image from "next/image";
-import { SiteFooter } from "@/components/course/site-footer";
+import Link from "next/link";
 import { SiteHeader } from "@/components/course/site-header";
-import { bonusLesson, courseLessons } from "@/config/site";
+import { bonusLesson, courseLessons, siteConfig } from "@/config/site";
 
 type Header = Parameters<typeof SiteHeader>[0];
 
-type LessonMediaProps = {
-  alt: string;
-  poster: string;
-  videoUrl: string;
-  priority?: boolean;
-};
-
-function LessonMedia({ alt, poster, videoUrl, priority = false }: LessonMediaProps) {
-  const resolvedVideoUrl = videoUrl.trim();
-
-  return (
-    <div className="figma-course-media">
-      {resolvedVideoUrl ? (
-        <video
-          aria-label={alt}
-          controls
-          playsInline
-          poster={poster}
-          preload="none"
-          src={resolvedVideoUrl}
-        />
-      ) : (
-        <Image
-          alt={alt}
-          fill
-          priority={priority}
-          sizes="(max-width: 720px) calc(100vw - 32px), 86vw"
-          src={poster}
-        />
-      )}
-    </div>
-  );
-}
-
 export function CoursePageClient({ header }: { header: Header }) {
+  const accountPath = header.user ? "/profile" : header.signInPath;
   return (
-    <div className="site-shell course-page figma-course-page">
-      <SiteHeader {...header} />
-
-      <main className="figma-course-main">
-        <header className="figma-course-heading">
-          <h1>Курс по Тантрическому<br />массажу</h1>
-          <p>Больше чувствительности. Больше контакта.<br />Больше близости через прикосновение.</p>
-        </header>
-
-        <section className="figma-course-lessons" aria-label="Уроки курса">
-          {courseLessons.map((lesson, index) => (
-            <article
-              className="figma-course-lesson"
-              id={lesson.slug}
-              key={lesson.slug}
-              style={{ "--lesson-index": index } as React.CSSProperties}
-            >
-              <h2>{Number(lesson.number)} урок - {lesson.title.toLocaleLowerCase("ru")}</h2>
-              <LessonMedia
-                alt={`Обложка видеоурока «${lesson.title}»`}
-                poster={lesson.poster}
-                priority={index === 0}
-                videoUrl={lesson.videoUrl}
-              />
-              <p>{lesson.description}</p>
-            </article>
-          ))}
-
-          <article className="figma-course-lesson figma-course-bonus" id={bonusLesson.slug}>
-            <h2>Дополнительно</h2>
-            <LessonMedia
-              alt={`Обложка видео «${bonusLesson.title}»`}
-              poster={bonusLesson.poster}
-              videoUrl={bonusLesson.videoUrl}
-            />
-            <p><strong>Полное видео массажа</strong> — {bonusLesson.description}</p>
-          </article>
+    <div className="figma-artwork-shell">
+      <main className="figma-artwork-page figma-lessons-artwork">
+        <picture className="figma-artwork-picture">
+          <source media="(max-width: 600px)" srcSet="/course/lessons-mobile.svg" width="380" height="3107" />
+          <img className="figma-artwork-image" src="/course/lessons-desktop.svg" alt="" aria-hidden="true" width="1920" height="12334" fetchPriority="high" />
+        </picture>
+        <h1 className="sr-only">Курс по Тантрическому массажу</h1>
+        <nav className="figma-hotspots" aria-label="Навигация страницы курса">
+          <Link className="figma-hotspot home-brand" href="/" aria-label="Магия прикосновений — на главную" />
+          <a className="figma-hotspot home-account" href={accountPath} target={header.user ? undefined : "_top"} aria-label={header.user ? "Личный кабинет" : "Войти"} />
+          {siteConfig.socials.map((social, index) => <a className={`figma-hotspot lesson-social lesson-social-${index + 1}`} href={social.href} aria-label={social.label} key={social.label} />)}
+          <a className="figma-hotspot lesson-document lesson-document-2" href={siteConfig.documents[1].href} aria-label={siteConfig.documents[1].label} />
+        </nav>
+        <section className="sr-only" aria-label="Уроки курса">
+          {courseLessons.map((lesson) => <article id={lesson.slug} key={lesson.slug}><h2>{Number(lesson.number)} урок — {lesson.title}</h2><p>{lesson.description}</p></article>)}
+          <article id={bonusLesson.slug}><h2>{bonusLesson.title}</h2><p>{bonusLesson.description}</p></article>
         </section>
       </main>
-
-      <SiteFooter />
     </div>
   );
 }

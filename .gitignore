@@ -46,3 +46,6 @@ next-env.d.ts
 /.codex/
 /outputs/
 /work/
+/.tools/
+/documents-modal-verified.jpg
+/home-desktop-preview.png
