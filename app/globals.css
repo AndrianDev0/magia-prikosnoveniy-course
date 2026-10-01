@@ -421,8 +421,8 @@ body:has(.document-dialog) [data-slot="dialog-overlay"] { background: rgba(20,8,
   border: 0!important;
   border-radius: 1.82cqi!important;
   background:
-    radial-gradient(circle 43.4cqi at -11.83% 50.04%, #ffffc9 0%, rgba(255,59,0,.9) 58%, transparent 100%),
-    radial-gradient(circle 43.4cqi at 111.52% 50.04%, #ffffc9 0%, rgba(255,59,0,.9) 58%, transparent 100%),
+    radial-gradient(circle 27cqi at -8% 50%, rgba(255, 181, 132, .82) 0%, rgba(224, 87, 40, .58) 46%, rgba(111, 48, 25, .28) 72%, transparent 100%),
+    radial-gradient(circle 27cqi at 108% 50%, rgba(255, 181, 132, .82) 0%, rgba(224, 87, 40, .58) 46%, rgba(111, 48, 25, .28) 72%, transparent 100%),
     #482817!important;
   color: #fff4ed!important;
   box-shadow: 0 28px 84px rgba(13,4,2,.62)!important;
