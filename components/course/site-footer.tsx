@@ -7,7 +7,6 @@ export function SiteFooter() {
       <div className="footer-main">
         <div>
           <p className="footer-signature">Эмиль</p>
-          <p>{siteConfig.author.name}</p>
         </div>
         <div className="footer-contacts">
           <span className="footer-label">Контакты</span>

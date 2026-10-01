@@ -1,6 +1,6 @@
 "use client";
 
-import { Camera, Menu, Send } from "lucide-react";
+import { Camera, Menu, Send, UserRound } from "lucide-react";
 import Link from "next/link";
 import {
   Sheet,
@@ -51,13 +51,13 @@ function Navigation({ user, signInPath, signOutPath, isAdmin, mobile = false }: 
 }
 
 export function SiteHeader(props: HeaderProps) {
+  const accountPath = props.user ? "/profile" : props.signInPath;
   return (
     <header className="site-header">
       <Link className="brand" href="/" aria-label="Магия прикосновений — на главную">
-        <span className="brand-mark" aria-hidden="true">M</span>
-        <span>Магия прикосновений</span>
+        <span>Эмиль</span>
       </Link>
-      <Navigation {...props} />
+      <a className="account-button" href={accountPath} target={props.user ? undefined : "_top"} aria-label={props.user ? "Личный кабинет" : "Войти"}><UserRound /></a>
       <Sheet>
         <SheetTrigger asChild>
           <button className="menu-button" type="button" aria-label="Открыть меню"><Menu /></button>
