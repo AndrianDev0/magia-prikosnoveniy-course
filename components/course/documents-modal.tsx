@@ -67,7 +67,7 @@ export function DocumentsModal() {
           <Image className="document-artwork" src="/course/documents-desktop-figma.png" alt="" width={1649} height={1341} unoptimized priority />
         </picture>
         <DialogHeader className="document-dialog-header">
-          <DialogTitle ref={titleRef} tabIndex={-1} className="sr-only">
+          <DialogTitle ref={titleRef} tabIndex={-1} className="document-mobile-title sr-only">
             Сначала ознакомьтесь с документами:
           </DialogTitle>
           <DialogDescription className="sr-only">
@@ -84,7 +84,7 @@ export function DocumentsModal() {
               rel="noreferrer"
               aria-label={`${document.label} (откроется в новой вкладке)`}
             >
-              <span className="sr-only">{document.label}</span>
+              <span className="document-link-label">{document.label}</span>
             </a>
           ))}
         </nav>
@@ -95,7 +95,7 @@ export function DocumentsModal() {
               checked={offerAccepted}
               onCheckedChange={(checked) => setOfferAccepted(checked === true)}
             />
-            <span className="sr-only">Я принимаю условия Публичной оферты.</span>
+            <span className="document-consent-label sr-only">Я принимаю условия Публичной оферты.</span>
           </label>
           <label className="document-consent">
             <Checkbox
@@ -103,7 +103,7 @@ export function DocumentsModal() {
               checked={dataProcessingAccepted}
               onCheckedChange={(checked) => setDataProcessingAccepted(checked === true)}
             />
-            <span className="sr-only">
+            <span className="document-consent-label sr-only">
               Я даю согласие на обработку моих персональных данных в соответствии с
               Политикой обработки персональных данных.
             </span>
@@ -116,7 +116,7 @@ export function DocumentsModal() {
             disabled={!canContinue}
             aria-describedby="document-consent-hint"
           >
-            <span className="sr-only">Продолжить</span>
+            <span className="document-continue-label">Продолжить</span>
           </button>
         </DialogClose>
         <span id="document-consent-hint" className="sr-only">

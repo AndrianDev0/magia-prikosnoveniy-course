@@ -503,6 +503,42 @@ body:has(.document-dialog) [data-slot="dialog-overlay"] { background: rgba(0,0,0
 .document-checkbox[data-state="checked"] { background: #fff4ed!important; }
 .document-checkbox svg { width: 100%; height: 100%; }
 .document-checkbox:focus-visible { outline: 2px solid #fff4ed!important; outline-offset: 3px!important; }
+.document-mobile-title,.document-link-label,.document-consent-label,.document-continue-label { display: none; }
+
+@media (max-width: 600px) {
+  .document-dialog {
+    container-type: normal;
+    display: flex!important;
+    flex-direction: column;
+    width: min(calc(100vw - 24px), 420px)!important;
+    max-width: 420px!important;
+    max-height: calc(100dvh - 24px);
+    aspect-ratio: auto;
+    overflow-y: auto;
+    gap: 0!important;
+    padding: 26px 18px 20px!important;
+    border: 1px solid rgba(255,196,151,.42)!important;
+    border-radius: 20px!important;
+    background: radial-gradient(circle at 0 55%,rgba(236,112,53,.72),transparent 38%),radial-gradient(circle at 100% 45%,rgba(255,151,94,.62),transparent 38%),#542d1b!important;
+    box-shadow: 0 24px 70px rgba(18,6,2,.52)!important;
+    color: #fff4ed!important;
+    translate: -50% -50%!important;
+  }
+  .document-artwork-picture { display: none; }
+  .document-dialog-header { position: static; pointer-events: auto; }
+  .document-mobile-title.sr-only { position: static; display: block; width: auto; height: auto; margin: 0 0 18px; padding: 0; overflow: visible; clip: auto; white-space: normal; border: 0; color: #fff4ed; font: 400 clamp(27px,8vw,36px)/.86 "Miama Nueva",Georgia,serif; text-align: center; }
+  .document-dialog .document-links { position: static; display: grid; inset: auto; gap: 2px; pointer-events: auto; }
+  .document-dialog .document-links a,.document-dialog .document-links a:nth-child(n) { position: static; display: flex; align-items: center; justify-content: center; width: auto; min-height: 44px; height: auto; padding: 8px 4px; border-radius: 8px; color: #fff4ed; font: italic 400 14px/1.25 "Montserrat",Arial,sans-serif; text-align: center; text-decoration: underline; text-underline-offset: 3px; }
+  .document-dialog .document-link-label { display: inline; }
+  .document-dialog .document-consents { position: static; display: grid; inset: auto; gap: 13px; margin-top: 13px; pointer-events: auto; }
+  .document-dialog .document-consent,.document-dialog .document-consent:nth-child(n) { position: static; display: flex; align-items: flex-start; gap: 10px; width: auto; height: auto; color: rgba(255,244,237,.8); font: italic 400 12px/1.35 "Montserrat",Arial,sans-serif; }
+  .document-dialog .document-checkbox,.document-dialog .document-consent:nth-child(2) .document-checkbox { position: relative; left: auto; top: auto; flex: 0 0 24px; width: 24px!important; height: 24px!important; border: 1px solid rgba(255,244,237,.62)!important; border-radius: 5px!important; }
+  .document-dialog .document-consent-label.sr-only { position: static; display: block; width: auto; height: auto; margin: 0; padding: 2px 0 0; overflow: visible; clip: auto; white-space: normal; border: 0; }
+  .document-dialog .document-continue { position: static; display: grid; place-items: center; width: min(230px,80%); min-height: 58px; height: auto; margin: 22px auto 0; padding: 10px 18px 14px; border: 1px solid #fff4ed; border-radius: 999px; background: rgba(72,40,23,.22); box-shadow: inset 0 0 0 5px #542d1b,inset 0 0 0 6px rgba(255,244,237,.75); color: #fff4ed; font: 400 22px/.84 "Miama Nueva",Georgia,serif; }
+  .document-dialog .document-continue:disabled { opacity: .48; }
+  .document-dialog .document-continue:enabled { background: rgba(255,244,237,.12); }
+  .document-dialog .document-continue-label { display: inline; }
+}
 
 .course-plan-dialog {
   width: min(92vw, 960px)!important;
@@ -869,7 +905,7 @@ body:has(.document-dialog) [data-slot="dialog-overlay"] { background: rgba(0,0,0
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    width: 55%;
+    width: 62%;
     height: 9.47vw;
     margin: 0 auto;
   }
@@ -892,17 +928,18 @@ body:has(.document-dialog) [data-slot="dialog-overlay"] { background: rgba(0,0,0
   .mobile-plan-dots button:focus-visible,
   .mobile-plan-slide > button:focus-visible,
   .mobile-plan-slide > a:focus-visible { outline: 2px solid #fff4ed; outline-offset: 2px; }
-  .mobile-plan-dots { display: flex; align-items: center; gap: 7px; }
+  .mobile-plan-dots { display: flex; align-items: center; gap: 0; }
   .mobile-plan-dots button {
-    width: 6px;
-    height: 6px;
+    position: relative;
+    width: 30px;
+    height: 44px;
     padding: 0;
     border: 0;
-    border-radius: 50%;
-    background: rgba(255, 244, 237, .45);
+    background: transparent;
     cursor: pointer;
   }
-  .mobile-plan-dots button.is-active { background: #fff4ed; transform: scale(1.18); }
+  .mobile-plan-dots button::after { content: ""; position: absolute; left: 50%; top: 50%; width: 6px; height: 6px; border-radius: 50%; background: rgba(255, 244, 237, .45); transform: translate(-50%, -50%); }
+  .mobile-plan-dots button.is-active::after { background: #fff4ed; transform: translate(-50%, -50%) scale(1.18); }
   .mobile-plan-viewport { height: calc(100% - 9.47vw); overflow: hidden; }
   .mobile-plan-track {
     display: flex;
@@ -928,8 +965,9 @@ body:has(.document-dialog) [data-slot="dialog-overlay"] { background: rgba(0,0,0
   .mobile-plan-slide > .mobile-plan-purchase { display: block; width: 100%; margin: 0; padding: 0; border: 0; border-radius: 12px; background: transparent; cursor: pointer; }
   .mobile-plan-slide img { display: block; width: 100%; height: auto; border-radius: 12px; }
   .mobile-plan-slide > button {
-    margin-top: 7px;
-    padding: 3px 8px;
+    min-height: 44px;
+    margin-top: 0;
+    padding: 10px 8px;
     border: 0;
     background: transparent;
     color: rgba(255, 244, 237, .72);
