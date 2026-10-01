@@ -37,19 +37,22 @@
     </section>
   </main>
 
-  <dialog class="documents-modal" id="documents" tabindex="-1">
-    <img src="./course/documents-frame.svg" alt="" aria-hidden="true">
-    <nav class="document-links" aria-label="Документы">
-      <a href="./document.html?doc=offer" aria-label="Публичная оферта"></a>
-      <a href="./document.html?doc=privacy" aria-label="Политика обработки персональных данных"></a>
-      <a href="./document.html?doc=consent" aria-label="Согласие на обработку персональных данных"></a>
-      <a href="./document.html?doc=rules" aria-label="Правила курса 18+"></a>
-      <a href="./document.html?doc=refunds" aria-label="Правила возврата денежных средств"></a>
-    </nav>
-    <label class="consent consent-1"><input type="checkbox"><span class="sr-only">Принимаю условия публичной оферты</span></label>
-    <label class="consent consent-2"><input type="checkbox"><span class="sr-only">Согласен на обработку персональных данных</span></label>
-    <button class="documents-continue" disabled aria-label="Продолжить"></button>
-  </dialog>
+  <button class="documents-reopen" type="button" aria-controls="documents">Документы</button>
+  <div class="documents-layer" id="documents" hidden>
+    <section class="documents-modal" tabindex="-1" role="dialog" aria-modal="true" aria-label="Ознакомление с документацией">
+      <img src="./course/documents-frame.svg" alt="" aria-hidden="true">
+      <nav class="document-links" aria-label="Документы">
+        <a href="./document.html?doc=offer" aria-label="Публичная оферта"></a>
+        <a href="./document.html?doc=privacy" aria-label="Политика обработки персональных данных"></a>
+        <a href="./document.html?doc=consent" aria-label="Согласие на обработку персональных данных"></a>
+        <a href="./document.html?doc=rules" aria-label="Правила курса 18+"></a>
+        <a href="./document.html?doc=refunds" aria-label="Правила возврата денежных средств"></a>
+      </nav>
+      <label class="consent consent-1"><input type="checkbox"><span class="sr-only">Принимаю условия публичной оферты</span></label>
+      <label class="consent consent-2"><input type="checkbox"><span class="sr-only">Согласен на обработку персональных данных</span></label>
+      <button class="documents-continue" disabled aria-label="Продолжить"></button>
+    </section>
+  </div>
 
   <dialog class="plan-modal" id="plan-modal">
     <picture><source media="(max-width:720px)" srcset="./course/plan-modal-mobile.svg"><img src="./course/plan-modal.svg" alt="План курса"></picture>

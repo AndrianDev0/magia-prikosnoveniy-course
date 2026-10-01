@@ -2,10 +2,14 @@ const documents=document.querySelector('#documents');
 const plan=document.querySelector('#plan-modal');
 const checks=[...document.querySelectorAll('.consent input')];
 const continueButton=document.querySelector('.documents-continue');
-const accepted='magic-touch-documents-pages-v2';
-if(!localStorage.getItem(accepted)){documents?.showModal();documents?.focus()}
+const reopenButton=document.querySelector('.documents-reopen');
+const accepted='magic-touch-documents-pages-v3';
+function showDocuments(){documents.hidden=false;document.body.style.overflow='hidden';documents.querySelector('.documents-modal')?.focus()}
+function hideDocuments(){documents.hidden=true;document.body.style.overflow=''}
+if(!localStorage.getItem(accepted)) showDocuments();
+reopenButton?.addEventListener('click',showDocuments);
 checks.forEach(check=>check.addEventListener('change',()=>{continueButton.disabled=!checks.every(item=>item.checked)}));
-continueButton?.addEventListener('click',()=>{if(checks.every(item=>item.checked)){localStorage.setItem(accepted,'yes');documents.close()}});
+continueButton?.addEventListener('click',()=>{if(checks.every(item=>item.checked)){localStorage.setItem(accepted,'yes');hideDocuments()}});
 document.querySelectorAll('[data-plan-open]').forEach(button=>button.addEventListener('click',()=>plan?.showModal()));
 document.querySelector('.plan-close')?.addEventListener('click',()=>plan?.close());
 
