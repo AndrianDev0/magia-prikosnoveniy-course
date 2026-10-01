@@ -50,6 +50,7 @@ export function HomeClient(props: HomeClientProps) {
         </section>
 
         <section className="figma-prices" id="prices" aria-label="Тарифы курса">
+          <span className="section-anchor" id="program" aria-hidden="true" />
           <div className="figma-price-grid">
             {plans.map((plan) => (
               <article className={`figma-price-card figma-price-${plan.id}`} key={plan.id}>

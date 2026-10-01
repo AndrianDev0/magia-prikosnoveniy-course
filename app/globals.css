@@ -327,7 +327,8 @@ button { font: inherit; cursor: pointer; }
 .figma-intro-main strong { color: #fff4ed; font-weight: 500; }
 .figma-intro-side strong { display: block; color: #fff4ed; font-weight: 500; }
 
-.figma-prices { width: min(81%, 1555px); margin: clamp(112px, 9.4vw, 180px) auto 0; }
+.figma-prices { position: relative; width: min(81%, 1555px); margin: clamp(112px, 9.4vw, 180px) auto 0; }
+.section-anchor { position: absolute; top: 0; left: 0; width: 1px; height: 1px; pointer-events: none; }
 .figma-price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 2.1vw, 40px); align-items: start; }
 .figma-price-card {
   position: relative;
@@ -745,6 +746,8 @@ body:has(.document-dialog) [data-slot="dialog-overlay"] { background: rgba(20,8,
 }
 
 @media (max-width: 720px) {
+  html { scrollbar-width: none; }
+  html::-webkit-scrollbar { width: 0; height: 0; }
   .section { width: min(100% - 28px, 1180px); padding-block: 62px; }
   .site-header { width: calc(100% - 20px); min-height: 66px; margin-top: 8px; padding: 0 11px 0 14px; }
   .brand { font-size: 1rem; }
@@ -799,7 +802,7 @@ body:has(.document-dialog) [data-slot="dialog-overlay"] { background: rgba(20,8,
   .figma-course-main {
     height: auto;
     min-height: 0;
-    padding: 39px 16px 86px;
+    padding: 39px 16px 8px;
     overflow: hidden;
   }
   .figma-course-heading { position: relative; top: auto; left: auto; }
