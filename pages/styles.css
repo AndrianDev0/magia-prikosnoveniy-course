@@ -5,6 +5,17 @@
 .documents-layer[hidden]{display:none}.documents-layer{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:7px;background:rgba(12,5,2,.72);overscroll-behavior:contain}.documents-layer .documents-modal{margin:0}.documents-mobile-art,.mobile-plan-open{display:none}.documents-reopen{position:fixed;right:max(12px,env(safe-area-inset-right));bottom:max(12px,env(safe-area-inset-bottom));z-index:20;min-width:112px;min-height:44px;padding:10px 18px;border:1px solid rgba(255,244,237,.55);border-radius:999px;background:rgba(72,40,23,.88);color:#fff4ed;font:italic 15px Georgia,serif;box-shadow:0 8px 25px rgba(0,0,0,.3);touch-action:manipulation;cursor:pointer}.documents-reopen:focus-visible{outline:2px solid #fff4ed;outline-offset:3px}
 
 @media(max-width:600px){
+  /* `<picture>` keeps the fallback `<img>` width/height ratio in some
+     mobile browsers.  Pin the ratio to the actually selected Figma export
+     so every percentage-positioned control stays aligned with the artwork. */
+  .home-artwork .artwork-image{
+    aspect-ratio:1140/5418;
+    height:auto;
+  }
+  .course-artwork .artwork-image{
+    aspect-ratio:1140/9321;
+    height:auto;
+  }
   html,body{background:#4b2818}
   .home-artwork,.course-artwork{width:100%}
   .home-artwork .artwork-image,.course-artwork .artwork-image{image-rendering:auto}
@@ -32,3 +43,5 @@
 html{scrollbar-width:none}html::-webkit-scrollbar{width:0;height:0}
 @media(min-width:1024px) and (max-height:900px){body:has(.artwork){background:radial-gradient(ellipse at 50% 20%,#59301b 0%,#482817 65%)}.artwork{width:min(88%,104svh)}}
 @media(min-width:601px){.documents-layer{background:rgba(0,0,0,.5);backdrop-filter:blur(1px)}.documents-layer .documents-modal{transform:translateY(30px)}.documents-modal::backdrop,.plan-modal::backdrop{background:rgba(0,0,0,.5);backdrop-filter:blur(1px)}}
+.site-placeholder-toast{position:fixed;z-index:80;left:50%;bottom:max(18px,env(safe-area-inset-bottom));transform:translateX(-50%);width:max-content;max-width:calc(100vw - 28px);padding:12px 18px;border:1px solid rgba(255,244,237,.32);border-radius:999px;background:rgba(55,27,17,.96);box-shadow:0 12px 36px rgba(20,8,3,.38);color:#fff4ed;font:600 13px/1.35 "Montserrat",Arial,sans-serif;text-align:center}.site-placeholder-toast[hidden]{display:none}
+@media(max-width:600px){.documents-reopen{display:none}}

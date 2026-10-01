@@ -833,6 +833,8 @@ body:has(.document-dialog) [data-slot="dialog-overlay"] { background: rgba(0,0,0
 
 @media (max-width: 600px) {
   .figma-artwork-page { width: 100%; }
+  .figma-home-artwork .figma-artwork-image { aspect-ratio: 1140 / 5418; height: auto; }
+  .figma-lessons-artwork .figma-artwork-image { aspect-ratio: 1140 / 9321; height: auto; }
   .home-brand { left: 3%; top: .2%; width: 35%; height: 3.2%; }
   .home-account { left: 86%; top: .15%; width: 12%; height: 2.4%; }
   .home-plan-card-1 { left: 0; top: 39.44%; width: 22.4%; height: 12.13%; }

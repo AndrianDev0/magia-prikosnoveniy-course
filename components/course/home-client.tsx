@@ -48,7 +48,7 @@ export function HomeClient(props: HomeClientProps) {
 
       <main className="figma-artwork-page figma-home-artwork">
         <picture className="figma-artwork-picture">
-          <source media="(max-width: 600px)" srcSet="/course/home-mobile-figma.png" width="1140" height="5418" />
+          <source media="(max-width: 600px)" srcSet="/course/home-mobile-figma.webp" width="1140" height="5418" type="image/webp" />
           <img className="figma-artwork-image" src="/course/home-desktop-figma.png" alt="" aria-hidden="true" width="1920" height="5657" fetchPriority="high" />
         </picture>
 
