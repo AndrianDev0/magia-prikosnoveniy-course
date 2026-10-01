@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogHeader,
@@ -23,15 +24,24 @@ export function DocumentsModal() {
 
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
-      if (window.localStorage.getItem(STORAGE_KEY) !== "dismissed") setOpen(true);
+      try {
+        if (window.localStorage.getItem(STORAGE_KEY) !== "dismissed") setOpen(true);
+      } catch {
+        setOpen(true);
+      }
     });
     return () => window.cancelAnimationFrame(frame);
   }, []);
 
   function changeOpen(next: boolean) {
-    if (!next && !canContinue) return;
+    if (!next) {
+      try {
+        window.localStorage.setItem(STORAGE_KEY, "dismissed");
+      } catch {
+        // The modal must still close when storage is blocked by the browser.
+      }
+    }
     setOpen(next);
-    if (!next) window.localStorage.setItem(STORAGE_KEY, "dismissed");
   }
 
   return (
@@ -43,8 +53,12 @@ export function DocumentsModal() {
           event.preventDefault();
           titleRef.current?.focus();
         }}
-        onEscapeKeyDown={(event) => event.preventDefault()}
-        onPointerDownOutside={(event) => event.preventDefault()}
+        onEscapeKeyDown={(event) => {
+          if (!canContinue) event.preventDefault();
+        }}
+        onPointerDownOutside={(event) => {
+          if (!canContinue) event.preventDefault();
+        }}
       >
         <DialogHeader className="document-dialog-header">
           <DialogTitle ref={titleRef} tabIndex={-1} className="document-dialog-title">
@@ -70,15 +84,16 @@ export function DocumentsModal() {
             </a>
           ))}
         </nav>
-        <button
-          className="button document-continue"
-          type="button"
-          disabled={!canContinue}
-          aria-describedby="document-consent-hint"
-          onClick={() => changeOpen(false)}
-        >
-          Продолжить
-        </button>
+        <DialogClose asChild>
+          <button
+            className="button document-continue"
+            type="button"
+            disabled={!canContinue}
+            aria-describedby="document-consent-hint"
+          >
+            Продолжить
+          </button>
+        </DialogClose>
         <span id="document-consent-hint" className="sr-only">
           Чтобы продолжить, отметьте оба согласия.
         </span>
