@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#482817">
+  <title>Магия прикосновений</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <main class="artwork home-artwork">
+    <picture class="artwork-picture">
+      <source media="(max-width:600px)" srcset="./course/home-mobile.svg" width="380" height="1806">
+      <img class="artwork-image" src="./course/home-desktop.svg" width="1920" height="5657" alt="Курс по тантрическому массажу «Магия прикосновений»">
+    </picture>
+
+    <nav class="hotspots" aria-label="Навигация">
+      <a class="hotspot account" href="#contact" aria-label="Контакты"></a>
+      <a class="hotspot enter-course" href="./course.html" aria-label="Перейти к курсу"></a>
+      <button class="hotspot plan plan-1" data-plan-open aria-label="План тарифа Стандарт"></button>
+      <button class="hotspot plan plan-2" data-plan-open aria-label="План тарифа VIP"></button>
+      <button class="hotspot plan plan-3" data-plan-open aria-label="План тарифа VIP+"></button>
+    </nav>
+
+    <section class="mobile-carousel" data-index="1" aria-label="Тарифы">
+      <div class="carousel-controls">
+        <button data-prev aria-label="Предыдущий тариф">←</button>
+        <div class="dots"><button data-dot="0"></button><button class="active" data-dot="1"></button><button data-dot="2"></button></div>
+        <button data-next aria-label="Следующий тариф">→</button>
+      </div>
+      <div class="carousel-window"><div class="carousel-track">
+        <article class="slide"><img src="./course/plan-standard.png" alt="Тариф Стандарт"><button data-plan-open>План курса</button></article>
+        <article class="slide active"><img src="./course/plan-vip.png" alt="Тариф VIP"><button data-plan-open>План курса</button></article>
+        <article class="slide"><img src="./course/plan-vip-plus.png" alt="Тариф VIP плюс"><button data-plan-open>План курса</button></article>
+      </div></div>
+    </section>
+  </main>
+
+  <dialog class="documents-modal" id="documents">
+    <img src="./course/documents-frame.svg" alt="" aria-hidden="true">
+    <nav class="document-links" aria-label="Документы">
+      <a href="./document.html?doc=offer" aria-label="Публичная оферта"></a>
+      <a href="./document.html?doc=privacy" aria-label="Политика обработки персональных данных"></a>
+      <a href="./document.html?doc=consent" aria-label="Согласие на обработку персональных данных"></a>
+      <a href="./document.html?doc=rules" aria-label="Правила курса 18+"></a>
+      <a href="./document.html?doc=refunds" aria-label="Правила возврата денежных средств"></a>
+    </nav>
+    <label class="consent consent-1"><input type="checkbox"><span class="sr-only">Принимаю условия публичной оферты</span></label>
+    <label class="consent consent-2"><input type="checkbox"><span class="sr-only">Согласен на обработку персональных данных</span></label>
+    <button class="documents-continue" disabled aria-label="Продолжить"></button>
+  </dialog>
+
+  <dialog class="plan-modal" id="plan-modal">
+    <picture><source media="(max-width:720px)" srcset="./course/plan-modal-mobile.svg"><img src="./course/plan-modal.svg" alt="План курса"></picture>
+    <button class="plan-close" aria-label="Продолжить"></button>
+  </dialog>
+</body>
+</html>

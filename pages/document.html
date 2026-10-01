@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#482817">
+  <title>Документ — Магия прикосновений</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body class="legal-body">
+  <main class="legal-card">
+    <p class="legal-brand">Эмиль</p>
+    <p class="legal-eyebrow">Демонстрационный документ</p>
+    <h1 id="document-title">Документ курса</h1>
+    <p id="document-intro"></p>
+    <section><h2>Общие положения</h2><p>Эта страница доступна для проверки структуры сайта. Перед коммерческим запуском текст должен быть заменён юридической редакцией для выбранной юрисдикции, формата оплаты и способа обработки персональных данных.</p></section>
+    <section><h2>Контакты</h2><p>Актуальные реквизиты исполнителя, адрес для обращений и сроки ответа добавляет владелец курса перед запуском.</p></section>
+    <a class="legal-back" href="./">Вернуться на главную</a>
+  </main>
+  <script>
+    const docs={offer:['Публичная оферта','Условия приобретения доступа к онлайн-курсу.'],privacy:['Политика обработки персональных данных','Как будут обрабатываться персональные данные участников курса.'],consent:['Согласие на обработку персональных данных','Условия предоставления согласия на обработку персональных данных.'],rules:['Правила курса 18+','Возрастные ограничения и правила участия в онлайн-курсе.'],refunds:['Правила возврата денежных средств','Порядок и условия возврата денежных средств за доступ к курсу.']};
+    const data=docs[new URLSearchParams(location.search).get('doc')]||['Документ курса','Информация для участников курса.'];
+    document.title=data[0]+' — Магия прикосновений'; document.querySelector('#document-title').textContent=data[0]; document.querySelector('#document-intro').textContent=data[1];
+  </script>
+</body>
+</html>
