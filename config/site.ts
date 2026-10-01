@@ -1,4 +1,4 @@
-export const DOCUMENT_VERSION = "2026-10-01-documents-v8";
+export const DOCUMENT_VERSION = "2026-10-01-documents-v9";
 
 export const plans = [
   {

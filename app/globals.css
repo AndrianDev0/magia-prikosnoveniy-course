@@ -437,13 +437,13 @@ body:has(.document-dialog) [data-slot="dialog-overlay"] { background: rgba(20,8,
 .document-continue,
 .document-consents { z-index: 1; }
 .document-dialog-header { position: absolute; inset: 0; display: block; }
-.document-dialog-title { position: absolute; top: 7.46cqh; left: 23.47cqi; width: 53.06cqi; height: 10.44cqh; margin: 0; color: #fff4ed; font-family: "Snell Roundhand", "Bad Script", cursive; font-size: 6.06cqi; font-weight: 500; font-style: normal; line-height: 70%; letter-spacing: 0; text-align: center; text-wrap: balance; }
+.document-dialog-title { position: absolute; top: 7.46cqh; left: 23.47cqi; width: 53.06cqi; height: 10.44cqh; margin: 0; color: #fff4ed; font-family: "Snell Roundhand", "Marck Script", cursive; font-size: 6.06cqi; font-weight: 400; font-style: normal; font-synthesis: none; line-height: 70%; letter-spacing: 0; text-align: center; text-wrap: balance; }
 .document-dialog-title:focus { outline: none; }
 .document-links { position: absolute; top: 29.08cqh; left: 0; width: 100%; display: grid; justify-items: center; gap: 2.24cqh; margin: 0; }
 .document-links a { height: 3.65cqh; display: inline-flex; align-items: center; justify-content: center; padding: 0; color: #fff4ed; font-family: "Montserrat", Arial, sans-serif; font-size: 2.43cqi; font-weight: 300; font-style: italic; line-height: 100%; letter-spacing: 0; text-align: center; text-decoration: underline; text-decoration-thickness: from-font; text-underline-offset: 0; transition: color .18s ease, text-shadow .18s ease; }
 .document-links a:hover { color: #fff8f2; text-shadow: 0 0 16px rgba(255,190,142,.5); }
 .document-links a:focus-visible { outline: 2px solid #f6d3b9; outline-offset: 3px; border-radius: 5px; }
-.document-continue { position: absolute; top: 67.49cqh; left: 36.39cqi; width: 27.47cqi; min-width: 0; height: 10.81cqh; min-height: 0; margin: 0; padding: 0; border: max(1px, .12cqi) solid #fff4ed; border-radius: 6.06cqi; background: transparent; color: #fff4ed; box-shadow: none; font-family: "Snell Roundhand", "Bad Script", cursive; font-size: 3.03cqi; font-weight: 500; font-style: normal; line-height: 100%; letter-spacing: 0; }
+.document-continue { position: absolute; top: 67.49cqh; left: 36.39cqi; width: 27.47cqi; min-width: 0; height: 10.81cqh; min-height: 0; margin: 0; padding: 0; border: max(1px, .12cqi) solid #fff4ed; border-radius: 6.06cqi; background: transparent; color: #fff4ed; box-shadow: none; font-family: "Snell Roundhand", "Marck Script", cursive; font-size: 3.03cqi; font-weight: 400; font-style: normal; font-synthesis: none; line-height: 100%; letter-spacing: 0; }
 .document-continue::before { content: ""; position: absolute; inset: .97cqh .97cqi; border: max(1px, .12cqi) solid #fff4ed; border-radius: 6.06cqi; pointer-events: none; }
 .document-continue:enabled:hover { border-color: #fff8f2; background: rgba(255,255,255,.035); box-shadow: 0 8px 24px rgba(9,3,1,.28); }
 .document-continue:disabled { cursor: not-allowed; opacity: 1; }
