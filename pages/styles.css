@@ -26,3 +26,6 @@
   .plan-modal::backdrop{background:rgba(12,5,2,.74);backdrop-filter:none}
 }
 .plan-modal[open]{position:fixed;inset:0}
+.legal-index{display:grid;gap:8px;margin-top:38px;padding-top:28px;border-top:1px solid rgba(255,244,237,.2)}.legal-index a{text-decoration:underline;text-underline-offset:4px;color:#ead8cc}
+.plan-card-link{width:27.92%}.plan-card-link-1{left:6.46%;top:46.58%;height:12.06%}.plan-card-link-2{left:36.04%;top:45.87%;height:15.24%}.plan-card-link-3{left:65.63%;top:46.58%;height:18.91%}
+@media(max-width:600px){.plan-card-link{display:none}}
