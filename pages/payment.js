@@ -141,7 +141,7 @@ if (typeof document !== 'undefined') {
       offer.checked = false; offer.removeAttribute('aria-invalid');
       touched.delete('offer'); document.querySelector('#payment-offer-error').hidden = true;
       clearSummary();
-      planChangeNote.textContent = `Выбран тариф ${plans[selectedPlan].name} — ${plans[selectedPlan].price} Подтвердите условия выбранного тарифа.`;
+      planChangeNote.textContent = `Тариф ${plans[selectedPlan].name}: ${plans[selectedPlan].price} Подтвердите его условия.`;
       planChangeNote.hidden = false;
     }));
     function open(plan) {
@@ -183,7 +183,7 @@ if (typeof document !== 'undefined') {
       if (!legalSnapshot) { formError('Сначала дождитесь загрузки юридических документов или повторите её.'); return; }
       const errors = fields.map(field => { touched.add(field); return {field,message:showError(field)}; }).filter(item => item.message);
       if (errors.length) {
-        const title = document.createElement('p'); title.textContent = 'Проверьте поля перед отправкой:';
+        const title = document.createElement('p'); title.textContent = 'Проверьте поля перед сохранением:';
         const list = document.createElement('ul');
         errors.forEach(({field,message}) => {
           const item = document.createElement('li'); const link = document.createElement('a');
@@ -199,7 +199,7 @@ if (typeof document !== 'undefined') {
         const lead = createPaymentLead({name:String(data.get('name')),email:String(data.get('email')),offer:data.get('offer') === 'on',consent:data.get('consent') === 'on',adult:data.get('adult') === 'on'},selectedPlan,legalSnapshot);
         // Treat browser storage as untrusted. Never render contacts as HTML.
         const result = storePaymentLead(lead, localStorage);
-        if (result === 'duplicate') { formError('Такая заявка уже сохранена. Посмотрите её в демо-админке или подождите 5 минут перед повторной отправкой.'); return; }
+        if (result === 'duplicate') { formError('Такая заявка уже сохранена. Посмотрите её в демо-админке или подождите 5 минут перед повторным сохранением.'); return; }
         if (result === 'full') { formError('В демо уже сохранено 100 заявок. Новая заявка не записана; старые данные сохранены.'); return; }
         completed = true;
         form.querySelectorAll('.payment-copy,.payment-fields').forEach(item => item.hidden = true);

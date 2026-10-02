@@ -154,7 +154,7 @@
     <form class="payment-card" id="payment-form" method="dialog" novalidate>
       <div class="payment-copy">
         <p class="payment-eyebrow">Магия прикосновений</p>
-        <h2 id="payment-title"><span class="payment-tariff-label">Ваш тариф</span><span data-payment-name>VIP</span></h2>
+        <h2 id="payment-title"><span class="payment-tariff-label">Выбранный тариф</span><span data-payment-name>VIP</span></h2>
         <fieldset class="payment-plan-picker"><legend>Сменить тариф</legend>
           <label><input type="radio" name="planId" value="standard" data-payment-choice><span>Стандарт</span></label>
           <label><input type="radio" name="planId" value="vip" data-payment-choice checked><span>VIP</span></label>
@@ -164,13 +164,13 @@
         <ul class="payment-benefits"><li>7 видеоуроков без ограничения срока доступа</li><li>2 видеоконсультации по 1 часу</li></ul>
         <p class="payment-plan-links"><a href="./document.html?doc=offer" target="_blank" rel="noopener">Условия тарифа</a> · <a href="./document.html?doc=refunds" target="_blank" rel="noopener">Возвраты</a></p>
         <details class="payment-qr">
-          <summary>QR для оплаты <span class="payment-demo-badge">Демо</span></summary>
-          <div class="payment-qr-content"><img src="./course/payment-qr-placeholder.svg" alt="Образец QR-кода, не предназначен для оплаты"><p>Это образец. Настоящие реквизиты подключим позже — сейчас оплачивать ничего не нужно.</p></div>
+          <summary>Пример QR-кода <span class="payment-demo-badge">Демо</span></summary>
+          <div class="payment-qr-content"><img src="./course/payment-qr-placeholder.svg" alt="Образец QR-кода, не предназначен для оплаты"><p>Этот код нельзя использовать для оплаты. Оплата пока не подключена.</p></div>
         </details>
-        <p class="payment-side-note">Оставьте контакты, чтобы оформить заявку на выбранный тариф.</p>
+        <p class="payment-side-note">Проверьте тариф и его условия перед сохранением заявки.</p>
       </div>
       <div class="payment-fields">
-        <div class="payment-fields-heading"><h3>Начнём с знакомства</h3><p>Ваше имя, почта и отдельные подтверждения.</p></div>
+        <div class="payment-fields-heading"><h3>Контакты для заявки</h3><p>Укажите имя и почту. Пока данные останутся только в этом браузере.</p></div>
         <div class="payment-form-error" hidden role="alert" tabindex="-1"></div>
         <div class="payment-field"><label for="payment-name">Ваше имя</label><input id="payment-name" name="name" autocomplete="name" required minlength="2" maxlength="80" aria-describedby="payment-name-error" placeholder="Как к вам обращаться"><p class="payment-field-error" id="payment-name-error" hidden></p></div>
         <div class="payment-field"><label for="payment-email">Электронная почта</label><input id="payment-email" name="email" type="email" autocomplete="email" autocapitalize="none" spellcheck="false" required maxlength="254" aria-describedby="payment-email-error" placeholder="name@example.com"><p class="payment-field-error" id="payment-email-error" hidden></p></div>
@@ -182,14 +182,14 @@
         </fieldset>
         <p class="payment-legal-status" role="status">Редакция документов будет проверена при открытии формы.</p>
         <button class="payment-legal-retry" type="button" hidden>Повторить загрузку документов</button>
-        <button class="payment-submit" type="submit"><span>Отправить заявку</span><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></button>
-        <p class="payment-note">Пока это демо: контакты сохраняются только в этом браузере, не отправляются на сервер и не подтверждают оплату.</p>
+        <button class="payment-submit" type="submit"><span>Сохранить демо-заявку</span><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></button>
+        <p class="payment-note">Администратор не получит эту заявку. Оплата и доступ к курсу здесь пока не оформляются.</p>
       </div>
       <div class="payment-success" hidden role="status">
         <span aria-hidden="true">✓</span>
-        <h2>Заявка принята</h2>
-        <p>Демо-заявка сохранена в этом браузере. Её можно посмотреть в демонстрационной админ-панели.</p>
-        <a href="./admin-demo.html">Открыть демо админки</a>
+        <h2>Демо-заявка сохранена</h2>
+        <p>Данные остались в этом браузере. Администратор их не получил.</p>
+        <a href="./admin-demo.html">Посмотреть в демо-админке</a>
         <button type="button" data-payment-done>Готово</button>
       </div>
     </form>
