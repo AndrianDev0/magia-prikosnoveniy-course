@@ -1,14 +1,120 @@
-/* Documents are available before signup; consent is requested per lead. */
-.documents-layer .legal-entry{container-type:normal;display:grid;gap:14px;width:min(620px,calc(100vw - 28px));max-width:620px;max-height:calc(100dvh - 28px);aspect-ratio:auto;overflow-y:auto;padding:28px;border:1px solid #c88d66;border-radius:22px;background:radial-gradient(ellipse at 0 100%,#9c512b,transparent 75%),#482817;box-shadow:0 24px 80px #17090488;color:#fff4ed;font:400 14px/1.6 "Montserrat",Arial,sans-serif;transform:none}
-.legal-entry h2{margin:0;font:700 28px/1.3 "Montserrat",Arial,sans-serif}
-.legal-entry-eyebrow{margin:0;color:#f0c9ae;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
-.legal-entry-note{margin:0;color:#f5ded0;font-size:13px}
-.documents-layer .legal-entry .document-links{position:static;inset:auto;display:grid;gap:0;pointer-events:auto}
-.documents-layer .legal-entry .document-links a:nth-child(n){position:static;display:flex;align-items:center;justify-content:flex-start;width:100%;height:auto;min-height:44px;padding:9px 0;border-bottom:1px solid #a87455;border-radius:0;color:#fff4ed;font:400 13px/1.5 "Montserrat",Arial,sans-serif;text-align:left;text-decoration:underline;text-underline-offset:4px}
+/* The notice echoes the course artwork; legal choices remain in the application form. */
+.documents-layer .legal-entry{
+  container-type:normal;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  width:min(800px,calc(100vw - 24px));
+  max-width:800px;
+  min-height:min(635px,calc(100dvh - 24px));
+  max-height:calc(100dvh - 24px);
+  aspect-ratio:auto;
+  overflow-y:auto;
+  scrollbar-width:none;
+  padding:48px clamp(22px,5vw,56px) 30px;
+  border:1px solid rgba(255,231,209,.2);
+  border-radius:18px;
+  background:
+    radial-gradient(ellipse at -5% 52%,rgba(225,103,51,.73),transparent 40%),
+    radial-gradient(ellipse at 110% 49%,rgba(239,125,67,.82),transparent 42%),
+    #482817;
+  box-shadow:0 26px 80px rgba(18,6,2,.5);
+  color:#fff4e9;
+  font:400 16px/1.5 "Montserrat",Arial,sans-serif;
+  text-align:center;
+  transform:none;
+}
+.documents-layer .legal-entry::-webkit-scrollbar{display:none}
+.legal-entry h2{
+  max-width:620px;
+  margin:0 0 65px;
+  font:400 40px/.88 "Miama Nueva",Georgia,serif;
+  text-wrap:balance;
+}
+.legal-entry h2 span{display:block;white-space:nowrap}
+.documents-layer .legal-entry .document-links{
+  position:static;
+  inset:auto;
+  display:grid;
+  justify-items:center;
+  width:100%;
+  pointer-events:auto;
+}
+.documents-layer .legal-entry .document-links a{
+  position:static;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  min-height:40px;
+  height:auto;
+  padding:7px 4px;
+  border:0;
+  border-radius:0;
+  color:#fff4e9;
+  font:italic 400 clamp(15px,1.8vw,19px)/1.35 "Montserrat",Arial,sans-serif;
+  text-align:center;
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-underline-offset:4px;
+  pointer-events:auto;
+}
 .legal-entry .document-link-label{display:inline}
-.documents-layer .legal-entry .documents-continue{position:static;display:grid;place-items:center;order:0;width:100%;height:auto;min-height:50px;margin:2px 0 0;padding:12px 18px;border:1px solid #fff4ed;border-radius:12px;background:#fff4ed;box-shadow:none;color:#482817;font:700 14px/1.4 "Montserrat",Arial,sans-serif}
+.legal-entry .documents-more{width:100%;margin-top:4px}
+.legal-entry .documents-more summary{
+  display:grid;
+  place-items:center;
+  min-height:36px;
+  color:#f1d5c1;
+  font:italic 400 13px/1.4 "Montserrat",Arial,sans-serif;
+  text-decoration:underline;
+  text-underline-offset:3px;
+  cursor:pointer;
+  list-style:none;
+}
+.legal-entry .documents-more summary::-webkit-details-marker{display:none}
+.legal-entry .documents-more[open] summary{margin-bottom:6px}
+.documents-layer .legal-entry .documents-more a{font-size:15px}
+.documents-layer .legal-entry .documents-continue{
+  position:relative;
+  inset:auto;
+  display:grid;
+  place-items:center;
+  flex:none;
+  order:0;
+  width:220px;
+  min-height:70px;
+  height:auto;
+  margin:12px auto 0;
+  padding:10px 20px 14px;
+  border:1px solid #fff4e9;
+  border-radius:999px;
+  background:rgba(72,40,23,.12);
+  box-shadow:none;
+  color:#fff4e9;
+  font:400 22px/.9 "Miama Nueva",Georgia,serif;
+  cursor:pointer;
+}
+.legal-entry .documents-continue::before{
+  position:absolute;
+  inset:6px;
+  border:1px solid rgba(255,244,233,.9);
+  border-radius:inherit;
+  content:"";
+  pointer-events:none;
+}
+.legal-entry .documents-continue:hover{background:rgba(255,244,233,.12)}
 .legal-entry .documents-continue-label{display:inline}
-.legal-entry a:focus-visible,.legal-entry button:focus-visible{outline:3px solid #f3bc95;outline-offset:3px}
+.legal-entry .legal-entry-note{
+  margin:auto 0 0;
+  padding-top:20px;
+  color:#f1d6c5;
+  font:italic 400 14px/1.5 "Montserrat",Arial,sans-serif;
+}
+.legal-entry a:focus-visible,.legal-entry button:focus-visible,.legal-entry summary:focus-visible{
+  outline:3px solid #fff4e9;
+  outline-offset:3px;
+}
 .course-safety{width:min(100%,1320px);margin:0 auto;padding:12px 24px;border-bottom:1px solid #95664b;background:#482817;color:#fff4ed;font:400 13px/1.6 "Montserrat",Arial,sans-serif}
 .course-safety summary{min-height:44px;display:flex;align-items:center;justify-content:center;gap:12px;cursor:pointer;text-align:center;list-style:none}
 .course-safety summary::-webkit-details-marker{display:none}
@@ -21,4 +127,21 @@
 .demo-lead-consents summary{min-height:44px;cursor:pointer}
 .demo-lead-consents p{margin:8px 0}
 .demo-lead-consents ul{padding-left:18px}
-@media(max-width:680px){.documents-layer .legal-entry{padding:24px 20px;gap:12px}.legal-entry h2{font-size:24px}.course-safety{padding:8px 18px;font-size:12px}.course-safety summary{justify-content:space-between;text-align:left}}
+@media(max-width:680px){
+  .documents-layer .legal-entry{
+    width:min(420px,calc(100vw - 16px));
+    min-height:0;
+    max-height:calc(100dvh - 16px);
+    padding:30px 18px 26px;
+    border-radius:18px;
+  }
+  .legal-entry h2{margin-bottom:25px;font-size:clamp(25px,8vw,37px);line-height:1.18}
+  .legal-entry h2 span{white-space:normal}
+  .legal-entry h2 span:last-child{white-space:nowrap}
+  .documents-layer .legal-entry .document-links a{font-size:15px;min-height:46px}
+  .legal-entry .documents-more summary{min-height:42px}
+  .documents-layer .legal-entry .documents-continue{min-height:64px;margin-top:20px}
+  .legal-entry .legal-entry-note{padding-top:18px;font-size:12px}
+  .course-safety{padding:8px 18px;font-size:12px}
+  .course-safety summary{justify-content:space-between;text-align:left}
+}

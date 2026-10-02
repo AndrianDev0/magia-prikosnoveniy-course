@@ -25,9 +25,9 @@
   <link rel="stylesheet" href="./course/intro-copy.css?v=review-v18">
   <link rel="stylesheet" href="./course/footer.css?v=legal-v16">
   <link rel="stylesheet" href="./payment.css?v=plan-switch-v17">
-  <link rel="stylesheet" href="./legal-compliance.css?v=legal-v16">
+  <link rel="stylesheet" href="./legal-compliance.css?v=figma-docs-v17">
   <script src="./course/menu.js?v=footer-v12" defer></script>
-  <script src="./app.js?v=legal-v16" defer></script>
+  <script src="./app.js?v=figma-docs-v17" defer></script>
   <script src="./payment.js?v=email-check-v18" type="module"></script>
 </head>
 <body>
@@ -127,20 +127,24 @@
   <div class="site-placeholder-toast" role="status" aria-live="polite" hidden></div>
 
   <div class="documents-layer" id="documents" hidden>
-    <section class="documents-modal legal-entry" tabindex="-1" role="dialog" aria-modal="true" aria-label="Документы курса">
-      <p class="legal-entry-eyebrow">Магия прикосновений · 18+</p>
-      <h2>Документы курса</h2>
-      <p class="legal-entry-note">Перед оформлением заявки ознакомьтесь с условиями. Подтверждения запрашиваются отдельно в форме заявки.</p>
+    <section class="documents-modal legal-entry" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="documents-title">
+      <h2 id="documents-title"><span>Сначала ознакомьтесь</span><span>с документами.</span></h2>
       <nav class="document-links" aria-label="Документы">
         <a href="./document.html?doc=offer" aria-label="Публичная оферта"><span class="document-link-label">Публичная оферта</span></a>
         <a href="./document.html?doc=privacy" aria-label="Политика обработки персональных данных"><span class="document-link-label">Политика обработки персональных данных</span></a>
         <a href="./document.html?doc=consent" aria-label="Согласие на обработку персональных данных"><span class="document-link-label">Согласие на обработку персональных данных</span></a>
         <a href="./document.html?doc=rules" aria-label="Правила курса 18+"><span class="document-link-label">Правила курса 18+</span></a>
         <a href="./document.html?doc=refunds" aria-label="Правила возврата денежных средств"><span class="document-link-label">Правила возврата денежных средств</span></a>
-        <a href="./document.html?doc=user-agreement"><span class="document-link-label">Пользовательское соглашение</span></a>
-        <a href="./document.html?doc=testimonial-consent"><span class="document-link-label">Согласие на использование отзыва</span></a>
+        <details class="documents-more">
+          <summary>Ещё документы</summary>
+          <div>
+            <a href="./document.html?doc=user-agreement"><span class="document-link-label">Пользовательское соглашение</span></a>
+            <a href="./document.html?doc=testimonial-consent"><span class="document-link-label">Согласие на использование отзыва</span></a>
+          </div>
+        </details>
       </nav>
-      <button class="documents-continue" aria-label="Продолжить на сайт"><span class="documents-continue-label">Перейти на сайт</span></button>
+      <button class="documents-continue" type="button" aria-label="Продолжить на сайт"><span class="documents-continue-label">Продолжить</span></button>
+      <p class="legal-entry-note">Продолжение не означает согласия с документами.<br>Подтверждения запрашиваются отдельно при оформлении заявки.</p>
     </section>
   </div>
 

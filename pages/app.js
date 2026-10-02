@@ -15,10 +15,10 @@ try{if(!localStorage.getItem(noticeSeen))showDocuments()}catch{showDocuments()}
 reopenButton?.addEventListener('click',showDocuments);
 continueButton?.addEventListener('click',()=>{try{localStorage.setItem(noticeSeen,'seen')}catch{}hideDocuments()});
 documents?.addEventListener('keydown',event=>{
-  if(event.key==='Escape'){event.preventDefault();return}
+  if(event.key==='Escape'){event.preventDefault();hideDocuments();return}
   if(event.key!=='Tab')return;
   const modal=documents.querySelector('.documents-modal');
-  const focusable=[...documents.querySelectorAll('a[href],input:not([disabled]),button:not([disabled])')].filter(item=>item instanceof HTMLElement&&item.offsetParent!==null);
+  const focusable=[...documents.querySelectorAll('a[href],summary,input:not([disabled]),button:not([disabled])')].filter(item=>item instanceof HTMLElement&&item.offsetParent!==null);
   if(!focusable.length){event.preventDefault();return}
   const first=focusable[0],last=focusable[focusable.length-1];
   if(event.shiftKey&&(document.activeElement===first||document.activeElement===modal)){event.preventDefault();last.focus()}
