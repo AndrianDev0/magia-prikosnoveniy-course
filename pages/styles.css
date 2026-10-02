@@ -157,6 +157,21 @@ button,a{touch-action:manipulation}
 .plan{min-height:44px}
 .demo-lead-contact a{display:flex;align-items:center;min-height:44px}
 .demo-lead select{min-height:44px}
+.demo-admin-tools{display:flex;align-items:end;gap:14px;margin:22px 0 12px}
+.demo-admin-tools label{display:grid;gap:7px;color:#f1cdb6;font-size:13px}
+.demo-admin-search{flex:1;min-width:0}
+.demo-admin-search input,.demo-admin-filter select{width:100%;min-height:48px;padding:10px 13px;border:1px solid rgba(255,244,237,.45);border-radius:10px;background:#fff5ed;color:#402318;font:400 15px/1.3 "Montserrat",Arial,sans-serif}
+.demo-admin-filter{width:190px}
+.demo-admin-visible{margin:0 0 12px;color:#f1cdb6;font-size:13px}
+.demo-admin-notice{max-width:850px;font-size:14px}
+.demo-lead{grid-template-columns:minmax(0,1.15fr) minmax(0,1.25fr) minmax(145px,.8fr) minmax(150px,1fr)}
+.demo-lead-main strong{font-size:17px}
+.demo-lead-main span,.demo-lead time{font-size:13px}
+.demo-lead label{font-size:13px}
+.demo-lead select{min-width:0;font-size:14px}
+.demo-admin-search input:focus-visible,.demo-admin-filter select:focus-visible,.demo-lead select:focus-visible{outline:3px solid #ffd1a6;outline-offset:3px}
+@media(max-width:800px){.demo-lead{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.demo-admin-summary{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.demo-admin-summary article{min-width:0;padding:12px}.demo-admin-summary span{font-size:10px;letter-spacing:0}.demo-admin-summary strong{font-size:25px}.demo-admin-tools{display:grid;gap:12px}.demo-admin-filter{width:100%}.demo-lead{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:767px){.documents-layer .documents-modal{transform:none}}
 .menu-payment-button{display:flex;align-items:center;min-height:44px}
 .payment-modal{overflow-x:hidden;overflow-y:auto}

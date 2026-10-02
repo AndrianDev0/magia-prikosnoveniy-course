@@ -9,12 +9,20 @@ export async function POST(request: Request, { params }: { params: Promise<{ use
     const identity = await getChatGPTUser();
     if (!identity) return Response.json({ error: "Требуется вход" }, { status: 401 });
     if (!isAdminEmail(identity.email)) return Response.json({ error: "Недостаточно прав" }, { status: 403 });
+    const origin = request.headers.get("origin");
+    if ((origin && origin !== new URL(request.url).origin) || request.headers.get("sec-fetch-site") === "cross-site") {
+      return Response.json({ error: "Запрос с другого сайта отклонён" }, { status: 403 });
+    }
+    if (!request.headers.get("content-type")?.startsWith("application/json")) {
+      return Response.json({ error: "Ожидается JSON" }, { status: 415 });
+    }
     const { userId } = await params;
     const input = (await request.json()) as { action?: string };
     if (!input.action || !actions.has(input.action as "approve" | "reject" | "grant" | "revoke")) return Response.json({ error: "Неизвестное действие" }, { status: 400 });
     const user = await updateUserAccess(userId, input.action as "approve" | "reject" | "grant" | "revoke");
-    return Response.json({ user });
+    return Response.json({ user }, { headers: { "cache-control": "no-store" } });
   } catch (error) {
-    return Response.json({ error: error instanceof Error ? error.message : "Не удалось изменить доступ" }, { status: 400 });
+    const known = error instanceof Error && ["Пользователь не найден", "Актуальная заявка на выбранный тариф не найдена"].includes(error.message);
+    return Response.json({ error: known ? error.message : "Не удалось сохранить изменение. Повторите попытку." }, { status: known ? 409 : 503 });
   }
 }

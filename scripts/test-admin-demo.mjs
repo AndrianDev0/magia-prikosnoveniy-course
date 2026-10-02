@@ -24,7 +24,15 @@ function fixture(){
   let failure;
   const localStorage={getItem(){return persisted},setItem(key,value){assert.equal(key,'magic-touch-payment-leads-v1');if(failure)throw failure;persisted=value}};
   vm.runInNewContext(source,{document,localStorage,Intl,Date});
-  return {document,change(value){status.value=value;status.change()},status:()=>status.value,persisted:()=>JSON.parse(persisted),fail(error){failure=error}};
+  return {
+    document,
+    change(value){status.value=value;status.change()},
+    search(value){const input=document.querySelector('[data-search]');input.value=value;input.input()},
+    filter(value){const input=document.querySelector('[data-filter]');input.value=value;input.change()},
+    status:()=>status.value,
+    persisted:()=>JSON.parse(persisted),
+    fail(error){failure=error}
+  };
 }
 
 for(const name of ['QuotaExceededError','SecurityError']){
@@ -48,4 +56,14 @@ const invalid=fixture();
 invalid.change('unknown');
 assert.equal(invalid.status(),'pending');
 assert.equal(invalid.persisted()[0].status,'pending');
-console.log('Admin status persistence: quota, blocked storage, retry and invalid status checks passed.');
+const listing=fixture();
+assert.equal(listing.document.querySelector('[data-visible-count]').textContent,'Показано: 1');
+listing.search('nothing');
+assert.equal(listing.document.querySelector('[data-visible-count]').textContent,'Показано: 0');
+assert.match(listing.document.querySelector('.demo-admin-list').children[0].textContent,/По этому запросу/);
+listing.search('test@example.com');
+listing.filter('confirmed');
+assert.equal(listing.document.querySelector('[data-visible-count]').textContent,'Показано: 0');
+listing.filter('pending');
+assert.equal(listing.document.querySelector('[data-visible-count]').textContent,'Показано: 1');
+console.log('Admin demo: status persistence, storage failure, search and filters passed.');

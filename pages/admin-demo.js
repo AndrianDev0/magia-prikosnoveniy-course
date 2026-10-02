@@ -3,6 +3,9 @@ if(typeof document!=='undefined'){
   const list=document.querySelector('.demo-admin-list');
   const template=document.querySelector('#lead-template');
   const storageError=document.querySelector('[data-storage-error]');
+  const search=document.querySelector('[data-search]');
+  const filter=document.querySelector('[data-filter]');
+  const visibleCount=document.querySelector('[data-visible-count]');
   let leads=[];
   try{
     const stored=JSON.parse(localStorage.getItem(key)||'[]');
@@ -17,8 +20,12 @@ if(typeof document!=='undefined'){
     document.querySelector('[data-total]').textContent=String(leads.length);
     document.querySelector('[data-pending]').textContent=String(leads.filter(item=>item.status==='pending').length);
     document.querySelector('[data-confirmed]').textContent=String(leads.filter(item=>item.status==='confirmed').length);
-    if(!leads.length){const empty=document.createElement('p');empty.className='demo-admin-empty';empty.textContent='Заявок пока нет. Откройте любой тариф на главной странице и заполните форму.';list.append(empty);return}
-    leads.forEach(lead=>{
+    const needle=search.value.trim().toLocaleLowerCase('ru-RU');
+    const selected=['pending','confirmed','rejected'].includes(filter.value)?filter.value:'all';
+    const visible=leads.filter(item=>(selected==='all'||item.status===selected)&&(!needle||[item.name,item.email,item.phone||'',item.planName].some(value=>value.toLocaleLowerCase('ru-RU').includes(needle)))).sort((a,b)=>Date.parse(b.createdAt)-Date.parse(a.createdAt));
+    visibleCount.textContent=`Показано: ${visible.length}`;
+    if(!visible.length){const empty=document.createElement('p');empty.className='demo-admin-empty';empty.textContent=leads.length?'По этому запросу заявок нет. Измените поиск или статус.':'Заявок пока нет. Откройте любой тариф на главной странице и заполните форму.';list.append(empty);return}
+    visible.forEach(lead=>{
       const card=template.content.firstElementChild.cloneNode(true);
       card.querySelector('[data-name]').textContent=lead.name;
       card.querySelector('[data-plan]').textContent=`${lead.planName} · ${lead.price}`;
@@ -42,5 +49,8 @@ if(typeof document!=='undefined'){
       list.append(card);
     });
   }
+  search.addEventListener('input',render);
+  filter.addEventListener('change',render);
+  if(typeof window!=='undefined')window.addEventListener('storage',event=>{if(event.key!==key)return;try{const next=JSON.parse(event.newValue||'[]');if(Array.isArray(next)){leads=next.filter(item=>item&&typeof item==='object'&&['id','name','email','planId','planName','price','createdAt'].every(field=>typeof item[field]==='string'&&item[field].length<=254)&&['pending','confirmed','rejected'].includes(item.status)&&Number.isFinite(Date.parse(item.createdAt)));render()}}catch{}});
   render();
 }
