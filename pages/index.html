@@ -25,9 +25,9 @@
   <link rel="stylesheet" href="./course/intro-copy.css?v=review-v18">
   <link rel="stylesheet" href="./course/footer.css?v=legal-v16">
   <link rel="stylesheet" href="./payment.css?v=plan-switch-v17">
-  <link rel="stylesheet" href="./legal-compliance.css?v=figma-docs-v17">
+  <link rel="stylesheet" href="./legal-compliance.css?v=figma-docs-v18">
   <script src="./course/menu.js?v=footer-v12" defer></script>
-  <script src="./app.js?v=figma-docs-v17" defer></script>
+  <script src="./app.js?v=figma-docs-v18" defer></script>
   <script src="./payment.js?v=email-check-v18" type="module"></script>
 </head>
 <body>
@@ -143,8 +143,14 @@
           </div>
         </details>
       </nav>
-      <button class="documents-continue" type="button" aria-label="Продолжить на сайт"><span class="documents-continue-label">Продолжить</span></button>
-      <p class="legal-entry-note">Продолжение не означает согласия с документами.<br>Подтверждения запрашиваются отдельно при оформлении заявки.</p>
+      <form class="documents-consent-form" id="documents-consent-form" novalidate>
+        <button class="documents-continue" type="submit" aria-label="Продолжить на сайт"><span class="documents-continue-label">Продолжить</span></button>
+        <p class="documents-consent-error" id="documents-consent-error" role="alert" hidden>Отметьте оба согласия, чтобы продолжить.</p>
+        <div class="documents-consents">
+          <label class="documents-consent-row"><input name="offer" type="checkbox" required aria-describedby="documents-consent-error"><span>Я принимаю условия Публичной оферты.</span></label>
+          <label class="documents-consent-row"><input name="data" type="checkbox" required aria-describedby="documents-consent-error"><span>Я даю согласие на обработку моих персональных данных<br class="documents-consent-break"> в соответствии с Политикой обработки персональных данных.</span></label>
+        </div>
+      </form>
     </section>
   </div>
 

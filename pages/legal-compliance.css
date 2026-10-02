@@ -1,4 +1,4 @@
-/* The notice echoes the course artwork; legal choices remain in the application form. */
+/* The document notice follows the supplied course frame; lead consents remain separate. */
 .documents-layer .legal-entry{
   container-type:normal;
   display:flex;
@@ -11,7 +11,7 @@
   aspect-ratio:auto;
   overflow-y:auto;
   scrollbar-width:none;
-  padding:48px clamp(22px,5vw,56px) 30px;
+  padding:48px clamp(22px,5vw,56px) 42px;
   border:1px solid rgba(255,231,209,.2);
   border-radius:18px;
   background:
@@ -27,8 +27,8 @@
 .documents-layer .legal-entry::-webkit-scrollbar{display:none}
 .legal-entry h2{
   max-width:620px;
-  margin:0 0 65px;
-  font:400 40px/.88 "Miama Nueva",Georgia,serif;
+  margin:0 0 12px;
+  font:400 40px/1.55 "Miama Nueva",Georgia,serif;
   text-wrap:balance;
 }
 .legal-entry h2 span{display:block;white-space:nowrap}
@@ -75,6 +75,14 @@
 .legal-entry .documents-more summary::-webkit-details-marker{display:none}
 .legal-entry .documents-more[open] summary{margin-bottom:6px}
 .documents-layer .legal-entry .documents-more a{font-size:15px}
+.legal-entry .documents-consent-form{
+  display:flex;
+  flex:1;
+  flex-direction:column;
+  align-items:center;
+  width:100%;
+  min-height:0;
+}
 .documents-layer .legal-entry .documents-continue{
   position:relative;
   inset:auto;
@@ -82,14 +90,14 @@
   place-items:center;
   flex:none;
   order:0;
-  width:220px;
-  min-height:70px;
+  width:226px;
+  min-height:73px;
   height:auto;
-  margin:12px auto 0;
+  margin:10px auto 0;
   padding:10px 20px 14px;
   border:1px solid #fff4e9;
   border-radius:999px;
-  background:rgba(72,40,23,.12);
+  background:transparent;
   box-shadow:none;
   color:#fff4e9;
   font:400 22px/.9 "Miama Nueva",Georgia,serif;
@@ -97,7 +105,7 @@
 }
 .legal-entry .documents-continue::before{
   position:absolute;
-  inset:6px;
+  inset:7px;
   border:1px solid rgba(255,244,233,.9);
   border-radius:inherit;
   content:"";
@@ -105,11 +113,58 @@
 }
 .legal-entry .documents-continue:hover{background:rgba(255,244,233,.12)}
 .legal-entry .documents-continue-label{display:inline}
-.legal-entry .legal-entry-note{
-  margin:auto 0 0;
-  padding-top:20px;
-  color:#f1d6c5;
-  font:italic 400 14px/1.5 "Montserrat",Arial,sans-serif;
+.legal-entry .documents-consents{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  width:100%;
+  margin-top:auto;
+}
+.legal-entry .documents-consent-row{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  width:max-content;
+  max-width:100%;
+  min-height:44px;
+  color:#e4d0c2;
+  font:italic 400 14px/1.3 "Montserrat",Arial,sans-serif;
+  cursor:pointer;
+}
+.legal-entry .documents-consent-row span{text-align:center}
+.legal-entry .documents-consent-row input{
+  appearance:none;
+  flex:0 0 16px;
+  width:16px;
+  height:16px;
+  margin:0;
+  border:1px solid #dac3b2;
+  border-radius:2px;
+  background:transparent;
+  cursor:pointer;
+}
+.legal-entry .documents-consent-row input:checked{
+  border-color:#fff4e9;
+  background:#fff4e9;
+}
+.legal-entry .documents-consent-row input:checked::after{
+  display:block;
+  color:#482817;
+  font:700 14px/14px Arial,sans-serif;
+  text-align:center;
+  content:"✓";
+}
+.legal-entry .documents-consent-error{
+  margin:8px 0 0;
+  color:#fff4e9;
+  font:600 12px/1.35 "Montserrat",Arial,sans-serif;
+}
+.legal-entry .documents-consent-error[hidden]{display:none}
+.legal-entry .documents-consent-row input[aria-invalid="true"]{border-color:#fff4e9;box-shadow:0 0 0 2px #ae421d}
+.legal-entry .documents-consent-row input:focus-visible{
+  outline:3px solid #fff4e9;
+  outline-offset:3px;
 }
 .legal-entry a:focus-visible,.legal-entry button:focus-visible,.legal-entry summary:focus-visible{
   outline:3px solid #fff4e9;
@@ -135,13 +190,17 @@
     padding:30px 18px 26px;
     border-radius:18px;
   }
-  .legal-entry h2{margin-bottom:25px;font-size:clamp(25px,8vw,37px);line-height:1.18}
+  .legal-entry h2{margin-bottom:0;font-size:clamp(25px,8vw,37px);line-height:1.7}
   .legal-entry h2 span{white-space:normal}
   .legal-entry h2 span:last-child{white-space:nowrap}
   .documents-layer .legal-entry .document-links a{font-size:15px;min-height:46px}
   .legal-entry .documents-more summary{min-height:42px}
-  .documents-layer .legal-entry .documents-continue{min-height:64px;margin-top:20px}
-  .legal-entry .legal-entry-note{padding-top:18px;font-size:12px}
+  .legal-entry .documents-consent-form{flex:none}
+  .documents-layer .legal-entry .documents-continue{width:min(226px,100%);min-height:73px;margin-top:15px}
+  .legal-entry .documents-consents{margin-top:18px}
+  .legal-entry .documents-consent-row{justify-content:flex-start;width:100%;font-size:13px;text-align:left}
+  .legal-entry .documents-consent-row span{text-align:left}
+  .legal-entry .documents-consent-break{display:none}
   .course-safety{padding:8px 18px;font-size:12px}
   .course-safety summary{justify-content:space-between;text-align:left}
 }
