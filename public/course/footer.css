@@ -19,7 +19,7 @@
 }
 .readable-footer-main {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(220px, auto) auto;
+  grid-template-columns: minmax(120px, .6fr) minmax(220px, 1.4fr) auto;
   align-items: start;
   gap: clamp(32px, 4vw, 64px);
 }
@@ -34,6 +34,9 @@
   font: 400 44px/1.15 "Miama Nueva", Georgia, serif;
 }
 .readable-footer-contacts p { margin: 0 0 5px; }
+.readable-footer-contacts a{color:inherit;text-underline-offset:4px;overflow-wrap:anywhere}
+.readable-footer-contacts .footer-business-name{font-weight:700;font-size:14px;margin-bottom:12px}
+.readable-footer-contacts .footer-address,.readable-footer-contacts .footer-requisites,.readable-footer-contacts .footer-support-note{font-size:13px;line-height:1.65;margin-top:10px}
 .readable-footer-main > section:last-child h2 { text-align: center; }
 .readable-footer-socials { display: flex; justify-content: center; gap: 12px; }
 .readable-footer-socials button {
@@ -84,7 +87,9 @@
   .readable-footer-main { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px 20px; }
   .readable-footer-brand { grid-column: 1 / -1; justify-self: center; font-size: 66px; }
   .readable-footer h2 { font-size: 28px; margin-bottom: 14px; }
-  .readable-footer-contacts p { white-space: nowrap; }
+  .readable-footer-contacts{grid-column:1/-1;text-align:center}
+  .readable-footer-main > section:last-child{grid-column:1/-1;justify-self:center}
+  .readable-footer-contacts p { white-space: normal; }
   .readable-footer-socials { gap: 8px; }
   .readable-footer-socials button { width: 44px; height: 44px; }
   .readable-footer-legal { flex-direction: column; gap: 8px; margin-top: 24px; text-align: center; }

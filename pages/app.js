@@ -1,19 +1,19 @@
 if(typeof document!=="undefined"){
 const documents=document.querySelector('#documents');
 const plan=document.querySelector('#plan-modal');
-const checks=[...document.querySelectorAll('.consent input')];
 const continueButton=document.querySelector('.documents-continue');
 const reopenButton=document.querySelector('.documents-reopen');
 const page=document.querySelector('main');
 const footer=document.querySelector('.readable-footer');
 let lastFocused=null;
-const accepted='magic-touch-documents-pages-v3';
+// This key only remembers that the document notice was dismissed. It is not
+// an offer acceptance or personal-data consent; those belong to each lead.
+const noticeSeen='magic-touch-documents-notice-2.0';
 function showDocuments(){lastFocused=document.activeElement;documents.hidden=false;if(page)page.inert=true;if(footer)footer.inert=true;document.body.style.overflow='hidden';documents.querySelector('.documents-modal')?.focus()}
 function hideDocuments(){documents.hidden=true;if(page)page.inert=false;if(footer)footer.inert=false;document.body.style.overflow='';if(lastFocused instanceof HTMLElement&&lastFocused!==document.body)lastFocused.focus()}
-if(!localStorage.getItem(accepted)) showDocuments();
+try{if(!localStorage.getItem(noticeSeen))showDocuments()}catch{showDocuments()}
 reopenButton?.addEventListener('click',showDocuments);
-checks.forEach(check=>check.addEventListener('change',()=>{continueButton.disabled=!checks.every(item=>item.checked)}));
-continueButton?.addEventListener('click',()=>{if(checks.every(item=>item.checked)){localStorage.setItem(accepted,'yes');hideDocuments()}});
+continueButton?.addEventListener('click',()=>{try{localStorage.setItem(noticeSeen,'seen')}catch{}hideDocuments()});
 documents?.addEventListener('keydown',event=>{
   if(event.key==='Escape'){event.preventDefault();return}
   if(event.key!=='Tab')return;
