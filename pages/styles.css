@@ -86,7 +86,8 @@ html{scrollbar-width:none}html::-webkit-scrollbar{width:0;height:0}
   .dots button{width:44px;height:44px}
   .account,.course-account{left:auto;right:max(0px,env(safe-area-inset-right));top:max(0px,env(safe-area-inset-top));width:48px;min-width:48px;height:48px;min-height:48px}
   .artwork-menu-cover{top:max(0px,env(safe-area-inset-top))}
-  .documents-reopen{display:block;min-width:104px;min-height:44px;padding:9px 14px;font-size:13px}
+  /* The document links remain in the menu; a fixed shortcut obscures the footer on phones. */
+  .documents-reopen{display:none}
   .plan-modal .plan-close{left:28%;top:70%;width:44%;height:27%;min-height:44px}
 }
 
@@ -141,7 +142,7 @@ button,a{touch-action:manipulation}
 .lesson-title-copy span{font-family:"Miama Nueva",Georgia,serif;font-weight:400}
 :where(a,button,input,select,summary):focus-visible{outline:2px solid #fff4ed;outline-offset:3px}
 
-.legal-card h1{font-size:clamp(28px,8vw,48px);overflow-wrap:anywhere;hyphens:auto}
+.legal-card h1{font-size:clamp(22px,5.5vw,48px);line-height:1.16;overflow-wrap:normal;word-break:normal;hyphens:none;text-wrap:balance}
 .legal-index a{display:flex;align-items:center;min-height:44px;padding:6px 0;overflow-wrap:anywhere}
 @media(max-width:520px){
   .demo-admin-body{padding:24px 16px 20px}
