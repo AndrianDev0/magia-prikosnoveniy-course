@@ -87,6 +87,8 @@ if (typeof document !== 'undefined') {
     let legalLoading = false;
     const legalStatus = form.querySelector('.payment-legal-status');
     const legalRetry = form.querySelector('.payment-legal-retry');
+    const planChoices = Array.from(form.querySelectorAll('[data-payment-choice]'));
+    const planChangeNote = form.querySelector('.payment-plan-change-note');
     async function loadLegalDocuments() {
       if (legalLoading || legalSnapshot) return;
       legalLoading = true; submit.disabled = true; legalRetry.hidden = true;
@@ -121,9 +123,30 @@ if (typeof document !== 'undefined') {
       summary.hidden = false;
       summary.focus();
     }
-    function open(plan) {
+    function selectPlan(plan) {
       selectedPlan = Object.hasOwn(plans, plan) ? plan : 'vip';
+      const selected = plans[selectedPlan];
+      planChoices.forEach(input => { input.checked = input.value === selectedPlan; });
+      modal.querySelector('[data-payment-name]').textContent = selected.name;
+      modal.querySelector('[data-payment-price]').textContent = selected.price;
+      const benefits = modal.querySelector('.payment-benefits'); benefits.replaceChildren();
+      selected.benefits.forEach(text=>{const item=document.createElement('li');item.textContent=text;benefits.append(item);});
+      modal.querySelector('.payment-qr').open = false;
+    }
+    planChoices.forEach(input => input.addEventListener('change', () => {
+      if (!input.checked || busy || completed || input.value === selectedPlan || !Object.hasOwn(plans,input.value)) return;
+      selectPlan(input.value);
+      // Contact details and general consents remain; tariff terms need a new choice.
+      const offer = form.elements.namedItem('offer');
+      offer.checked = false; offer.removeAttribute('aria-invalid');
+      touched.delete('offer'); document.querySelector('#payment-offer-error').hidden = true;
+      clearSummary();
+      planChangeNote.textContent = `Выбран тариф ${plans[selectedPlan].name} — ${plans[selectedPlan].price} Подтвердите условия выбранного тарифа.`;
+      planChangeNote.hidden = false;
+    }));
+    function open(plan) {
       form.reset(); touched.clear(); clearSummary(); completed = false;
+      planChangeNote.hidden = true;
       legalSnapshot = null;
       fields.forEach(field => {
         form.elements.namedItem(field).removeAttribute('aria-invalid');
@@ -131,11 +154,7 @@ if (typeof document !== 'undefined') {
       });
       form.querySelectorAll('.payment-copy,.payment-fields').forEach(item => item.hidden = false);
       form.querySelector('.payment-success').hidden = true;
-      modal.querySelector('[data-payment-name]').textContent = plans[selectedPlan].name;
-      modal.querySelector('[data-payment-price]').textContent = plans[selectedPlan].price;
-      const benefits = modal.querySelector('.payment-benefits'); benefits.replaceChildren();
-      plans[selectedPlan].benefits.forEach(text=>{const item=document.createElement('li');item.textContent=text;benefits.append(item);});
-      modal.querySelector('.payment-qr').open = false;
+      selectPlan(plan);
       modal.showModal(); modal.scrollTop = 0;
       void loadLegalDocuments();
     }
@@ -153,6 +172,7 @@ if (typeof document !== 'undefined') {
       });
       input.addEventListener(checkboxFields.has(field) ? 'change' : 'input', () => {
         clearSummary();
+        if (field === 'offer' && input.checked) planChangeNote.hidden = true;
         if (touched.has(field)) showError(field);
       });
     });

@@ -8,6 +8,16 @@
 .payment-modal .payment-eyebrow{font-size:10px;letter-spacing:.14em;color:#f5cfb3;line-height:1.5}
 .payment-modal .payment-copy h2{display:grid;gap:10px;font:700 34px/1.2 "Montserrat",Arial,sans-serif;overflow-wrap:anywhere}
 .payment-tariff-label{font:400 13px/1.4 "Montserrat",Arial,sans-serif;color:#f5cfb3}
+.payment-plan-picker{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0;padding:0;border:0;min-width:0}
+.payment-plan-picker legend{padding:0;margin-bottom:8px;color:#f5cfb3;font-size:12px;line-height:1.5}
+.payment-plan-picker label{position:relative;min-width:0;cursor:pointer}
+.payment-plan-picker input{position:absolute;width:1px;height:1px;opacity:0}
+.payment-plan-picker span{display:grid;place-items:center;box-sizing:border-box;min-height:44px;padding:8px 6px;border:1px solid #d09c7d;border-radius:10px;color:#fff4e9;font:700 12px/1.4 "Montserrat",Arial,sans-serif;transition:background .15s,color .15s}
+.payment-plan-picker input:checked+span{border-color:#fff4e9;background:#fff4e9;color:#482817;box-shadow:inset 0 -3px 0 #d09c7d}
+.payment-plan-picker input:focus-visible+span{outline:3px solid #fff4e9;outline-offset:3px}
+.payment-plan-picker label:hover span{background:#ffffff18}
+.payment-plan-picker label:hover input:checked+span{background:#fff4e9}
+.payment-plan-change-note{margin:0;padding:9px 12px;border-left:3px solid #a65a36;background:#f5e8dd;color:#482817;font-size:12px;line-height:1.55}
 .payment-modal .payment-copy>p:not(.payment-eyebrow){font-size:14px;line-height:1.65;color:#f7dfce}
 .payment-modal .payment-price{font:700 29px/1.3 "Montserrat",Arial,sans-serif;color:#fff4e9;white-space:nowrap;letter-spacing:-.04em}
 .payment-modal .payment-qr{display:block;width:100%;margin:4px 0 0;padding:0;border:1px solid #d09c7d;border-radius:14px;text-align:left;overflow:hidden}
@@ -77,4 +87,4 @@
  .payment-fields-heading h3{font-size:20px}
  .payment-modal .payment-success{min-height:420px;padding:52px 24px 30px}
 }
-@media(prefers-reduced-motion:reduce){.payment-fields input,.payment-submit{transition:none!important}}
+@media(prefers-reduced-motion:reduce){.payment-fields input,.payment-submit,.payment-plan-picker span{transition:none!important}}

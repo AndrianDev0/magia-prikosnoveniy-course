@@ -39,6 +39,13 @@ assert.notEqual(snapshot.offer.sha256,changedSnapshot.offer.sha256);
 assert.equal(snapshot.consent.sha256,changedSnapshot.consent.sha256);
 assert.equal(paymentPlans['vip-plus'].benefits.length,3);
 assert.match(paymentPlans['vip-plus'].benefits[2],/Одно очное занятие в течение года/);
+for (const [planId,plan] of Object.entries(paymentPlans)) {
+  const switchedLead = createPaymentLead(values,planId,snapshot,new Date(now));
+  assert.equal(switchedLead.planId,planId);
+  assert.equal(switchedLead.planName,plan.name);
+  assert.equal(switchedLead.price,plan.price);
+  assert.equal(switchedLead.email,lead.email);
+}
 console.log('Legal acknowledgments: versions, timestamps, document hashes, required choices and tariff checks passed.');
 function memory(initial = null) {
   let value = initial;

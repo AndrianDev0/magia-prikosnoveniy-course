@@ -24,11 +24,11 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
   <link rel="stylesheet" href="./course/intro-copy.css?v=client-final-v7">
   <link rel="stylesheet" href="./course/footer.css?v=legal-v16">
-  <link rel="stylesheet" href="./payment.css?v=legal-v16">
+  <link rel="stylesheet" href="./payment.css?v=plan-switch-v17">
   <link rel="stylesheet" href="./legal-compliance.css?v=legal-v16">
   <script src="./course/menu.js?v=footer-v12" defer></script>
   <script src="./app.js?v=legal-v16" defer></script>
-  <script src="./payment.js?v=legal-v16" type="module"></script>
+  <script src="./payment.js?v=plan-switch-v17" type="module"></script>
 </head>
 <body>
   <main class="artwork home-artwork">
@@ -155,6 +155,11 @@
       <div class="payment-copy">
         <p class="payment-eyebrow">Магия прикосновений</p>
         <h2 id="payment-title"><span class="payment-tariff-label">Ваш тариф</span><span data-payment-name>VIP</span></h2>
+        <fieldset class="payment-plan-picker"><legend>Сменить тариф</legend>
+          <label><input type="radio" name="planId" value="standard" data-payment-choice><span>Стандарт</span></label>
+          <label><input type="radio" name="planId" value="vip" data-payment-choice checked><span>VIP</span></label>
+          <label><input type="radio" name="planId" value="vip-plus" data-payment-choice><span>VIP+</span></label>
+        </fieldset>
         <strong class="payment-price" data-payment-price>35 000 руб.</strong>
         <ul class="payment-benefits"><li>7 видеоуроков без ограничения срока доступа</li><li>2 видеоконсультации по 1 часу</li></ul>
         <p class="payment-plan-links"><a href="./document.html?doc=offer" target="_blank" rel="noopener">Условия тарифа</a> · <a href="./document.html?doc=refunds" target="_blank" rel="noopener">Возвраты</a></p>
@@ -170,6 +175,7 @@
         <div class="payment-field"><label for="payment-name">Ваше имя</label><input id="payment-name" name="name" autocomplete="name" required minlength="2" maxlength="80" aria-describedby="payment-name-error" placeholder="Как к вам обращаться"><p class="payment-field-error" id="payment-name-error" hidden></p></div>
         <div class="payment-field"><label for="payment-email">Электронная почта</label><input id="payment-email" name="email" type="email" autocomplete="email" autocapitalize="none" spellcheck="false" required maxlength="254" aria-describedby="payment-email-error" placeholder="name@example.com"><p class="payment-field-error" id="payment-email-error" hidden></p></div>
         <fieldset class="payment-confirmations"><legend>Подтверждения</legend>
+          <p class="payment-plan-change-note" role="status" hidden></p>
           <div class="payment-consent-wrap"><label class="payment-consent" for="payment-offer"><input id="payment-offer" name="offer" type="checkbox" required aria-describedby="payment-offer-error"><span>Принимаю <a href="./document.html?doc=offer" target="_blank" rel="noopener">публичную оферту</a> и <a href="./document.html?doc=user-agreement" target="_blank" rel="noopener">пользовательское соглашение</a></span></label><p class="payment-field-error" id="payment-offer-error" hidden></p></div>
           <div class="payment-consent-wrap"><label class="payment-consent" for="payment-consent"><input id="payment-consent" name="consent" type="checkbox" required aria-describedby="payment-consent-error"><span>Даю отдельное <a href="./document.html?doc=consent" target="_blank" rel="noopener">согласие на обработку персональных данных</a> и ознакомлен с <a href="./document.html?doc=privacy" target="_blank" rel="noopener">политикой обработки данных</a></span></label><p class="payment-field-error" id="payment-consent-error" hidden></p></div>
           <div class="payment-consent-wrap"><label class="payment-consent" for="payment-adult"><input id="payment-adult" name="adult" type="checkbox" required aria-describedby="payment-adult-error"><span>Мне исполнилось 18 лет. Ознакомлен с <a href="./document.html?doc=rules-18" target="_blank" rel="noopener">правилами 18+ и безопасного использования</a></span></label><p class="payment-field-error" id="payment-adult-error" hidden></p></div>
