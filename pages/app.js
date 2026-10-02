@@ -7,10 +7,11 @@ const checks=[...document.querySelectorAll('.consent input')];
 const continueButton=document.querySelector('.documents-continue');
 const reopenButton=document.querySelector('.documents-reopen');
 const page=document.querySelector('main');
+const footer=document.querySelector('.readable-footer');
 let lastFocused=null;
 const accepted='magic-touch-documents-pages-v3';
-function showDocuments(){lastFocused=document.activeElement;documents.hidden=false;if(page)page.inert=true;document.body.style.overflow='hidden';documents.querySelector('.documents-modal')?.focus()}
-function hideDocuments(){documents.hidden=true;if(page)page.inert=false;document.body.style.overflow='';if(lastFocused instanceof HTMLElement&&lastFocused!==document.body)lastFocused.focus()}
+function showDocuments(){lastFocused=document.activeElement;documents.hidden=false;if(page)page.inert=true;if(footer)footer.inert=true;document.body.style.overflow='hidden';documents.querySelector('.documents-modal')?.focus()}
+function hideDocuments(){documents.hidden=true;if(page)page.inert=false;if(footer)footer.inert=false;document.body.style.overflow='';if(lastFocused instanceof HTMLElement&&lastFocused!==document.body)lastFocused.focus()}
 if(!localStorage.getItem(accepted)) showDocuments();
 reopenButton?.addEventListener('click',showDocuments);
 checks.forEach(check=>check.addEventListener('change',()=>{continueButton.disabled=!checks.every(item=>item.checked)}));

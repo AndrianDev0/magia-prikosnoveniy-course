@@ -24,3 +24,13 @@ document.querySelectorAll('[data-video-title]').forEach(button => {
     placeholderToastTimer = setTimeout(() => { placeholderToast.hidden = true; }, 2600);
   });
 });
+
+document.querySelectorAll('[data-social-placeholder]').forEach(button => {
+  button.addEventListener('click', () => {
+    if (!placeholderToast) return;
+    placeholderToast.textContent = `${button.dataset.socialPlaceholder}: ссылка будет добавлена позже`;
+    placeholderToast.hidden = false;
+    clearTimeout(placeholderToastTimer);
+    placeholderToastTimer = setTimeout(() => { placeholderToast.hidden = true; }, 2600);
+  });
+});
