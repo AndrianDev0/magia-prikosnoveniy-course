@@ -15,7 +15,7 @@
   <link rel="canonical" href="https://andriandev0.github.io/magia-prikosnoveniy-course/">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <title>Магия прикосновений</title>
-  <link rel="stylesheet" href="./styles.css?v=mobile-v4">
+  <link rel="stylesheet" href="./styles.css?v=mobile-v5">
   <link rel="stylesheet" href="./course/ambient.css?v=1">
   <link rel="stylesheet" href="./course/menu.css?v=1">
   <link rel="stylesheet" href="./course/tariffs.css?v=3">
@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
   <link rel="stylesheet" href="./course/intro-copy.css?v=2">
   <script src="./course/menu.js?v=1" defer></script>
-  <script src="./app.js?v=mobile-v4" defer></script>
+  <script src="./app.js?v=mobile-v5" defer></script>
 </head>
 <body>
   <main class="artwork home-artwork">
@@ -52,8 +52,8 @@
         <nav class="artwork-menu-panel" aria-label="Меню сайта">
           <a href="./">Главная</a>
           <a href="#tariffs">Тарифы</a>
-          <a href="https://magia-prikosnoveniy.elizabethhilla266.chatgpt.site/profile">Перейти к курсу</a>
-          <a href="https://magia-prikosnoveniy.elizabethhilla266.chatgpt.site/profile">Личный кабинет</a>
+          <a href="./course.html">Перейти к курсу</a>
+          <button class="menu-payment-button" type="button" data-payment-plan="vip">Оставить заявку</button>
           <details class="artwork-menu-documents"><summary>Документы <span aria-hidden="true">⌄</span></summary>
             <a href="./document.html?doc=offer">Публичная оферта</a>
             <a href="./document.html?doc=privacy">Политика обработки персональных данных</a>
@@ -65,11 +65,11 @@
       </details>
     </div>
     <nav class="hotspots" aria-label="Навигация">
-      <a class="hotspot account" href="https://magia-prikosnoveniy.elizabethhilla266.chatgpt.site/profile" aria-label="Личный кабинет"></a>
-      <a class="hotspot enter-course" href="https://magia-prikosnoveniy.elizabethhilla266.chatgpt.site/profile" aria-label="Зарегистрироваться и перейти к курсу"></a>
-      <a class="hotspot plan-card-link plan-card-link-1" href="https://magia-prikosnoveniy.elizabethhilla266.chatgpt.site/profile?plan=standard&amp;pay=1" aria-label="Оплатить тариф Стандарт"></a>
-      <a class="hotspot plan-card-link plan-card-link-2" href="https://magia-prikosnoveniy.elizabethhilla266.chatgpt.site/profile?plan=vip&amp;pay=1" aria-label="Оплатить тариф VIP"></a>
-      <a class="hotspot plan-card-link plan-card-link-3" href="https://magia-prikosnoveniy.elizabethhilla266.chatgpt.site/profile?plan=vip-plus&amp;pay=1" aria-label="Оплатить тариф VIP плюс"></a>
+      <button class="hotspot account" type="button" data-payment-plan="vip" aria-label="Оставить заявку"></button>
+      <a class="hotspot enter-course" href="./course.html" aria-label="Открыть демонстрацию курса"></a>
+      <button class="hotspot plan-card-link plan-card-link-1" type="button" data-payment-plan="standard" aria-label="Оплатить тариф Стандарт"></button>
+      <button class="hotspot plan-card-link plan-card-link-2" type="button" data-payment-plan="vip" aria-label="Оплатить тариф VIP"></button>
+      <button class="hotspot plan-card-link plan-card-link-3" type="button" data-payment-plan="vip-plus" aria-label="Оплатить тариф VIP плюс"></button>
       <button class="hotspot plan plan-1" data-plan-open aria-label="План тарифа Стандарт"></button>
       <button class="hotspot plan plan-2" data-plan-open aria-label="План тарифа VIP"></button>
       <button class="hotspot plan plan-3" data-plan-open aria-label="План тарифа VIP+"></button>
@@ -82,9 +82,9 @@
         <button data-next aria-label="Следующий тариф">→</button>
       </div>
       <div class="carousel-window"><div class="carousel-track">
-        <article class="slide"><a href="https://magia-prikosnoveniy.elizabethhilla266.chatgpt.site/profile?plan=standard&amp;pay=1"><img src="./course/plan-standard.png" alt="Тариф Стандарт"></a><button data-plan-open>План курса</button></article>
-        <article class="slide active"><a href="https://magia-prikosnoveniy.elizabethhilla266.chatgpt.site/profile?plan=vip&amp;pay=1"><img src="./course/plan-vip.png" alt="Тариф VIP"></a><button data-plan-open>План курса</button></article>
-        <article class="slide"><a href="https://magia-prikosnoveniy.elizabethhilla266.chatgpt.site/profile?plan=vip-plus&amp;pay=1"><img src="./course/plan-vip-plus.png" alt="Тариф VIP плюс"></a><button data-plan-open>План курса</button></article>
+        <article class="slide"><button class="mobile-plan-purchase" type="button" data-payment-plan="standard"><img src="./course/plan-standard.png" alt="Тариф Стандарт"></button><button data-plan-open>План курса</button></article>
+        <article class="slide active"><button class="mobile-plan-purchase" type="button" data-payment-plan="vip"><img src="./course/plan-vip.png" alt="Тариф VIP"></button><button data-plan-open>План курса</button></article>
+        <article class="slide"><button class="mobile-plan-purchase" type="button" data-payment-plan="vip-plus"><img src="./course/plan-vip-plus.png" alt="Тариф VIP плюс"></button><button data-plan-open>План курса</button></article>
       </div></div>
     </section>
     <button class="mobile-plan-open" data-plan-open aria-label="Открыть план курса"></button>
@@ -112,6 +112,34 @@
   <dialog class="plan-modal" id="plan-modal" aria-label="План курса">
     <picture><source media="(max-width:720px)" srcset="./course/plan-modal-mobile-figma.png"><img src="./course/plan-desktop-figma.png" alt="План курса"></picture>
     <button class="plan-close" aria-label="Продолжить"></button>
+  </dialog>
+
+  <dialog class="payment-modal" id="payment-modal" aria-labelledby="payment-title">
+    <form class="payment-card" id="payment-form" method="dialog">
+      <button class="payment-close" type="button" aria-label="Закрыть">×</button>
+      <div class="payment-copy">
+        <p class="payment-eyebrow">Заявка на курс</p>
+        <h2 id="payment-title">Тариф <span data-payment-name>VIP</span></h2>
+        <p>Оставьте контакты. После подтверждения заявки администратор свяжется с вами и откроет доступ.</p>
+        <strong class="payment-price" data-payment-price>35 000 руб.</strong>
+        <div class="payment-qr"><img src="./course/payment-qr-placeholder.svg" alt="QR-код для оплаты"><span>Демонстрационный QR — реквизиты будут подключены отдельно</span></div>
+      </div>
+      <div class="payment-fields">
+        <label>Имя<input name="name" autocomplete="name" required minlength="2" placeholder="Как к вам обращаться"></label>
+        <label>Почта<input name="email" type="email" autocomplete="email" required placeholder="name@example.com"></label>
+        <label>Телефон<input name="phone" type="tel" autocomplete="tel" inputmode="tel" required placeholder="+7 900 000-00-00"></label>
+        <label class="payment-consent"><input name="consent" type="checkbox" required> <span>Согласен с обработкой персональных данных</span></label>
+        <button class="payment-submit" type="submit">Отправить заявку</button>
+        <p class="payment-note">Демо-режим: заявка сохраняется в браузере для просмотра интерфейса администратором.</p>
+      </div>
+      <div class="payment-success" hidden role="status">
+        <span aria-hidden="true">✓</span>
+        <h2>Заявка принята</h2>
+        <p>В демонстрации она уже появилась в админ-панели.</p>
+        <a href="./admin-demo.html">Открыть демо админки</a>
+        <button type="button" data-payment-done>Готово</button>
+      </div>
+    </form>
   </dialog>
 </body>
 </html>

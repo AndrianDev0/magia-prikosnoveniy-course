@@ -1,6 +1,8 @@
 if(typeof document!=="undefined"){
 const documents=document.querySelector('#documents');
 const plan=document.querySelector('#plan-modal');
+const payment=document.querySelector('#payment-modal');
+const paymentForm=document.querySelector('#payment-form');
 const checks=[...document.querySelectorAll('.consent input')];
 const continueButton=document.querySelector('.documents-continue');
 const reopenButton=document.querySelector('.documents-reopen');
@@ -25,6 +27,39 @@ documents?.addEventListener('keydown',event=>{
 });
 document.querySelectorAll('[data-plan-open]').forEach(button=>button.addEventListener('click',()=>plan?.showModal()));
 document.querySelector('.plan-close')?.addEventListener('click',()=>plan?.close());
+
+const planDetails={
+  standard:{name:'Стандарт',price:'25 000 руб.'},
+  vip:{name:'VIP',price:'35 000 руб.'},
+  'vip-plus':{name:'VIP+',price:'50 000 руб.'}
+};
+let selectedPlan='vip';
+function resetPayment(){
+  paymentForm?.reset();
+  paymentForm?.querySelectorAll('.payment-copy,.payment-fields').forEach(item=>item.hidden=false);
+  const success=paymentForm?.querySelector('.payment-success');if(success)success.hidden=true;
+}
+function openPayment(planId){
+  selectedPlan=planDetails[planId]?planId:'vip';
+  const details=planDetails[selectedPlan];
+  resetPayment();
+  const name=payment?.querySelector('[data-payment-name]');if(name)name.textContent=details.name;
+  const price=payment?.querySelector('[data-payment-price]');if(price)price.textContent=details.price;
+  payment?.showModal();
+}
+document.querySelectorAll('[data-payment-plan]').forEach(button=>button.addEventListener('click',event=>{event.preventDefault();openPayment(button.dataset.paymentPlan)}));
+payment?.querySelector('.payment-close')?.addEventListener('click',()=>payment.close());
+payment?.querySelector('[data-payment-done]')?.addEventListener('click',()=>payment.close());
+payment?.addEventListener('click',event=>{if(event.target===payment)payment.close()});
+paymentForm?.addEventListener('submit',event=>{
+  event.preventDefault();
+  if(!paymentForm.reportValidity())return;
+  const data=new FormData(paymentForm);
+  const lead={id:globalThis.crypto?.randomUUID?.()||String(Date.now()),createdAt:new Date().toISOString(),name:String(data.get('name')||''),email:String(data.get('email')||''),phone:String(data.get('phone')||''),planId:selectedPlan,planName:planDetails[selectedPlan].name,price:planDetails[selectedPlan].price,status:'pending'};
+  try{const key='magic-touch-payment-leads-v1';const leads=JSON.parse(localStorage.getItem(key)||'[]');leads.unshift(lead);localStorage.setItem(key,JSON.stringify(leads.slice(0,100)))}catch{}
+  paymentForm.querySelectorAll('.payment-copy,.payment-fields').forEach(item=>item.hidden=true);
+  const success=paymentForm.querySelector('.payment-success');if(success)success.hidden=false;
+});
 
 const carousel=document.querySelector('.mobile-carousel');
 let index=1,start=null;

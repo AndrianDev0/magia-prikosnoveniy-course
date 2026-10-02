@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#482817">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <title>Демо админки — Магия прикосновений</title>
+  <link rel="stylesheet" href="./styles.css?v=mobile-v5">
+  <script src="./admin-demo.js?v=1" defer></script>
+</head>
+<body class="demo-admin-body">
+  <main class="demo-admin">
+    <header class="demo-admin-header">
+      <div><p>Магия прикосновений</p><h1>Заявки на оплату</h1></div>
+      <a href="./">← На сайт</a>
+    </header>
+    <aside class="demo-admin-notice">Демонстрационный режим: данные сохраняются только в этом браузере. После подключения backend здесь будут заявки со всех устройств.</aside>
+    <section class="demo-admin-summary" aria-label="Статистика">
+      <article><span>Всего заявок</span><strong data-total>0</strong></article>
+      <article><span>Ожидают</span><strong data-pending>0</strong></article>
+      <article><span>Подтверждены</span><strong data-confirmed>0</strong></article>
+    </section>
+    <section class="demo-admin-list" aria-live="polite" aria-label="Список заявок"></section>
+    <template id="lead-template">
+      <article class="demo-lead">
+        <div class="demo-lead-main"><strong data-name></strong><span data-plan></span></div>
+        <div class="demo-lead-contact"><a data-email></a><a data-phone></a></div>
+        <time data-date></time>
+        <label>Статус<select data-status><option value="pending">Ожидает</option><option value="confirmed">Оплата подтверждена</option><option value="rejected">Отклонена</option></select></label>
+      </article>
+    </template>
+  </main>
+</body>
+</html>
