@@ -161,45 +161,32 @@ button,a{touch-action:manipulation}
 .payment-modal{overflow-x:hidden;overflow-y:auto}
 @media(max-width:1024px){.documents-modal .consent{min-height:44px}}
 
-/* Compact desktop canvas.
-   The Figma export is one proportional artwork, so scaling the canvas keeps
-   every hotspot aligned while revealing more of the page at 100% browser
-   zoom. Soft edge masking and matching ambient gradients make the narrower
-   canvas blend into the viewport instead of leaving hard side bands. */
-@media(min-width:1280px){
-  html,body{
-    background:
-      radial-gradient(ellipse 34vw 62vh at 0 28vh,rgba(225,103,48,.28),transparent 72%),
-      radial-gradient(ellipse 32vw 66vh at 100% 82vh,rgba(235,119,61,.2),transparent 74%),
-      #482817;
-    background-attachment:fixed;
-  }
-  body::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    z-index:0;
-    pointer-events:none;
-    background-position:center top;
-    background-size:100% auto;
-    background-repeat:no-repeat;
-    filter:blur(24px) saturate(.9);
-    opacity:.62;
-    transform:scaleX(1.035);
-    transform-origin:center top;
-  }
-  body:has(.home-artwork)::before{background-image:url("./course/home-placeholder.webp")}
-  body:has(.course-artwork)::before{background-image:url("./course/lessons-placeholder.webp")}
+/* Scale content and hit targets together. Extend only the original background
+   vectors at the same scale, so the gutters never contain photos or text. */
+@media(min-width:1025px){
+  body:has(.artwork){background:#482817}
   .artwork{
     z-index:1;
-    width:clamp(1180px,82vw,1574px);
-    max-width:calc(100vw - 32px);
+    width:min(100%,calc(30vw + 716.8px),1320px);
     overflow:visible;
   }
   .home-artwork,.course-artwork{background-image:none}
-  .artwork-picture{
-    -webkit-mask-image:linear-gradient(to right,transparent 0,#000 2.25%,#000 97.75%,transparent 100%);
-    mask-image:linear-gradient(to right,transparent 0,#000 2.25%,#000 97.75%,transparent 100%);
+  .home-artwork{--wide-background:url("./course/home-background-wide.svg")}
+  .course-artwork{--wide-background:url("./course/lessons-background-wide.svg")}
+  .artwork::before{
+    content:"";
+    position:absolute;
+    z-index:-1;
+    top:0;
+    bottom:0;
+    left:-100%;
+    width:300%;
+    pointer-events:none;
+    background:var(--wide-background) center top/100% 100% no-repeat;
   }
-  .figma-ambient-glows{overflow:visible}
+  /* Blend the slight SVG/raster color rounding only inside the empty gutters. */
+  .artwork-picture{
+    mask-image:linear-gradient(to right,transparent,#000 4%,#000 96%,transparent);
+  }
+  .figma-ambient-glows{display:none}
 }

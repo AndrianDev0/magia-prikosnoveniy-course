@@ -820,43 +820,31 @@ body:has(.document-dialog) [data-slot="dialog-overlay"] { background: rgba(0,0,0
   }
   .figma-artwork-page { width: min(88%, 104svh); }
 }
-/* Keep the customer-facing desktop composition compact at normal browser
-   zoom. All percentage-positioned controls continue to scale with the Figma
-   canvas, while the ambient shell removes hard side-color seams. */
-@media (min-width: 1280px) {
-  .figma-artwork-shell {
-    position: relative;
-    background:
-      radial-gradient(ellipse 34vw 62vh at 0 28vh, rgba(225,103,48,.28), transparent 72%),
-      radial-gradient(ellipse 32vw 66vh at 100% 82vh, rgba(235,119,61,.2), transparent 74%),
-      #482817;
-  }
-  .figma-artwork-shell::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background-position: center top;
-    background-size: 100% auto;
-    background-repeat: no-repeat;
-    filter: blur(24px) saturate(.9);
-    opacity: .62;
-    transform: scaleX(1.035);
-    transform-origin: center top;
-  }
-  .figma-artwork-shell:has(.figma-home-artwork)::before { background-image: url("/course/home-placeholder.webp"); }
-  .figma-artwork-shell:has(.figma-lessons-artwork)::before { background-image: url("/course/lessons-placeholder.webp"); }
+/* Continue the original Figma background vectors beyond the compact content. */
+@media (min-width: 1025px) {
+  .figma-artwork-shell { background: #482817; }
   .figma-artwork-page {
     z-index: 1;
-    width: clamp(1180px, 82vw, 1574px);
-    max-width: calc(100vw - 32px);
+    width: min(100%, calc(30vw + 716.8px), 1320px);
     overflow: visible;
   }
-  .figma-artwork-picture {
-    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 2.25%, #000 97.75%, transparent 100%);
-    mask-image: linear-gradient(to right, transparent 0, #000 2.25%, #000 97.75%, transparent 100%);
+  .figma-home-artwork { --wide-background: url("/course/home-background-wide.svg"); }
+  .figma-lessons-artwork { --wide-background: url("/course/lessons-background-wide.svg"); }
+  .figma-artwork-page::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: -100%;
+    width: 300%;
+    pointer-events: none;
+    background: var(--wide-background) center top/100% 100% no-repeat;
   }
+  .figma-artwork-picture {
+    mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+  }
+  .figma-artwork-page .figma-ambient-glows { display: none; }
 }
 .figma-hotspots { position: absolute; inset: 0; pointer-events: none; }
 .figma-hotspot { position: absolute; z-index: 2; display: block; margin: 0; padding: 0; border: 0; border-radius: 12px; background: transparent; color: transparent; pointer-events: auto; cursor: pointer; }
