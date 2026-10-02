@@ -24,6 +24,7 @@ export function HomeClient(props: HomeClientProps) {
   const [mobilePlanIndex, setMobilePlanIndex] = useState(1);
   const mobileTouchStart = useRef<number | null>(null);
   const accountPath = props.user ? "/profile" : props.signInPath;
+  const vipPlusBonus = <span className="vip-plus-bonus"><strong>+1 очное занятие</strong><span>В течение года с покупки, при наличии занятия и предварительном согласовании.</span></span>;
 
   function selectMobilePlan(index: number) {
     setMobilePlanIndex(Math.max(0, Math.min(plans.length - 1, index)));
@@ -100,6 +101,7 @@ export function HomeClient(props: HomeClientProps) {
                 <article className={`mobile-plan-slide ${index === mobilePlanIndex ? "is-active" : "is-side"}`} key={plan.id}>
                   <button className="mobile-plan-purchase" type="button" onClick={() => openPayment(plan.id)} aria-label={`Оплатить тариф ${plan.name}`}>
                     <Image src={`/course/plan-${plan.id}.png`} alt={`Тариф ${plan.name}: ${plan.priceLabel}`} width={536} height={index === 0 ? 682 : index === 1 ? 862 : 1070} />
+                    {plan.id === "vip-plus" ? vipPlusBonus : null}
                   </button>
                   <button type="button" onClick={() => setPlanOpen(true)}>План курса</button>
                 </article>
@@ -116,7 +118,7 @@ export function HomeClient(props: HomeClientProps) {
           <Link className="figma-hotspot home-brand" href="/" aria-label="Магия прикосновений — на главную" />
           {plans.map((plan, index) => (
             <Fragment key={plan.id}>
-              <button className={`figma-hotspot home-plan-card home-plan-card-${index + 1}`} type="button" onClick={() => openPayment(plan.id)} aria-label={`Оплатить тариф ${plan.name}`} />
+              <button className={`figma-hotspot home-plan-card home-plan-card-${index + 1}`} type="button" onClick={() => openPayment(plan.id)} aria-label={`Оплатить тариф ${plan.name}`}>{plan.id === "vip-plus" ? vipPlusBonus : null}</button>
               <button className={`figma-hotspot home-plan-details home-plan-details-${index + 1}`} type="button" onClick={() => setPlanOpen(true)} aria-label={`Показать план курса для тарифа ${plan.name}`} />
             </Fragment>
           ))}

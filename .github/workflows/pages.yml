@@ -33,6 +33,7 @@ jobs:
           npm run lint
           npm run typecheck
           node scripts/test-payment-validation.mjs
+          node scripts/test-admin-demo.mjs
           npm run build
       - name: Assemble static site
         run: |

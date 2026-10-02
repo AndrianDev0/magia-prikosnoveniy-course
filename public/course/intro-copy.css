@@ -50,3 +50,16 @@
   .home-intro-copy .intro-description { top: 4%; left: 5%; width: 90%; }
   .home-intro-copy .intro-outcome { top: 58%; left: 5%; width: 90%; font-size: inherit; }
 }
+/* Let narrow-screen paragraphs follow their actual text height, not fixed offsets. */
+@media (max-width: 360px) {
+  .home-intro-copy { top: calc(390 / 1806 * 100%); }
+  .home-intro-copy .intro-description,
+  .home-intro-copy .intro-outcome {
+    position: relative;
+    top: auto;
+    left: 2%;
+    width: 96%;
+    padding-left: 2%;
+  }
+  .home-intro-copy .intro-outcome { margin-top: 8px; }
+}

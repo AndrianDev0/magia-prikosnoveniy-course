@@ -2,12 +2,16 @@ if(typeof document!=='undefined'){
   const key='magic-touch-payment-leads-v1';
   const list=document.querySelector('.demo-admin-list');
   const template=document.querySelector('#lead-template');
+  const storageError=document.querySelector('[data-storage-error]');
   let leads=[];
   try{
     const stored=JSON.parse(localStorage.getItem(key)||'[]');
     if(Array.isArray(stored))leads=stored.filter(item=>item&&typeof item==='object'&&['id','name','email','planId','planName','price','createdAt'].every(field=>typeof item[field]==='string'&&item[field].length<=254)&&(item.phone===undefined||typeof item.phone==='string')&&['pending','confirmed','rejected'].includes(item.status)&&Number.isFinite(Date.parse(item.createdAt)));
   }catch{}
-  function save(){try{localStorage.setItem(key,JSON.stringify(leads))}catch{}}
+  function save(nextLeads){
+    try{localStorage.setItem(key,JSON.stringify(nextLeads));storageError.hidden=true;return true}
+    catch{storageError.textContent='Не удалось сохранить статус: хранилище браузера недоступно или заполнено. Прежний статус сохранён. Освободите место или разрешите хранение данных и попробуйте снова.';storageError.hidden=false;return false}
+  }
   function render(){
     list.replaceChildren();
     document.querySelector('[data-total]').textContent=String(leads.length);
@@ -21,7 +25,11 @@ if(typeof document!=='undefined'){
       const email=card.querySelector('[data-email]');email.textContent=lead.email;if(/^[^\s@<>]+@[^\s@<>]+\.[a-z]{2,63}$/i.test(lead.email))email.href=`mailto:${encodeURIComponent(lead.email)}`;else email.removeAttribute('href');
       const phone=card.querySelector('[data-phone]');if(typeof lead.phone==='string'){phone.textContent=lead.phone;if(/^\+?[\d ()-]{10,32}$/.test(lead.phone))phone.href=`tel:${lead.phone.replace(/[^+\d]/g,'')}`;else phone.removeAttribute('href')}else phone.remove();
       const date=card.querySelector('[data-date]');date.dateTime=lead.createdAt;date.textContent=new Intl.DateTimeFormat('ru-RU',{dateStyle:'medium',timeStyle:'short'}).format(new Date(lead.createdAt));
-      const status=card.querySelector('[data-status]');status.value=lead.status;status.addEventListener('change',()=>{lead.status=status.value;save();render()});
+      const status=card.querySelector('[data-status]');status.value=lead.status;status.addEventListener('change',()=>{
+        if(!['pending','confirmed','rejected'].includes(status.value)){status.value=lead.status;return}
+        const nextLeads=leads.map(item=>item===lead?{...item,status:status.value}:item);
+        if(save(nextLeads)){leads=nextLeads;render()}else status.value=lead.status;
+      });
       const acknowledgments=document.createElement('details');acknowledgments.className='demo-lead-consents';
       const heading=document.createElement('summary');heading.textContent='Подтверждения и редакции документов (демо)';acknowledgments.append(heading);
       const items=[['offer','Оферта','offer'],['consent','Обработка данных','consent'],['privacy','Ознакомление с политикой','privacy'],['userAgreement','Пользовательское соглашение','user-agreement'],['adult','Подтверждение 18+ и правил безопасности','rules-18']];
