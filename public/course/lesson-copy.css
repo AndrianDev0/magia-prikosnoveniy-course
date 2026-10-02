@@ -1,5 +1,31 @@
 .figma-lessons-artwork,
 .course-artwork { container-type: inline-size; }
+.course-tagline {
+  position: absolute;
+  z-index: 2;
+  top: calc(570 / 12334 * 100%);
+  left: 25.5%;
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  width: 49%;
+  height: calc(135 / 12334 * 100%);
+  margin: 0;
+  padding: 0 2%;
+  isolation: isolate;
+  color: #fff4ed;
+  font: italic 300 clamp(15px, 1.8cqw, 28px)/1.32 "Montserrat", Arial, sans-serif;
+  text-align: center;
+  text-wrap: balance;
+}
+.course-tagline::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(90deg, #562b16, #4f2916 5%, #482818 16%, #482818);
+  mask-image: linear-gradient(to bottom, transparent, #000 15%, #000 85%, transparent);
+}
 @font-face {
   font-family: "Miama Nueva Course";
   src: url("./miama-nueva.otf") format("opentype");
@@ -185,6 +211,19 @@
 .lesson-video-placeholder-7 { top: calc(9260 / 12334 * 100%); }
 .lesson-video-placeholder-8 { top: calc(10690 / 12334 * 100%); }
 @media (max-width: 767px) {
+  .course-artwork .course-tagline {
+    top: calc(350 / 7359 * 100%);
+    left: 5%;
+    width: 90%;
+    height: calc(130 / 7359 * 100%);
+    padding: 0 6%;
+    font-size: clamp(11px, 3cqw, 16px);
+  }
+  .course-artwork .course-tagline::before {
+    background: linear-gradient(to bottom, rgba(255, 180, 130, .1), rgba(0, 0, 0, .1)), linear-gradient(90deg, #d28051, #c16f46 4%, #ab5f37 9%, #874526 17%, #67331b 24%, #4e2a16 34%, #482818 50%, #482818);
+    mask-image: linear-gradient(to bottom, transparent, #000 15%, #000 85%, transparent), linear-gradient(to right, transparent, #000 8%, #000 95%, transparent);
+    mask-composite: intersect;
+  }
   .lesson-description-copy {
     top: calc(425 / 3107 * 100%);
     height: calc(75 / 3107 * 100%);
@@ -228,6 +267,22 @@
   .lesson-video-placeholder-6 { top: calc(1820 / 3107 * 100%); }
   .lesson-video-placeholder-7 { top: calc(2140 / 3107 * 100%); }
   .lesson-video-placeholder-8 { top: calc(2410 / 3107 * 100%); }
+}
+
+@media (max-width: 600px) {
+  .figma-lessons-artwork .course-tagline {
+    top: calc(350 / 7359 * 100%);
+    left: 5%;
+    width: 90%;
+    height: calc(130 / 7359 * 100%);
+    padding: 0 6%;
+    font-size: clamp(11px, 3cqw, 16px);
+  }
+  .figma-lessons-artwork .course-tagline::before {
+    background: linear-gradient(to bottom, rgba(255, 180, 130, .1), rgba(0, 0, 0, .1)), linear-gradient(90deg, #d28051, #c16f46 4%, #ab5f37 9%, #874526 17%, #67331b 24%, #4e2a16 34%, #482818 50%, #482818);
+    mask-image: linear-gradient(to bottom, transparent, #000 15%, #000 85%, transparent), linear-gradient(to right, transparent, #000 8%, #000 95%, transparent);
+    mask-composite: intersect;
+  }
 }
 
 @media (max-width: 340px) {

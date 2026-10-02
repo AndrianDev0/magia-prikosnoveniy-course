@@ -27,6 +27,7 @@ export function CoursePageClient({ header }: { header: Header }) {
           <source srcSet="/course/lessons-desktop-figma.webp" width="1920" height="12334" type="image/webp" />
           <img className="figma-artwork-image" src="/course/lessons-desktop-figma.webp" alt="" aria-hidden="true" width="1920" height="12334" fetchPriority="high" />
         </picture>
+        <p className="course-tagline">Больше чувствительности. Больше доверия. Больше близости через прикосновения.</p>
         {[4, 5, 6].map((lessonIndex) => <div className={`lesson-title-copy lesson-title-copy-${lessonIndex + 1}`} aria-hidden="true" key={courseLessons[lessonIndex].slug}><span>{lessonIndex + 1} урок - {courseLessons[lessonIndex].title}</span></div>)}
         <div className="lesson-title-copy bonus-title-copy" aria-hidden="true"><span>{bonusLesson.title}</span></div>
         {[0, 1, 3, 4, 5, 6].map((lessonIndex) => {
