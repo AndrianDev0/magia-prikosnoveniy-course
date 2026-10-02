@@ -12,6 +12,7 @@ export function validatePaymentField(field, raw) {
   }
   if (field === 'email') {
     const parts = value.split('@');
+    if (parts.length > 2) return 'В адресе почты должен быть только один знак @.';
     if (value.length > 254 || parts.length !== 2) return 'Проверьте почту: например, name@example.com.';
     const [local, domain] = parts;
     if (!local || local.length > 64 || !/^[a-z0-9.!#$%&'*+/=?^_`{|}~-]+$/i.test(local) || local.startsWith('.') || local.endsWith('.') || local.includes('..')) return 'Проверьте часть адреса перед @.';
@@ -59,6 +60,7 @@ export const paymentPlans = {
 };
 
 export function storePaymentLead(lead, storage, now = Date.now()) {
+  if (validatePaymentField('email', lead?.email)) throw new Error('invalid-lead-email');
   const key = 'magic-touch-payment-leads-v1';
   const leads = JSON.parse(storage.getItem(key) || '[]');
   if (!Array.isArray(leads) || !leads.every(item => item && typeof item === 'object' && typeof item.email === 'string' && (item.phone === undefined || typeof item.phone === 'string'))) throw new Error('invalid-storage');
@@ -173,6 +175,7 @@ if (typeof document !== 'undefined') {
       input.addEventListener(checkboxFields.has(field) ? 'change' : 'input', () => {
         clearSummary();
         if (field === 'offer' && input.checked) planChangeNote.hidden = true;
+        if (field === 'email' && input.value.split('@').length > 2) touched.add(field);
         if (touched.has(field)) showError(field);
       });
     });

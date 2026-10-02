@@ -6,7 +6,7 @@ const cases = [
   ['name','Анна',true],['name','Jean-Luc O’Neill',true],['name','  Эмиль  ',true],
   ['name','',false],['name','1',false],['name','<script>alert(1)</script>',false],['name','Анна\nМария',false],['name','А'.repeat(81),false],
   ['email','anna+course@example.com',true],['email','NAME@EXAMPLE.CO.UK',true],
-  ['email','',false],['email','anna',false],['email','anna@example',false],['email','anna@-example.com',false],['email','a..b@example.com',false],['email','.anna@example.com',false],['email','a@b..com',false],['email','a@example.com\r\nBcc:x@example.com',false],['email','a'.repeat(65)+'@example.com',false],
+  ['email','',false],['email','anna',false],['email','anna@example',false],['email','anna@-example.com',false],['email','a..b@example.com',false],['email','.anna@example.com',false],['email','a@b..com',false],['email','maa190186@@gmail.co',false],['email','a@b@c.com',false],['email','a@example.com\r\nBcc:x@example.com',false],['email','a'.repeat(65)+'@example.com',false],
   ['consent',true,true],['consent',false,false],['consent','true',false],
   ['offer',true,true],['offer',false,false],['adult',true,true],['adult',false,false],['adult','true',false]
 ];
@@ -18,6 +18,8 @@ const packet = JSON.parse(await readFile(new URL('../public/course/legal-documen
 const snapshot = await createLegalSnapshot(packet);
 const values = {name:'  Тестовая Анна  ',email:'QA@example.com',offer:true,consent:true,adult:true};
 const lead = createPaymentLead(values,'standard',snapshot,new Date(now));
+assert.equal(validate('email','maa190186@@gmail.co'),'В адресе почты должен быть только один знак @.');
+assert.throws(()=>createPaymentLead({...values,email:'maa190186@@gmail.co'},'standard',snapshot,new Date(now)));
 assert.equal(lead.email,'qa@example.com');
 assert.equal(lead.name,'Тестовая Анна');
 assert.equal(Object.hasOwn(lead,'phone'),false);
@@ -53,6 +55,7 @@ function memory(initial = null) {
 }
 const storage = memory();
 assert.equal(storePaymentLead(lead,storage,now),'saved');
+assert.throws(()=>storePaymentLead({...lead,email:'maa190186@@gmail.co'},storage,now));
 assert.equal(JSON.parse(storage.getItem()).length,1);
 assert.equal(storePaymentLead({...lead,email:'QA@example.com'},storage,now),'duplicate');
 assert.equal(JSON.parse(storage.getItem()).length,1);
