@@ -184,7 +184,7 @@
 .lesson-video-placeholder-6 { top: calc(7850 / 12334 * 100%); }
 .lesson-video-placeholder-7 { top: calc(9260 / 12334 * 100%); }
 .lesson-video-placeholder-8 { top: calc(10690 / 12334 * 100%); }
-@media (max-width: 600px) {
+@media (max-width: 767px) {
   .lesson-description-copy {
     top: calc(425 / 3107 * 100%);
     height: calc(75 / 3107 * 100%);

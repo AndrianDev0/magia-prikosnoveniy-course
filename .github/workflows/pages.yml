@@ -40,8 +40,8 @@ jobs:
           cp public/course/*.css public/course/*.js public/course/legal-documents.json public/course/miama-nueva.otf _site/course/
           find public/course -maxdepth 1 -type f -name '*-background-*.svg' -exec cp {} _site/course/ \;
           cp public/course/plan-steps.svg public/course/payment-qr-placeholder.svg _site/course/
-          cp public/course/home-mobile-figma.webp public/course/home-desktop-figma.webp _site/course/
-          cp public/course/lessons-mobile-figma.webp public/course/lessons-desktop-figma.webp _site/course/
+          cp public/course/home-mobile-responsive.webp public/course/home-mobile-placeholder.webp public/course/home-tablet-figma.webp public/course/home-laptop-figma.webp public/course/home-desktop-figma.webp public/course/home-placeholder.webp _site/course/
+          cp public/course/lessons-mobile-responsive.webp public/course/lessons-mobile-placeholder.webp public/course/lessons-tablet-figma.webp public/course/lessons-laptop-figma.webp public/course/lessons-desktop-figma.webp public/course/lessons-placeholder.webp _site/course/
           cp public/course/documents-desktop-figma.png public/course/documents-modal-figma.png _site/course/
           cp public/course/plan-desktop-figma.png public/course/plan-modal-mobile-figma.png _site/course/
           cp public/course/plan-standard.png public/course/plan-vip.png public/course/plan-vip-plus.png _site/course/
@@ -49,8 +49,10 @@ jobs:
           touch _site/.nojekyll
           test -s _site/index.html
           test -s _site/course.html
-          test -s _site/course/home-mobile-figma.webp
-          test -s _site/course/lessons-mobile-figma.webp
+          test -s _site/course/home-mobile-responsive.webp
+          test -s _site/course/home-tablet-figma.webp
+          test -s _site/course/lessons-mobile-responsive.webp
+          test -s _site/course/lessons-tablet-figma.webp
           du -sh _site
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

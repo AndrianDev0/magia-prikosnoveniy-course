@@ -59,7 +59,7 @@
 .artwork-menu-documents { margin-top: 6px; padding-top: 6px; border-top: 1px solid rgba(255,244,237,.18); }
 .artwork-menu-documents a { font-size: 13px; padding-left: 20px; }
 .artwork-tariffs-anchor { position: absolute; top: 45%; left: 0; width: 1px; height: 1px; scroll-margin-top: 20px; pointer-events: none; }
-@media (max-width: 600px) {
+@media (max-width: 767px) {
   .artwork-menu-cover { right: 18%; width: 14%; aspect-ratio: 1.02; }
   .artwork-menu-panel { right: -44px; }
   .artwork-tariffs-anchor { top: 36%; }

@@ -34,7 +34,7 @@
   outline: 2px solid #8f5b44;
   outline-offset: -2px;
 }
-@media (max-width: 600px) {
+@media (max-width: 767px) {
   .plan-modal .plan-close {
     left: 28%;
     top: 70%;

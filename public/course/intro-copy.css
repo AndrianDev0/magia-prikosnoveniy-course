@@ -37,7 +37,7 @@
 .home-intro-copy strong { font-weight: 700; }
 .home-intro-copy .intro-description { top: 5%; left: 6.5%; width: 74%; }
 .home-intro-copy .intro-outcome { top: 57%; left: 38%; width: 55.5%; font-size: 1.979167cqw; }
-@media (max-width: 600px) {
+@media (max-width: 767px) {
   .home-intro-copy {
     top: calc(400 / 1806 * 100%);
     height: calc(255 / 1806 * 100%);
