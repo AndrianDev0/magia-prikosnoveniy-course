@@ -41,7 +41,7 @@
   .home-intro-copy {
     top: calc(400 / 1806 * 100%);
     height: calc(255 / 1806 * 100%);
-    font-size: 3.157895cqw;
+    font-size: max(11px, 3.157895cqw);
     line-height: 1.35;
   }
   .home-intro-copy::before { background-image: var(--intro-background-mobile); mask-image: linear-gradient(to bottom, transparent, #000 3%, #000 96%, transparent); }

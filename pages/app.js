@@ -51,11 +51,21 @@ document.querySelectorAll('[data-payment-plan]').forEach(button=>button.addEvent
 payment?.querySelector('.payment-close')?.addEventListener('click',()=>payment.close());
 payment?.querySelector('[data-payment-done]')?.addEventListener('click',()=>payment.close());
 payment?.addEventListener('click',event=>{if(event.target===payment)payment.close()});
+const paymentPhone=paymentForm?.elements.namedItem('phone');
+paymentPhone?.addEventListener('input',()=>paymentPhone.setCustomValidity(''));
 paymentForm?.addEventListener('submit',event=>{
   event.preventDefault();
   if(!paymentForm.reportValidity())return;
   const data=new FormData(paymentForm);
-  const lead={id:globalThis.crypto?.randomUUID?.()||String(Date.now()),createdAt:new Date().toISOString(),name:String(data.get('name')||''),email:String(data.get('email')||''),phone:String(data.get('phone')||''),planId:selectedPlan,planName:planDetails[selectedPlan].name,price:planDetails[selectedPlan].price,status:'pending'};
+  const phoneValue=String(data.get('phone')||'').trim();
+  const phoneDigits=phoneValue.replace(/\D/g,'');
+  if(phoneDigits.length<10||phoneDigits.length>15){
+    paymentPhone?.setCustomValidity('Введите номер телефона: от 10 до 15 цифр.');
+    paymentPhone?.reportValidity();
+    paymentPhone?.focus();
+    return;
+  }
+  const lead={id:globalThis.crypto?.randomUUID?.()||String(Date.now()),createdAt:new Date().toISOString(),name:String(data.get('name')||'').trim(),email:String(data.get('email')||'').trim(),phone:phoneValue,planId:selectedPlan,planName:planDetails[selectedPlan].name,price:planDetails[selectedPlan].price,status:'pending'};
   try{const key='magic-touch-payment-leads-v1';const leads=JSON.parse(localStorage.getItem(key)||'[]');leads.unshift(lead);localStorage.setItem(key,JSON.stringify(leads.slice(0,100)))}catch{}
   paymentForm.querySelectorAll('.payment-copy,.payment-fields').forEach(item=>item.hidden=true);
   const success=paymentForm.querySelector('.payment-success');if(success)success.hidden=false;

@@ -60,7 +60,7 @@ html{scrollbar-width:none}html::-webkit-scrollbar{width:0;height:0}
 /* On phones the Figma bitmap becomes too small to read. Replace only the
    mobile modal surface with semantic, touch-friendly controls. */
 .documents-mobile-title,.document-link-label,.documents-continue-label{display:none}
-@media(max-width:767px){
+@media(max-width:1024px){
   .documents-modal{container-type:normal;display:flex;flex-direction:column;width:min(calc(100vw - 24px),420px);max-width:420px;max-height:calc(100dvh - 24px);aspect-ratio:auto;overflow-y:auto;padding:26px 18px 20px;border:1px solid rgba(255,196,151,.42);border-radius:20px;background:radial-gradient(circle at 0 55%,rgba(236,112,53,.72),transparent 38%),radial-gradient(circle at 100% 45%,rgba(255,151,94,.62),transparent 38%),#542d1b;box-shadow:0 24px 70px rgba(18,6,2,.52);color:#fff4ed;line-height:1.35}
   .documents-modal>img{display:none}
   .documents-mobile-title{display:block;margin:0 0 18px;color:#fff4ed;font:400 clamp(27px,8vw,36px)/.86 "Miama Nueva",Georgia,serif;text-align:center}
@@ -95,7 +95,7 @@ html{overflow-x:clip}
 body{width:100%;min-width:0;overflow-x:clip}
 img{max-width:100%}
 button,a{touch-action:manipulation}
-.artwork{width:100%;max-width:1920px;contain:layout paint}
+.artwork{width:100%;max-width:1920px}
 .home-artwork{background:#482817 url("./course/home-placeholder.webp") center top/100% auto no-repeat}
 .course-artwork{background:#482817 url("./course/lessons-placeholder.webp") center top/100% auto no-repeat}
 .artwork-image{color:transparent}
@@ -149,3 +149,14 @@ button,a{touch-action:manipulation}
   .demo-admin-header h1{font-size:26px}
   .demo-admin-header a{justify-self:start;max-width:100%;font-size:13px}
 }
+
+/* Native `hidden` must win over component display modes such as grid/flex. */
+[hidden]{display:none!important}
+.payment-success:not([hidden]){display:grid}
+.plan{min-height:44px}
+.demo-lead-contact a{display:flex;align-items:center;min-height:44px}
+.demo-lead select{min-height:44px}
+@media(max-width:767px){.documents-layer .documents-modal{transform:none}}
+.menu-payment-button{display:flex;align-items:center;min-height:44px}
+.payment-modal{overflow-x:hidden;overflow-y:auto}
+@media(max-width:1024px){.documents-modal .consent{min-height:44px}}

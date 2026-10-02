@@ -15,15 +15,15 @@
   <link rel="canonical" href="https://andriandev0.github.io/magia-prikosnoveniy-course/">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <title>Магия прикосновений</title>
-  <link rel="stylesheet" href="./styles.css?v=responsive-v6">
+  <link rel="stylesheet" href="./styles.css?v=client-final-v7">
   <link rel="stylesheet" href="./course/ambient.css?v=responsive-v6">
   <link rel="stylesheet" href="./course/menu.css?v=responsive-v6">
   <link rel="stylesheet" href="./course/tariffs.css?v=3">
   <link rel="stylesheet" href="./course/plan-steps.css?v=responsive-v6">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
-  <link rel="stylesheet" href="./course/intro-copy.css?v=responsive-v6">
+  <link rel="stylesheet" href="./course/intro-copy.css?v=client-final-v7">
   <script src="./course/menu.js?v=1" defer></script>
-  <script src="./app.js?v=responsive-v6" defer></script>
+  <script src="./app.js?v=client-final-v7" defer></script>
 </head>
 <body>
   <main class="artwork home-artwork">
@@ -127,9 +127,9 @@
         <div class="payment-qr"><img src="./course/payment-qr-placeholder.svg" alt="QR-код для оплаты"><span>Демонстрационный QR — реквизиты будут подключены отдельно</span></div>
       </div>
       <div class="payment-fields">
-        <label>Имя<input name="name" autocomplete="name" required minlength="2" placeholder="Как к вам обращаться"></label>
-        <label>Почта<input name="email" type="email" autocomplete="email" required placeholder="name@example.com"></label>
-        <label>Телефон<input name="phone" type="tel" autocomplete="tel" inputmode="tel" required placeholder="+7 900 000-00-00"></label>
+        <label>Имя<input name="name" autocomplete="name" required minlength="2" maxlength="80" placeholder="Как к вам обращаться"></label>
+        <label>Почта<input name="email" type="email" autocomplete="email" required maxlength="254" placeholder="name@example.com"></label>
+        <label>Телефон<input name="phone" type="tel" autocomplete="tel" inputmode="tel" required minlength="10" maxlength="24" pattern="[+0-9() -]{10,24}" placeholder="+7 900 000-00-00"></label>
         <label class="payment-consent"><input name="consent" type="checkbox" required> <span>Согласен с обработкой персональных данных</span></label>
         <button class="payment-submit" type="submit">Отправить заявку</button>
         <p class="payment-note">Демо-режим: заявка сохраняется в браузере для просмотра интерфейса администратором.</p>

@@ -2,7 +2,7 @@
 .course-artwork { container-type: inline-size; }
 @font-face {
   font-family: "Miama Nueva Course";
-  src: url("/course/miama-nueva.otf") format("opentype");
+  src: url("./miama-nueva.otf") format("opentype");
   font-style: normal;
   font-weight: 400;
   font-display: swap;
@@ -228,4 +228,11 @@
   .lesson-video-placeholder-6 { top: calc(1820 / 3107 * 100%); }
   .lesson-video-placeholder-7 { top: calc(2140 / 3107 * 100%); }
   .lesson-video-placeholder-8 { top: calc(2410 / 3107 * 100%); }
+}
+
+@media (max-width: 340px) {
+  .lesson-description-copy {
+    font-size: 11.5px;
+    line-height: 1.34;
+  }
 }
