@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#482817">
   <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
   <meta name="description" content="Практический курс Эмиля Баткуллина по тантрическому массажу: семь уроков, бережное прикосновение и осознанная близость.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Магия прикосновений — курс по тантрическому массажу">
@@ -23,8 +24,10 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
   <link rel="stylesheet" href="./course/intro-copy.css?v=client-final-v7">
   <link rel="stylesheet" href="./course/footer.css?v=centered-v14">
+  <link rel="stylesheet" href="./payment.css?v=form-v15">
   <script src="./course/menu.js?v=footer-v12" defer></script>
-  <script src="./app.js?v=footer-v12" defer></script>
+  <script src="./app.js?v=form-v15" defer></script>
+  <script src="./payment.js?v=form-v15" type="module"></script>
 </head>
 <body>
   <main class="artwork home-artwork">
@@ -141,27 +144,33 @@
   </dialog>
 
   <dialog class="payment-modal" id="payment-modal" aria-labelledby="payment-title">
-    <form class="payment-card" id="payment-form" method="dialog">
-      <button class="payment-close" type="button" aria-label="Закрыть">×</button>
+    <div class="payment-close-wrap"><button class="payment-close" type="button" aria-label="Закрыть">×</button></div>
+    <form class="payment-card" id="payment-form" method="dialog" novalidate>
       <div class="payment-copy">
-        <p class="payment-eyebrow">Заявка на курс</p>
-        <h2 id="payment-title">Тариф <span data-payment-name>VIP</span></h2>
-        <p>Оставьте контакты. После подтверждения заявки администратор свяжется с вами и откроет доступ.</p>
+        <p class="payment-eyebrow">Магия прикосновений</p>
+        <h2 id="payment-title"><span class="payment-tariff-label">Ваш тариф</span><span data-payment-name>VIP</span></h2>
+        <p>7 видеоуроков для бережной, осознанной практики.</p>
         <strong class="payment-price" data-payment-price>35 000 руб.</strong>
-        <div class="payment-qr"><img src="./course/payment-qr-placeholder.svg" alt="QR-код для оплаты"><span>Демонстрационный QR — реквизиты будут подключены отдельно</span></div>
+        <details class="payment-qr">
+          <summary>QR для оплаты <span class="payment-demo-badge">Демо</span></summary>
+          <div class="payment-qr-content"><img src="./course/payment-qr-placeholder.svg" alt="Образец QR-кода, не предназначен для оплаты"><p>Это образец. Настоящие реквизиты подключим позже — сейчас оплачивать ничего не нужно.</p></div>
+        </details>
+        <p class="payment-side-note">Оставьте контакты, чтобы оформить заявку на выбранный тариф.</p>
       </div>
       <div class="payment-fields">
-        <label>Имя<input name="name" autocomplete="name" required minlength="2" maxlength="80" placeholder="Как к вам обращаться"></label>
-        <label>Почта<input name="email" type="email" autocomplete="email" required maxlength="254" placeholder="name@example.com"></label>
-        <label>Телефон<input name="phone" type="tel" autocomplete="tel" inputmode="tel" required minlength="10" maxlength="24" pattern="[+0-9() -]{10,24}" placeholder="+7 900 000-00-00"></label>
-        <label class="payment-consent"><input name="consent" type="checkbox" required> <span>Согласен с обработкой персональных данных</span></label>
-        <button class="payment-submit" type="submit">Отправить заявку</button>
-        <p class="payment-note">Демо-режим: заявка сохраняется в браузере для просмотра интерфейса администратором.</p>
+        <div class="payment-fields-heading"><h3>Начнём с знакомства</h3><p>Всего три поля — и заявка готова.</p></div>
+        <div class="payment-form-error" hidden role="alert" tabindex="-1"></div>
+        <div class="payment-field"><label for="payment-name">Ваше имя</label><input id="payment-name" name="name" autocomplete="name" required minlength="2" maxlength="80" aria-describedby="payment-name-error" placeholder="Как к вам обращаться"><p class="payment-field-error" id="payment-name-error" hidden></p></div>
+        <div class="payment-field"><label for="payment-email">Электронная почта</label><input id="payment-email" name="email" type="email" autocomplete="email" autocapitalize="none" spellcheck="false" required maxlength="254" aria-describedby="payment-email-error" placeholder="name@example.com"><p class="payment-field-error" id="payment-email-error" hidden></p></div>
+        <div class="payment-field"><label for="payment-phone">Номер телефона</label><input id="payment-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required maxlength="32" aria-describedby="payment-phone-error" placeholder="+7 900 000-00-00"><p class="payment-field-error" id="payment-phone-error" hidden></p></div>
+        <div class="payment-consent-wrap"><label class="payment-consent" for="payment-consent"><input id="payment-consent" name="consent" type="checkbox" required aria-describedby="payment-consent-error"><span>Согласен с <a href="./document.html?doc=privacy" target="_blank" rel="noopener">обработкой персональных данных</a></span></label><p class="payment-field-error" id="payment-consent-error" hidden></p></div>
+        <button class="payment-submit" type="submit"><span>Отправить заявку</span><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></button>
+        <p class="payment-note">Пока это демо: контакты сохраняются только в этом браузере, не отправляются на сервер и не подтверждают оплату.</p>
       </div>
       <div class="payment-success" hidden role="status">
         <span aria-hidden="true">✓</span>
         <h2>Заявка принята</h2>
-        <p>В демонстрации она уже появилась в админ-панели.</p>
+        <p>Демо-заявка сохранена в этом браузере. Её можно посмотреть в демонстрационной админ-панели.</p>
         <a href="./admin-demo.html">Открыть демо админки</a>
         <button type="button" data-payment-done>Готово</button>
       </div>

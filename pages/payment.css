@@ -1,0 +1,69 @@
+/* The checkout is semantic UI, independent of the Figma artwork scale. */
+.payment-modal{--payment-ink:#482817;--payment-muted:#765747;--payment-error:#a82d23;width:min(860px,calc(100vw - 32px));max-width:calc(100vw - 20px);box-sizing:border-box;border:1px solid #e5cdbd;border-radius:24px;background:#fff9f4;font-family:"Montserrat",Arial,sans-serif;color-scheme:light;scrollbar-width:thin;scrollbar-color:#b68b70 #fff9f4}
+.payment-modal .payment-card{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:0;padding:0;background:#fff9f4;overflow:hidden;border-radius:inherit}
+.payment-close{right:14px;top:14px;background:#fff9f4;border-color:#bc9b86;font-size:28px}
+.payment-close-wrap{position:sticky;top:0;height:0;z-index:3}
+.payment-close:focus-visible,.payment-qr summary:focus-visible,.payment-modal a:focus-visible,.payment-modal button:focus-visible{outline:3px solid #c56c42;outline-offset:3px}
+.payment-modal .payment-copy{gap:20px;min-width:0;padding:42px 30px;background:radial-gradient(ellipse at 0 100%,#b06339,transparent 65%),#482817;color:#fff4e9}
+.payment-modal .payment-eyebrow{font-size:10px;letter-spacing:.14em;color:#f5cfb3;line-height:1.5}
+.payment-modal .payment-copy h2{display:grid;gap:10px;font:700 34px/1.2 "Montserrat",Arial,sans-serif;overflow-wrap:anywhere}
+.payment-tariff-label{font:400 13px/1.4 "Montserrat",Arial,sans-serif;color:#f5cfb3}
+.payment-modal .payment-copy>p:not(.payment-eyebrow){font-size:14px;line-height:1.65;color:#f7dfce}
+.payment-modal .payment-price{font:700 29px/1.3 "Montserrat",Arial,sans-serif;color:#fff4e9;white-space:nowrap;letter-spacing:-.04em}
+.payment-modal .payment-qr{display:block;width:100%;margin:4px 0 0;padding:0;border:1px solid #d09c7d;border-radius:14px;text-align:left;overflow:hidden}
+.payment-qr summary{display:flex;align-items:center;gap:8px;width:100%;box-sizing:border-box;min-height:48px;padding:12px 14px;cursor:pointer;font-size:13px;font-weight:700;list-style:none}
+.payment-qr summary::-webkit-details-marker{display:none}
+.payment-qr summary::after{content:"+";margin-left:auto;font:24px/1 Arial,sans-serif}
+.payment-qr[open] summary::after{content:"−"}
+.payment-modal .payment-qr .payment-demo-badge{padding:3px 6px;border-radius:5px;background:#fff4e9;color:#482817;font:700 9px/1.3 "Montserrat",Arial,sans-serif}
+.payment-qr-content{display:grid;grid-template-columns:100px 1fr;align-items:center;gap:12px;padding:0 14px 14px}
+.payment-modal .payment-qr img{width:100px;border-radius:10px}
+.payment-qr-content p{margin:0;font-size:11px;line-height:1.6;color:#f7dfce}
+.payment-modal .payment-copy .payment-side-note{margin-top:auto;padding-top:20px;border-top:1px solid #a97b60;font-size:12px}
+.payment-modal .payment-fields{min-width:0;align-content:start;gap:17px;padding:44px 34px 28px}
+.payment-fields-heading{padding-right:30px;margin-bottom:3px}
+.payment-fields-heading h3{margin:0 0 8px;font-size:22px;line-height:1.3;letter-spacing:-.03em}
+.payment-fields-heading p{margin:0;font-size:12px;line-height:1.5;color:var(--payment-muted)}
+.payment-field{display:grid;gap:7px}
+.payment-field label{font-size:12px;font-weight:700;color:var(--payment-ink)}
+.payment-modal .payment-fields input:not([type=checkbox]){box-sizing:border-box;min-width:0;min-height:50px;background:#fff;border-color:#bc9b86;border-radius:10px;font:400 16px/1.4 "Montserrat",Arial,sans-serif;transition:border-color .15s,box-shadow .15s}
+.payment-fields input::placeholder{color:#8c7568;opacity:1;font-size:14px}
+.payment-modal .payment-fields input:focus{outline:2px solid #a65a36;outline-offset:2px}
+.payment-modal .payment-fields input[aria-invalid=true]{border:1px solid var(--payment-error);background:#fff6f4}
+.payment-field-error{margin:0;color:var(--payment-error);font-size:12px;line-height:1.5}
+.payment-consent-wrap{display:grid;gap:6px}
+.payment-modal .payment-consent{min-height:44px;align-items:center;font-size:11px;line-height:1.6;color:var(--payment-muted);cursor:pointer}
+.payment-consent a{color:var(--payment-ink);text-underline-offset:3px}
+.payment-modal .payment-consent input{width:22px;height:22px;flex-basis:22px;border-radius:5px}
+.payment-modal .payment-submit{display:flex;justify-content:center;align-items:center;gap:16px;min-height:52px;border-radius:12px;background:#482817;font:700 14px/1.4 "Montserrat",Arial,sans-serif;transition:background .15s,box-shadow .15s}
+.payment-submit:hover{background:#663b24;box-shadow:0 5px 18px #48281720}
+.payment-submit:active{background:#321b10}
+.payment-submit:disabled{opacity:.6;cursor:wait}
+.payment-modal .payment-note{font-size:10px;line-height:1.65;color:var(--payment-muted)}
+.payment-form-error{padding:12px;border:1px solid #c06f61;border-radius:10px;background:#fff0eb;color:#8b251d;font-size:12px;line-height:1.5}
+.payment-form-error p{margin:0}
+.payment-form-error ul{margin:8px 0 0;padding-left:18px}
+.payment-form-error a{color:inherit;text-underline-offset:3px}
+.payment-modal .payment-success{display:grid;padding:42px 30px;min-height:400px}
+.payment-modal .payment-success h2{font:700 28px/1.35 "Montserrat",Arial,sans-serif}
+.payment-success p{max-width:400px;font-size:14px;line-height:1.6}
+.payment-modal .payment-success a,.payment-modal .payment-success button{font:700 14px/1.4 "Montserrat",Arial,sans-serif;border-radius:12px}
+.payment-modal .payment-success a{background:transparent;color:#482817}
+@media(max-width:680px){
+ .payment-modal{width:calc(100vw - 20px);max-height:calc(100dvh - 24px);border-radius:20px}
+ .payment-modal .payment-card{grid-template-columns:minmax(0,1fr)}
+ .payment-modal .payment-copy{padding:20px 24px;gap:12px}
+ .payment-close{right:12px;top:12px;border-color:#d2af98}
+ .payment-modal .payment-copy h2{font-size:28px;gap:5px;padding-right:38px}
+ .payment-modal .payment-eyebrow{padding-right:40px}
+ .payment-modal .payment-copy>p:not(.payment-eyebrow){font-size:12px}
+ .payment-modal .payment-price{font-size:24px}
+ .payment-modal .payment-copy .payment-side-note{display:none}
+ .payment-modal .payment-qr{margin-top:0}
+ .payment-qr summary{min-height:44px;padding:10px 12px;font-size:12px}
+ .payment-modal .payment-fields{padding:20px 24px;gap:12px}
+ .payment-fields-heading{padding-right:0}
+ .payment-fields-heading h3{font-size:20px}
+ .payment-modal .payment-success{min-height:420px;padding:52px 24px 30px}
+}
+@media(prefers-reduced-motion:reduce){.payment-fields input,.payment-submit{transition:none!important}}
