@@ -4,13 +4,25 @@ const plan=document.querySelector('#plan-modal');
 const checks=[...document.querySelectorAll('.consent input')];
 const continueButton=document.querySelector('.documents-continue');
 const reopenButton=document.querySelector('.documents-reopen');
+const page=document.querySelector('main');
+let lastFocused=null;
 const accepted='magic-touch-documents-pages-v3';
-function showDocuments(){documents.hidden=false;document.body.style.overflow='hidden';documents.querySelector('.documents-modal')?.focus()}
-function hideDocuments(){documents.hidden=true;document.body.style.overflow=''}
+function showDocuments(){lastFocused=document.activeElement;documents.hidden=false;if(page)page.inert=true;document.body.style.overflow='hidden';documents.querySelector('.documents-modal')?.focus()}
+function hideDocuments(){documents.hidden=true;if(page)page.inert=false;document.body.style.overflow='';if(lastFocused instanceof HTMLElement&&lastFocused!==document.body)lastFocused.focus()}
 if(!localStorage.getItem(accepted)) showDocuments();
 reopenButton?.addEventListener('click',showDocuments);
 checks.forEach(check=>check.addEventListener('change',()=>{continueButton.disabled=!checks.every(item=>item.checked)}));
 continueButton?.addEventListener('click',()=>{if(checks.every(item=>item.checked)){localStorage.setItem(accepted,'yes');hideDocuments()}});
+documents?.addEventListener('keydown',event=>{
+  if(event.key==='Escape'){event.preventDefault();return}
+  if(event.key!=='Tab')return;
+  const modal=documents.querySelector('.documents-modal');
+  const focusable=[...documents.querySelectorAll('a[href],input:not([disabled]),button:not([disabled])')].filter(item=>item instanceof HTMLElement&&item.offsetParent!==null);
+  if(!focusable.length){event.preventDefault();return}
+  const first=focusable[0],last=focusable[focusable.length-1];
+  if(event.shiftKey&&(document.activeElement===first||document.activeElement===modal)){event.preventDefault();last.focus()}
+  else if(!event.shiftKey&&(document.activeElement===last||document.activeElement===modal)){event.preventDefault();first.focus()}
+});
 document.querySelectorAll('[data-plan-open]').forEach(button=>button.addEventListener('click',()=>plan?.showModal()));
 document.querySelector('.plan-close')?.addEventListener('click',()=>plan?.close());
 

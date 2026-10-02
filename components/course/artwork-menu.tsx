@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Link from "next/link";
 import { siteConfig } from "@/config/site";
 
 export function ArtworkMenu({ accountPath, coursePath, onHome = false }: {
@@ -36,9 +37,9 @@ export function ArtworkMenu({ accountPath, coursePath, onHome = false }: {
         <nav className="artwork-menu-panel" aria-label="Меню сайта" onClick={event => {
           if ((event.target as HTMLElement).closest("a") && menu.current) menu.current.open = false;
         }}>
-          <a href="/">Главная</a>
-          <a href={onHome ? "#tariffs" : "/#tariffs"}>Тарифы</a>
-          <a href={coursePath}>Перейти к курсу</a>
+          <Link href="/">Главная</Link>
+          <Link href={onHome ? "#tariffs" : "/#tariffs"}>Тарифы</Link>
+          <Link href={coursePath}>Перейти к курсу</Link>
           <a href={accountPath}>Личный кабинет</a>
           <details className="artwork-menu-documents">
             <summary>Документы <span aria-hidden="true">⌄</span></summary>

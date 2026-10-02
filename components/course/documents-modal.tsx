@@ -62,7 +62,7 @@ export function DocumentsModal() {
         }}
       >
         {/* Original outlined Figma artwork; semantic controls remain above it. */}
-        <picture className="document-artwork-picture" aria-hidden="true">
+        <picture className="document-artwork-picture">
           <source media="(max-width: 720px)" srcSet="/course/documents-modal-figma.png" width="940" height="764" />
           <Image className="document-artwork" src="/course/documents-desktop-figma.png" alt="" width={1649} height={1341} unoptimized priority />
         </picture>

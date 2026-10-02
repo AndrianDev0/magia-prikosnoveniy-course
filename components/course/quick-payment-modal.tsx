@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { CheckCircle2 } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -18,8 +18,6 @@ export function QuickPaymentModal({ open, onOpenChange, planId }: Props) {
   const [error, setError] = useState("");
   const [sent, setSent] = useState(false);
   const plan = useMemo(() => planById(planId) ?? plans[0], [planId]);
-
-  useEffect(() => { if (open) { setError(""); setSent(false); } }, [open, planId]);
 
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();

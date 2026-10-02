@@ -22,12 +22,36 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Quality gate
+        run: |
+          npm run lint
+          npm run typecheck
+          npm run build
       - name: Assemble static site
         run: |
           mkdir -p _site/course
           cp -r pages/. _site/
-          cp -r public/course/. _site/course/
+          cp public/course/*.css public/course/*.js public/course/legal-documents.json public/course/miama-nueva.otf _site/course/
+          find public/course -maxdepth 1 -type f -name '*-background-*.svg' -exec cp {} _site/course/ \;
+          cp public/course/plan-steps.svg public/course/payment-qr-placeholder.svg _site/course/
+          cp public/course/home-mobile-figma.webp public/course/home-desktop-figma.webp _site/course/
+          cp public/course/lessons-mobile-figma.webp public/course/lessons-desktop-figma.webp _site/course/
+          cp public/course/documents-desktop-figma.png public/course/documents-modal-figma.png _site/course/
+          cp public/course/plan-desktop-figma.png public/course/plan-modal-mobile-figma.png _site/course/
+          cp public/course/plan-standard.png public/course/plan-vip.png public/course/plan-vip-plus.png _site/course/
+          cp public/course/course-poster.png _site/course/
           touch _site/.nojekyll
+          test -s _site/index.html
+          test -s _site/course.html
+          test -s _site/course/home-mobile-figma.webp
+          test -s _site/course/lessons-mobile-figma.webp
+          du -sh _site
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

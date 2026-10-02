@@ -15,7 +15,7 @@
   width: 100%;
   height: calc(250 / 12334 * 100%);
   color: #fff4ed;
-  font: italic 300 1.458333cqw / 1.34 "Montserrat", Arial, sans-serif;
+  font: italic 300 clamp(15px, 1.458333cqw, 28px) / 1.34 "Montserrat", Arial, sans-serif;
 }
 .lesson-description-copy::before {
   content: "";
@@ -188,7 +188,7 @@
   .lesson-description-copy {
     top: calc(425 / 3107 * 100%);
     height: calc(75 / 3107 * 100%);
-    font-size: 2.631579cqw;
+    font-size: clamp(13px, 3.1cqw, 14px);
     line-height: 1.4;
   }
   .lesson-description-copy::before {

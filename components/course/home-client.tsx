@@ -43,14 +43,14 @@ export function HomeClient(props: HomeClientProps) {
     <div className="figma-artwork-shell">
       <DocumentsModal />
       <PlanModal open={planOpen} onOpenChange={setPlanOpen} />
-      <QuickPaymentModal open={paymentOpen} onOpenChange={setPaymentOpen} planId={paymentPlanId} />
+      <QuickPaymentModal key={`${paymentPlanId}-${paymentOpen ? "open" : "closed"}`} open={paymentOpen} onOpenChange={setPaymentOpen} planId={paymentPlanId} />
       {placeholderNotice ? <div className="site-placeholder-toast" role="status">{placeholderNotice}</div> : null}
 
       <main className="figma-artwork-page figma-home-artwork">
         <picture className="figma-artwork-picture">
           <source media="(max-width: 600px)" srcSet="/course/home-mobile-figma.webp" width="1140" height="5418" type="image/webp" />
           <source srcSet="/course/home-desktop-figma.webp" width="1920" height="5657" type="image/webp" />
-          <img className="figma-artwork-image" src="/course/home-desktop-figma.png" alt="" aria-hidden="true" width="1920" height="5657" fetchPriority="high" />
+          <img className="figma-artwork-image" src="/course/home-desktop-figma.webp" alt="" aria-hidden="true" width="1920" height="5657" fetchPriority="high" />
         </picture>
 
         <section id="about-course" className="home-intro-copy" aria-label="Описание курса">

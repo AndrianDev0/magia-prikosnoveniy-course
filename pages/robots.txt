@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://andriandev0.github.io/magia-prikosnoveniy-course/sitemap.xml
