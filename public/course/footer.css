@@ -34,7 +34,8 @@
   font: 400 44px/1.15 "Miama Nueva", Georgia, serif;
 }
 .readable-footer-contacts p { margin: 0 0 5px; }
-.readable-footer-socials { display: flex; gap: 12px; }
+.readable-footer-main > section:last-child h2 { text-align: center; }
+.readable-footer-socials { display: flex; justify-content: center; gap: 12px; }
 .readable-footer-socials button {
   display: grid;
   place-items: center;
