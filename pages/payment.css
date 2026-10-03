@@ -66,6 +66,8 @@
 .payment-modal .payment-success{display:grid;padding:42px 30px;min-height:400px}
 .payment-modal .payment-success h2{font:700 28px/1.35 "Montserrat",Arial,sans-serif}
 .payment-success p{max-width:400px;font-size:14px;line-height:1.6}
+.payment-success [data-server-payment]{min-width:0;overflow-wrap:anywhere}
+.payment-success [data-server-payment] img{display:block;max-width:100%;height:auto;margin:16px auto;padding:12px;background:#fff;border-radius:8px}
 .payment-modal .payment-success a,.payment-modal .payment-success button{font:700 14px/1.4 "Montserrat",Arial,sans-serif;border-radius:12px}
 .payment-modal .payment-success a{background:transparent;color:#482817}
 @media(max-width:680px){

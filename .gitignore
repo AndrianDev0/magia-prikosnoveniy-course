@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+**/node_modules/
 /.pnp
 .pnp.*
 .yarn/*
@@ -52,3 +53,5 @@ next-env.d.ts
 /.tools/
 /documents-modal-verified.jpg
 /home-desktop-preview.png
+/deploy/payment-assets/
+/deploy/backups/

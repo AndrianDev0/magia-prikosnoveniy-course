@@ -1,0 +1,8 @@
+{
+  "name": "magic-touch-server",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22.13.0" },
+  "scripts": { "start": "node index.mjs", "test": "node --test test/*.test.mjs" },
+  "dependencies": { "pg": "8.16.3" }
+}

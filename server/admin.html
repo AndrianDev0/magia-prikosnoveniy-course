@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow"><title>Админка — Магия прикосновений</title>
+  <link rel="stylesheet" href="/styles.css?v=admin-review-v15"><link rel="stylesheet" href="/admin.css">
+  <script src="/admin.js" type="module"></script>
+</head>
+<body class="demo-admin-body">
+  <main class="demo-admin">
+    <header class="demo-admin-header"><div><p>Магия прикосновений</p><h1>Заявки на курс</h1></div><a href="/">← На сайт</a></header>
+    <p id="admin-message" role="status" tabindex="-1">Проверяем вход…</p>
+    <form id="admin-login" hidden>
+      <h2>Вход администратора</h2>
+      <label>Логин<input name="username" autocomplete="username" required maxlength="80"></label>
+      <label>Пароль<input name="password" type="password" autocomplete="current-password" required maxlength="256"></label>
+      <button type="submit">Войти</button>
+    </form>
+    <section id="admin-workspace" hidden aria-label="Управление заявками">
+      <p class="demo-admin-notice">Проверяйте поступление денег в банке перед подтверждением. QR и заявка сами по себе не доказывают оплату. Изменения статуса записываются в журнал; выдача доступа к видео пока не подключена.</p>
+      <div class="admin-toolbar"><button id="admin-refresh">Обновить</button><button id="admin-logout">Выйти</button></div>
+      <form id="admin-filters" class="demo-admin-tools">
+        <label>Имя или почта<input name="search" type="search" maxlength="100" placeholder="Найти заявку"></label>
+        <label>Статус<select name="status"><option value="all">Все</option><option value="pending">Ожидают</option><option value="confirmed">Подтверждены</option><option value="rejected">Отклонены</option></select></label>
+        <button type="submit">Найти</button>
+      </form>
+      <p id="admin-count" role="status"></p><div id="admin-leads" class="demo-admin-list"></div>
+      <nav class="admin-toolbar" aria-label="Страницы заявок"><button id="admin-prev">Назад</button><span id="admin-page"></span><button id="admin-next">Далее</button></nav>
+    </section>
+  </main>
+</body>
+</html>

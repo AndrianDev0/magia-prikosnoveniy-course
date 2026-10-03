@@ -1,0 +1,14 @@
+# Copying this example alone is NOT enough to start production.
+# Prefer: node server/setup.mjs your-domain.ru owner@example.com
+DOMAIN=your-domain.ru
+TLS_EMAIL=owner@example.com
+DB_PASSWORD=GENERATE_RANDOM_VALUE
+ADMIN_USERNAME=admin
+ADMIN_PASSWORD_HASH=GENERATE_WITH_SETUP_SCRIPT
+SESSION_SECRET=GENERATE_WITH_SETUP_SCRIPT
+SUPPORT_EMAIL=emil_ka@list.ru
+PAYMENT_MODE=disabled
+PAYMENT_RECIPIENT=
+QR_STANDARD_FILE=
+QR_VIP_FILE=
+QR_VIP_PLUS_FILE=

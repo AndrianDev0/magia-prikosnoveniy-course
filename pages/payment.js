@@ -1,5 +1,5 @@
-// Client-side checks improve the demo UX; a real payment API must repeat them
-// server-side and add rate limits, verified contacts and payment verification.
+// Shared by the browser form and the portable server. Syntactic email checks
+// do not prove ownership of a mailbox or confirmation of a payment.
 export function validatePaymentField(field, raw) {
   const value = typeof raw === 'string' ? raw.trim() : '';
   if (field === 'consent') return raw === true ? '' : 'Подтвердите согласие на обработку данных.';
@@ -54,9 +54,9 @@ export function createPaymentLead(values, planId, snapshot, now = new Date()) {
 }
 
 export const paymentPlans = {
-  standard:{name:'Стандарт',price:'25 000 руб.',benefits:['7 видеоуроков','Доступ к видеокурсу — 12 месяцев']},
-  vip:{name:'VIP',price:'35 000 руб.',benefits:['7 видеоуроков без ограничения срока доступа','2 видеоконсультации по 1 часу']},
-  'vip-plus':{name:'VIP+',price:'50 000 руб.',benefits:['7 видеоуроков без ограничения срока доступа','4 видеоконсультации по 1 часу','Одно очное занятие в течение года с даты покупки, при наличии занятия и предварительном согласовании']}
+  standard:{name:'Стандарт',amountRub:25000,price:'25 000 руб.',benefits:['7 видеоуроков','Доступ к видеокурсу — 12 месяцев']},
+  vip:{name:'VIP',amountRub:35000,price:'35 000 руб.',benefits:['7 видеоуроков без ограничения срока доступа','2 видеоконсультации по 1 часу']},
+  'vip-plus':{name:'VIP+',amountRub:50000,price:'50 000 руб.',benefits:['7 видеоуроков без ограничения срока доступа','4 видеоконсультации по 1 часу','Одно очное занятие в течение года с даты покупки, при наличии занятия и предварительном согласовании']}
 };
 
 export function storePaymentLead(lead, storage, now = Date.now()) {
@@ -76,6 +76,9 @@ if (typeof document !== 'undefined') {
   const modal = document.querySelector('#payment-modal');
   const form = document.querySelector('#payment-form');
   if (modal && form) {
+    const runtime=globalThis.COURSE_RUNTIME;
+    const serverMode=runtime?.mode==='server';
+    const runtimeReady=['demo','server'].includes(runtime?.mode);
     const plans = paymentPlans;
     const fields = ['name','email','offer','consent','adult'];
     const checkboxFields = new Set(['offer','consent','adult']);
@@ -87,12 +90,23 @@ if (typeof document !== 'undefined') {
     let completed = false;
     let legalSnapshot = null;
     let legalLoading = false;
+    let idempotencyKey=globalThis.crypto.randomUUID();
     const legalStatus = form.querySelector('.payment-legal-status');
     const legalRetry = form.querySelector('.payment-legal-retry');
     const planChoices = Array.from(form.querySelectorAll('[data-payment-choice]'));
     const planChangeNote = form.querySelector('.payment-plan-change-note');
+    if(serverMode){
+      form.querySelector('.payment-fields-heading p').textContent='Укажите имя и почту. Заявка поступит администратору.';
+      submit.querySelector('span').textContent='Отправить заявку';
+      form.querySelector('.payment-note').textContent='Отправка заявки не подтверждает оплату и не открывает доступ к курсу.';
+      const qr=modal.querySelector('.payment-qr');
+      qr.querySelector('summary').textContent='Как оплатить';
+      qr.querySelector('img').hidden=true;
+      qr.querySelector('p').textContent=runtime.paymentMode==='manual-qr'?'QR выбранного тарифа появится после отправки заявки. Поступление денег проверяется администратором.':'Онлайн-оплата пока не подключена. Можно оставить заявку для связи.';
+    }
     async function loadLegalDocuments() {
       if (legalLoading || legalSnapshot) return;
+      if(!runtimeReady){legalStatus.textContent='Настройки сайта не загрузились. Обновите страницу; заявка не будет сохранена в демо вместо отправки.';submit.disabled=true;return;}
       legalLoading = true; submit.disabled = true; legalRetry.hidden = true;
       legalStatus.textContent = 'Проверяем редакцию документов…';
       try {
@@ -100,7 +114,7 @@ if (typeof document !== 'undefined') {
         if (!response.ok) throw new Error('legal-fetch-failed');
         const packet = await response.json();
         legalSnapshot = await createLegalSnapshot(packet);
-        legalStatus.textContent = `Документы: редакция ${packet.version} от ${packet.revision}. Подтверждения сохраняются только в этом браузере (демо).`;
+        legalStatus.textContent = `Документы: редакция ${packet.version} от ${packet.revision}. ${serverMode?'Подтверждения будут сохранены на сервере вместе с заявкой.':'Подтверждения сохраняются только в этом браузере (демо).'}`;
       } catch {
         legalStatus.textContent = 'Документы не загрузились. Заявка недоступна, пока не проверена их редакция.';
         legalRetry.hidden = false;
@@ -138,6 +152,7 @@ if (typeof document !== 'undefined') {
     planChoices.forEach(input => input.addEventListener('change', () => {
       if (!input.checked || busy || completed || input.value === selectedPlan || !Object.hasOwn(plans,input.value)) return;
       selectPlan(input.value);
+      idempotencyKey=globalThis.crypto.randomUUID();
       // Contact details and general consents remain; tariff terms need a new choice.
       const offer = form.elements.namedItem('offer');
       offer.checked = false; offer.removeAttribute('aria-invalid');
@@ -147,7 +162,9 @@ if (typeof document !== 'undefined') {
       planChangeNote.hidden = false;
     }));
     function open(plan) {
+      if(busy)return;
       form.reset(); touched.clear(); clearSummary(); completed = false;
+      idempotencyKey=globalThis.crypto.randomUUID();
       planChangeNote.hidden = true;
       legalSnapshot = null;
       fields.forEach(field => {
@@ -161,9 +178,10 @@ if (typeof document !== 'undefined') {
       void loadLegalDocuments();
     }
     document.querySelectorAll('[data-payment-plan]').forEach(button => button.addEventListener('click', event => { event.preventDefault(); open(button.dataset.paymentPlan); }));
-    modal.querySelector('.payment-close').addEventListener('click', () => modal.close());
+    modal.querySelector('.payment-close').addEventListener('click', () => {if(!busy)modal.close()});
     modal.querySelector('[data-payment-done]').addEventListener('click', () => modal.close());
-    modal.addEventListener('click', event => { if (event.target === modal) modal.close(); });
+    modal.addEventListener('click', event => { if (event.target === modal&&!busy) modal.close(); });
+    modal.addEventListener('cancel',event=>{if(busy)event.preventDefault()});
     fields.forEach(field => {
       const input = form.elements.namedItem(field);
       input.addEventListener('blur', event => {
@@ -173,13 +191,14 @@ if (typeof document !== 'undefined') {
         if (event.relatedTarget !== submit) showError(field);
       });
       input.addEventListener(checkboxFields.has(field) ? 'change' : 'input', () => {
+        idempotencyKey=globalThis.crypto.randomUUID();
         clearSummary();
         if (field === 'offer' && input.checked) planChangeNote.hidden = true;
         if (field === 'email' && input.value.split('@').length > 2) touched.add(field);
         if (touched.has(field)) showError(field);
       });
     });
-    form.addEventListener('submit', event => {
+    form.addEventListener('submit', async event => {
       event.preventDefault();
       if (busy || completed) return;
       clearSummary();
@@ -197,9 +216,35 @@ if (typeof document !== 'undefined') {
         summary.append(title,list); summary.hidden = false; summary.focus(); return;
       }
       busy = true; submit.disabled = true; form.setAttribute('aria-busy','true');
+      planChoices.forEach(input=>input.disabled=true);
       const data = new FormData(form);
+      fields.forEach(field=>form.elements.namedItem(field).disabled=true);
+      modal.querySelector('.payment-close').disabled=true;
       try {
-        const lead = createPaymentLead({name:String(data.get('name')),email:String(data.get('email')),offer:data.get('offer') === 'on',consent:data.get('consent') === 'on',adult:data.get('adult') === 'on'},selectedPlan,legalSnapshot);
+        const values={name:String(data.get('name')),email:String(data.get('email')),offer:data.get('offer') === 'on',consent:data.get('consent') === 'on',adult:data.get('adult') === 'on'};
+        if(serverMode){
+          const response=await fetch('./api/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...values,planId:selectedPlan,legalSnapshot,idempotencyKey}),signal:AbortSignal.timeout(15000)});
+          const result=await response.json();
+          if(!response.ok){formError(result.error||'Не удалось отправить заявку. Повторите позже.');return;}
+          completed=true;
+          form.querySelectorAll('.payment-copy,.payment-fields').forEach(item=>item.hidden=true);
+          const success=form.querySelector('.payment-success');success.hidden=false;
+          success.querySelector('h2').textContent='Заявка отправлена';
+          success.querySelector('p').textContent=`Номер: ${result.id}. ${result.planName} — ${result.amountRub.toLocaleString('ru-RU')} руб. Оплата ещё не подтверждена.`;
+          success.querySelector('a').hidden=true;
+          success.querySelector('[data-server-payment]')?.remove();
+          const payment=document.createElement('div');payment.dataset.serverPayment='';
+          if(result.payment?.mode==='manual-qr'&&/^\/api\/payments\/qr\/(standard|vip|vip-plus)$/.test(result.payment.qrUrl)){
+            const img=document.createElement('img');img.src=result.payment.qrUrl;img.alt=`QR для оплаты тарифа ${result.planName}`;img.width=220;img.height=220;
+            const note=document.createElement('p');note.textContent=`Получатель: ${result.payment.recipient}. Перед переводом проверьте получателя и сумму в приложении банка. Сохраните номер заявки. Оплата проверяется вручную.`;
+            img.addEventListener('error',()=>{img.hidden=true;note.textContent='QR не загрузился. Не переводите деньги по случайным реквизитам; свяжитесь с поддержкой.'});
+            payment.append(img,note);
+          }else{const note=document.createElement('p');note.textContent='Оплата пока не подключена. Администратор свяжется с вами по указанной почте.';payment.append(note)}
+          success.querySelector('[data-payment-done]').before(payment);
+          success.setAttribute('tabindex','-1');success.focus();modal.scrollTop=0;
+          return;
+        }
+        const lead = createPaymentLead(values,selectedPlan,legalSnapshot);
         // Treat browser storage as untrusted. Never render contacts as HTML.
         const result = storePaymentLead(lead, localStorage);
         if (result === 'duplicate') { formError('Такая заявка уже сохранена. Посмотрите её в демо-админке или подождите 5 минут перед повторным сохранением.'); return; }
@@ -209,9 +254,12 @@ if (typeof document !== 'undefined') {
         const success = form.querySelector('.payment-success'); success.hidden = false;
         success.setAttribute('tabindex','-1'); success.focus(); modal.scrollTop = 0;
       } catch {
-        formError('Не удалось сохранить заявку в браузере. Проверьте разрешение на хранение данных или попробуйте другой браузер. Ваши поля не сброшены.');
+        formError(serverMode?'Ответ сервера не получен. Повторите отправку: одинаковая попытка не создаст вторую заявку. Ваши поля сохранены.':'Не удалось сохранить заявку в браузере. Проверьте разрешение на хранение данных или попробуйте другой браузер. Ваши поля не сброшены.');
       } finally {
         busy = false; submit.disabled = false; form.removeAttribute('aria-busy');
+        planChoices.forEach(input=>input.disabled=false);
+        fields.forEach(field=>form.elements.namedItem(field).disabled=false);
+        modal.querySelector('.payment-close').disabled=false;
       }
     });
   }

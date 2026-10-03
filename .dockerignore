@@ -1,0 +1,15 @@
+.git
+node_modules
+**/node_modules
+.env*
+**/.env*
+deploy/payment-assets
+deploy/backups
+output
+outputs
+.next
+dist
+.wrangler
+.codex
+.agents
+*.log
