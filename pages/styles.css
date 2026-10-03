@@ -84,8 +84,8 @@ html{scrollbar-width:none}html::-webkit-scrollbar{width:0;height:0}
   .mobile-plan-open{left:27.5%;top:59%;width:45%;height:3%;min-height:44px}
   .carousel-controls{left:15%;width:70%}
   .dots button{width:44px;height:44px}
-  .account,.course-account{left:auto;right:max(0px,env(safe-area-inset-right));top:max(0px,env(safe-area-inset-top));width:48px;min-width:48px;height:48px;min-height:48px}
-  .artwork-menu-cover{top:max(0px,env(safe-area-inset-top))}
+  .account,.course-account{left:auto;right:max(0px,env(safe-area-inset-right));top:max(calc(7.7vw - 24px),env(safe-area-inset-top));width:48px;min-width:48px;height:48px;min-height:48px}
+  .artwork-menu-cover{top:max(calc(7.7vw - 24px),env(safe-area-inset-top))}
   /* The document links remain in the menu; a fixed shortcut obscures the footer on phones. */
   .documents-reopen{display:none}
   .plan-modal .plan-close{left:28%;top:70%;width:44%;height:27%;min-height:44px}

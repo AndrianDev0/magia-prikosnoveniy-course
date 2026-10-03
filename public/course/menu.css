@@ -62,10 +62,8 @@
 .artwork-menu-documents a { font-size: 13px; padding-left: 20px; }
 .artwork-tariffs-anchor { position: absolute; top: 45%; left: 0; width: 1px; height: 1px; scroll-margin-top: 20px; pointer-events: none; }
 @media (max-width: 767px) {
-  .artwork-menu-cover { top: 0; right: 56px; width: 48px; height: 48px; aspect-ratio: auto; }
+  .artwork-menu-cover { top: max(calc(7.7vw - 24px), env(safe-area-inset-top)); right: 56px; width: 48px; height: 48px; aspect-ratio: auto; }
   .artwork-menu > summary { width: 48px; height: 48px; }
-  /* The profile glyph is part of the artwork and sits 5px below the box centre. */
-  .artwork-menu-icon { transform: translateY(5px); }
   .artwork-menu-panel { right: -44px; }
   .artwork-tariffs-anchor { top: 36%; }
 }
