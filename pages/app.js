@@ -33,7 +33,26 @@ document.querySelector('.plan-close')?.addEventListener('click',()=>plan?.close(
 
 const carousel=document.querySelector('.mobile-carousel');
 let index=1,start=null;
-function select(next){index=Math.max(0,Math.min(2,next));carousel.dataset.index=String(index);document.querySelectorAll('.slide').forEach((el,i)=>el.classList.toggle('active',i===index));document.querySelectorAll('[data-dot]').forEach((el,i)=>{el.classList.toggle('active',i===index);if(i===index)el.setAttribute('aria-current','true');else el.removeAttribute('aria-current')});}
+function select(next){
+  if(!carousel)return;
+  const slides=[...carousel.querySelectorAll('.slide')];
+  index=Math.max(0,Math.min(slides.length-1,next));
+  carousel.dataset.index=String(index);
+  slides.forEach((el,i)=>{
+    const active=i===index;
+    el.classList.toggle('active',active);
+    // Keep the side previews clickable, but exclude their off-screen controls
+    // from keyboard navigation and the accessibility tree.
+    el.setAttribute('aria-hidden',String(!active));
+    el.querySelectorAll('button,a[href]').forEach(control=>{control.tabIndex=active?0:-1});
+  });
+  document.querySelectorAll('[data-dot]').forEach((el,i)=>{el.classList.toggle('active',i===index);if(i===index)el.setAttribute('aria-current','true');else el.removeAttribute('aria-current')});
+}
+select(index);
+carousel?.addEventListener('click',event=>{
+  const slide=event.target.closest('.slide');
+  if(slide)select([...carousel.querySelectorAll('.slide')].indexOf(slide));
+},{capture:true});
 document.querySelector('[data-prev]')?.addEventListener('click',()=>select(index-1));
 document.querySelector('[data-next]')?.addEventListener('click',()=>select(index+1));
 document.querySelectorAll('[data-dot]').forEach((dot,i)=>dot.addEventListener('click',()=>select(i)));

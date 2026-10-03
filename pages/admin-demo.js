@@ -15,7 +15,8 @@ if(typeof document!=='undefined'){
     try{localStorage.setItem(key,JSON.stringify(nextLeads));storageError.hidden=true;return true}
     catch{storageError.textContent='Не удалось сохранить статус: хранилище браузера недоступно или заполнено. Прежний статус сохранён. Освободите место или разрешите хранение данных и попробуйте снова.';storageError.hidden=false;return false}
   }
-  function render(){
+  function render(focusLeadId){
+    let restoredFocus=false;
     list.replaceChildren();
     document.querySelector('[data-total]').textContent=String(leads.length);
     document.querySelector('[data-pending]').textContent=String(leads.filter(item=>item.status==='pending').length);
@@ -24,7 +25,7 @@ if(typeof document!=='undefined'){
     const selected=['pending','confirmed','rejected'].includes(filter.value)?filter.value:'all';
     const visible=leads.filter(item=>(selected==='all'||item.status===selected)&&(!needle||[item.name,item.email,item.phone||'',item.planName].some(value=>value.toLocaleLowerCase('ru-RU').includes(needle)))).sort((a,b)=>Date.parse(b.createdAt)-Date.parse(a.createdAt));
     visibleCount.textContent=`Показано: ${visible.length}`;
-    if(!visible.length){const empty=document.createElement('p');empty.className='demo-admin-empty';empty.textContent=leads.length?'По этому запросу заявок нет. Измените поиск или статус.':'Заявок пока нет. Откройте любой тариф на главной странице и заполните форму.';list.append(empty);return}
+    if(!visible.length){const empty=document.createElement('p');empty.className='demo-admin-empty';empty.textContent=leads.length?'По этому запросу заявок нет. Измените поиск или статус.':'Заявок пока нет. Откройте любой тариф на главной странице и заполните форму.';list.append(empty);if(typeof focusLeadId==='string')filter.focus();return}
     visible.forEach(lead=>{
       const card=template.content.firstElementChild.cloneNode(true);
       card.querySelector('[data-name]').textContent=lead.name;
@@ -35,7 +36,7 @@ if(typeof document!=='undefined'){
       const status=card.querySelector('[data-status]');status.value=lead.status;status.addEventListener('change',()=>{
         if(!['pending','confirmed','rejected'].includes(status.value)){status.value=lead.status;return}
         const nextLeads=leads.map(item=>item===lead?{...item,status:status.value}:item);
-        if(save(nextLeads)){leads=nextLeads;render()}else status.value=lead.status;
+        if(save(nextLeads)){leads=nextLeads;render(lead.id)}else status.value=lead.status;
       });
       const acknowledgments=document.createElement('details');acknowledgments.className='demo-lead-consents';
       const heading=document.createElement('summary');heading.textContent='Подтверждения и редакции документов (демо)';acknowledgments.append(heading);
@@ -47,7 +48,9 @@ if(typeof document!=='undefined'){
       if(complete){const entries=document.createElement('ul');items.forEach(([field,label])=>{const record=lead.acknowledgments[field];const item=document.createElement('li');const text=document.createElement('p');text.textContent=`${label}: подтверждено ${new Intl.DateTimeFormat('ru-RU',{dateStyle:'medium',timeStyle:'short'}).format(new Date(record.acceptedAt))}; редакция ${record.version} от ${record.revision}.`;const hash=document.createElement('p');hash.textContent=`SHA-256: ${record.sha256}`;item.append(text,hash);entries.append(item)});acknowledgments.append(entries)}
       card.append(acknowledgments);
       list.append(card);
+      if(lead.id===focusLeadId){status.focus();restoredFocus=true}
     });
+    if(typeof focusLeadId==='string'&&!restoredFocus)filter.focus();
   }
   search.addEventListener('input',render);
   filter.addEventListener('change',render);

@@ -16,6 +16,7 @@ function fixture(){
     append(...elements){this.children.push(...elements)}
     remove(){}
     removeAttribute(){}
+    focus(){document.activeElement=this}
     addEventListener(event,callback){this[event]=callback}
   }
   const document={querySelector(selector){if(!selectors.has(selector))selectors.set(selector,new Element());return selectors.get(selector)},createElement(){return new Element()}};
@@ -58,6 +59,12 @@ assert.equal(invalid.status(),'pending');
 assert.equal(invalid.persisted()[0].status,'pending');
 const listing=fixture();
 assert.equal(listing.document.querySelector('[data-visible-count]').textContent,'Показано: 1');
+listing.change('confirmed');
+assert.equal(listing.document.activeElement.value,'confirmed','Status change preserves keyboard focus');
+listing.filter('confirmed');
+listing.change('pending');
+assert.equal(listing.document.activeElement,listing.document.querySelector('[data-filter]'),'Hidden card returns focus to filter');
+listing.filter('all');
 listing.search('nothing');
 assert.equal(listing.document.querySelector('[data-visible-count]').textContent,'Показано: 0');
 assert.match(listing.document.querySelector('.demo-admin-list').children[0].textContent,/По этому запросу/);
