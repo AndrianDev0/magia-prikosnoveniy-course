@@ -35,6 +35,7 @@ jobs:
           node scripts/test-payment-validation.mjs
           node scripts/test-admin-demo.mjs
           node scripts/test-carousel.mjs
+          node scripts/check-public-media.mjs
           npm run build
       - name: Assemble static site
         run: |
@@ -57,6 +58,7 @@ jobs:
           test -s _site/course/home-tablet-figma.webp
           test -s _site/course/lessons-mobile-responsive.webp
           test -s _site/course/lessons-tablet-figma.webp
+          test -z "$(find _site -type f \( -iname '*.mp4' -o -iname '*.webm' -o -iname '*.m3u8' -o -iname '*.mpd' \) -print -quit)"
           du -sh _site
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

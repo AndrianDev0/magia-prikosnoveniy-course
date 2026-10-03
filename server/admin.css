@@ -12,9 +12,12 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 #admin-leads article{display:block;overflow-wrap:anywhere}
 #admin-leads h2{font:700 22px/1.3 Arial,sans-serif;margin:0 0 10px}
 #admin-leads a{color:#fff4ed}
-.admin-status-form{display:grid;grid-template-columns:1fr 2fr auto;align-items:end;gap:16px;margin-top:16px}
+.admin-status-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:end;gap:16px;margin-top:16px}
 .admin-status-form label{margin:0}
+.admin-status-form label:has(input[type=checkbox]){grid-column:1/-1;display:flex;align-items:center;gap:10px;line-height:1.4}
+.admin-status-form input[type=checkbox]{width:20px;min-width:20px;height:20px;min-height:20px;flex:none}
 .admin-status-form textarea{min-height:80px;resize:vertical}
+.admin-status-form label:has(textarea),.admin-status-form button{grid-column:1/-1}
 #admin-message{min-height:24px;line-height:1.5;margin-top:24px}
 #admin-message[data-error="true"]{color:#ffd0b2}
 #admin-leads details{margin-top:18px;font-size:13px;line-height:1.6}

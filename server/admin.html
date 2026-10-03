@@ -17,11 +17,11 @@
       <button type="submit">Войти</button>
     </form>
     <section id="admin-workspace" hidden aria-label="Управление заявками">
-      <p class="demo-admin-notice">Проверяйте поступление денег в банке перед подтверждением. QR и заявка сами по себе не доказывают оплату. Изменения статуса записываются в журнал; выдача доступа к видео пока не подключена.</p>
+      <p class="demo-admin-notice">Подтверждайте оплату только по поступлению в кабинете банка: сверьте сумму, получателя и уникальный номер операции. Скриншот клиента, QR и заявка не доказывают оплату. При запросе возврата отметьте его отдельно; «возврат выполнен» ставьте только после операции банка. Доступ к видео пока не подключён.</p>
       <div class="admin-toolbar"><button id="admin-refresh">Обновить</button><button id="admin-logout">Выйти</button></div>
       <form id="admin-filters" class="demo-admin-tools">
         <label>Имя или почта<input name="search" type="search" maxlength="100" placeholder="Найти заявку"></label>
-        <label>Статус<select name="status"><option value="all">Все</option><option value="pending">Ожидают</option><option value="confirmed">Подтверждены</option><option value="rejected">Отклонены</option></select></label>
+        <label>Статус<select name="status"><option value="all">Все</option><option value="pending">Ожидают</option><option value="confirmed">Подтверждены</option><option value="refund_requested">Запрос возврата</option><option value="refunded">Возвращены</option><option value="rejected">Отклонены</option></select></label>
         <button type="submit">Найти</button>
       </form>
       <p id="admin-count" role="status"></p><div id="admin-leads" class="demo-admin-list"></div>

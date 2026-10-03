@@ -16,7 +16,7 @@ console.log(`Payment validation: ${cases.length} checks passed.`);
 const now = Date.now();
 const packet = JSON.parse(await readFile(new URL('../public/course/legal-documents.json',import.meta.url),'utf8'));
 const snapshot = await createLegalSnapshot(packet);
-const values = {name:'  Тестовая Анна  ',email:'QA@example.com',offer:true,consent:true,adult:true};
+const values = {name:'  Тестовая Анна  ',email:'QA@example.com',emailConfirm:'QA@example.com',offer:true,consent:true,adult:true};
 const lead = createPaymentLead(values,'standard',snapshot,new Date(now));
 assert.equal(validate('email','maa190186@@gmail.co'),'В адресе почты должен быть только один знак @.');
 assert.throws(()=>createPaymentLead({...values,email:'maa190186@@gmail.co'},'standard',snapshot,new Date(now)));

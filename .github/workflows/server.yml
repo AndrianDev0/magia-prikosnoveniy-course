@@ -24,6 +24,7 @@ jobs:
           cache: npm
           cache-dependency-path: server/package-lock.json
       - run: npm ci --prefix server --ignore-scripts --no-audit --no-fund
+      - run: node scripts/check-public-media.mjs
       - run: node --test server/test/*.test.mjs
         env:
           TEST_DATABASE_URL: postgresql://test:test-only-ci-password@127.0.0.1:5432/course_test

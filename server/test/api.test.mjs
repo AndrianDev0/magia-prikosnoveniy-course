@@ -16,7 +16,7 @@ const password='test-only-password-not-for-production';
 const passwordHash=await hashPassword(password);
 const snapshot=await createLegalSnapshot(JSON.parse(await readFile(new URL('../../public/course/legal-documents.json',import.meta.url),'utf8')));
 const env={ADMIN_PASSWORD_HASH:passwordHash,SESSION_SECRET:'1'.repeat(64),DATABASE_URL:'postgresql://test',SITE_ROOT:root};
-const valid=()=>({name:'Анна',email:'anna@example.com',offer:true,consent:true,adult:true,planId:'vip',legalSnapshot:snapshot,idempotencyKey:randomUUID()});
+const valid=()=>({name:'Анна',email:'anna@example.com',emailConfirm:'anna@example.com',offer:true,consent:true,adult:true,planId:'vip',legalSnapshot:snapshot,idempotencyKey:randomUUID()});
 async function fixture(t,overrides={}){
   const config=loadConfig({...env,...overrides}),store=memoryStore();
   const server=createServer(await createHandler(config,store));
@@ -35,7 +35,7 @@ test('production fails closed without real origin, credentials and payment setti
 });
 test('server validates contact, consent, tariff and document versions',async t=>{
   const {request,store}=await fixture(t);
-  for(const change of [{email:'maa190186@@gmail.co'},{name:'<script>'},{offer:false},{consent:false},{adult:false},{planId:'constructor'},{legalSnapshot:{}},{idempotencyKey:'123'}]){
+  for(const change of [{email:'maa190186@@gmail.co'},{emailConfirm:'wrong@example.com'},{name:'<script>'},{offer:false},{consent:false},{adult:false},{planId:'constructor'},{legalSnapshot:{}},{idempotencyKey:'123'}]){
     const response=await request('/api/leads','POST',{...valid(),...change});assert.ok([400,409].includes(response.status));
   }
   assert.equal(store.leads.size,0);
@@ -58,13 +58,33 @@ test('admin requires credentials, session, CSRF and fresh record version',async 
   const {csrfToken}=await login.json();const headers={Cookie:cookie.split(';')[0],'X-CSRF-Token':csrfToken};
   const lead=await (await request('/api/leads','POST',valid())).json();
   const listing=await (await request('/api/admin/leads','GET',undefined,headers)).json();assert.equal(listing.total,1);
-  const update={status:'confirmed',version:1,note:'Тестовая сверка операции банка'};
+  const update={status:'confirmed',version:1,note:'Тестовая сверка операции банка',reference:'BANK-TEST-1001',verifiedInBank:true};
   assert.equal((await request(`/api/admin/leads/${lead.id}`,'PATCH',update,{Cookie:headers.Cookie})).status,403);
   assert.equal((await request(`/api/admin/leads/${lead.id}`,'PATCH',update,{...headers,Origin:'https://attacker.invalid'})).status,403);
+  assert.equal((await request(`/api/admin/leads/${lead.id}`,'PATCH',{...update,verifiedInBank:false},headers)).status,400);
+  assert.equal((await request(`/api/admin/leads/${lead.id}`,'PATCH',{...update,reference:''},headers)).status,400);
   assert.equal((await request(`/api/admin/leads/${lead.id}`,'PATCH',update,headers)).status,200);assert.equal(store.audit.length,1);
   assert.equal((await request(`/api/admin/leads/${lead.id}`,'PATCH',update,headers)).status,409);
   assert.equal((await request('/api/admin/logout','POST',{},headers)).status,200);
   assert.equal((await request('/api/admin/leads','GET',undefined,headers)).status,401);
+});
+test('bank reference is unique; wrong email correction and refund require an authenticated bank workflow',async t=>{
+  const {request,store}=await fixture(t);
+  const a=await (await request('/api/leads','POST',valid())).json();
+  const b=await (await request('/api/leads','POST',{...valid(),email:'other@example.com',emailConfirm:'other@example.com'})).json();
+  const login=await request('/api/admin/login','POST',{username:'admin',password});
+  const {csrfToken}=await login.json();const headers={Cookie:login.headers.get('set-cookie').split(';')[0],'X-CSRF-Token':csrfToken};
+  const patch=(id,body)=>request(`/api/admin/leads/${id}`,'PATCH',body,headers);
+  const paid={status:'confirmed',version:1,note:'Поступление сверено в кабинете банка',reference:'BANK-UNIQUE-2001',verifiedInBank:true};
+  assert.equal((await patch(a.id,paid)).status,200);
+  assert.equal((await patch(b.id,paid)).status,409);
+  assert.equal((await patch(a.id,{status:'refunded',version:2,note:'Попытка обойти этап запроса',reference:'REFUND-2001',verifiedInBank:true})).status,409);
+  assert.equal((await request(`/api/admin/leads/${a.id}/email`,'PATCH',{email:'correct@example.com',version:2,bankReference:'WRONG-REFERENCE',note:'Плательщик представил номер заявки и данные операции',verifiedPayer:true},headers)).status,403);
+  assert.equal((await request(`/api/admin/leads/${a.id}/email`,'PATCH',{email:'correct@example.com',version:2,bankReference:'BANK-UNIQUE-2001',note:'Плательщик представил номер заявки и данные операции',verifiedPayer:true},headers)).status,200);
+  assert.equal([...store.leads.values()].find(row=>row.id===a.id).email,'correct@example.com');
+  assert.equal((await patch(a.id,{status:'refund_requested',version:3,note:'Получено обращение по возврату'})).status,200);
+  assert.equal((await patch(a.id,{status:'refunded',version:4,note:'Средства возвращены через банк',reference:'REFUND-2001',verifiedInBank:true})).status,200);
+  assert.equal((await patch(a.id,{status:'confirmed',version:5,note:'Повторное открытие доступа',verifiedInBank:true})).status,409);
 });
 test('rate limiting and errors do not expose contact records',async t=>{
   const {request,store}=await fixture(t);
@@ -75,7 +95,7 @@ test('rate limiting and errors do not expose contact records',async t=>{
 });
 test('static host exposes only public files and server runtime, with CSP',async t=>{
   const {request}=await fixture(t);
-  for(const path of ['/server/config.mjs','/.env','/deploy/settings.example','/course/%2e%2e%2f.env','/admin-demo.html'])assert.equal((await request(path)).status,404,path);
+  for(const path of ['/server/config.mjs','/.env','/deploy/settings.example','/course/%2e%2e%2f.env','/admin-demo.html','/course/lesson-1.mp4','/api/media/lesson-1'])assert.equal((await request(path)).status,404,path);
   const page=await request('/');assert.equal(page.status,200);assert.match(page.headers.get('content-security-policy'),/frame-ancestors 'none'/);
   assert.match(await (await request('/site-runtime.js')).text(),/"mode":"server"/);
   const doc=await request('/document.html?doc=offer');assert.match(await doc.text(),/<script nonce="[a-f0-9]+"/);

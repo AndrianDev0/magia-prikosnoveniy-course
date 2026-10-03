@@ -1,12 +1,12 @@
 import { readFile, stat } from 'node:fs/promises';
 import { resolve, extname, basename } from 'node:path';
 import { createHmac } from 'node:crypto';
-import { createPaymentLead, createLegalSnapshot, paymentPlans } from '../pages/payment.js';
+import { createPaymentLead, createLegalSnapshot, paymentPlans, validatePaymentField } from '../pages/payment.js';
 import { HttpError, readJson, sha256, token, verifyPassword, readSessionCookie, sessionCookie, csrfToken, sameToken } from './security.mjs';
+import { paymentStatuses, validBankReference, normalizeBankReference } from './payment-policy.mjs';
 
 const amounts=Object.fromEntries(Object.entries(paymentPlans).map(([id,plan])=>[id,plan.amountRub]));
 const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.svg':'image/svg+xml','.png':'image/png','.jpg':'image/jpeg','.webp':'image/webp','.otf':'font/otf'};
-const statuses=['pending','confirmed','rejected'];
 const uuid=/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i;
 export async function createHandler(config,store) {
   const packet=JSON.parse(await readFile(resolve(config.root,'public/course/legal-documents.json'),'utf8'));
@@ -102,14 +102,26 @@ export async function createHandler(config,store) {
         if(path==='/api/admin/leads'&&request.method==='GET'){
           const search=(url.searchParams.get('search')||'').slice(0,100),status=url.searchParams.get('status')||'all';
           const page=Number(url.searchParams.get('page')||1);
-          if(!['all',...statuses].includes(status)||!Number.isInteger(page)||page<1||page>100000)throw new HttpError(400,'Некорректный фильтр.');
+          if(!['all',...paymentStatuses].includes(status)||!Number.isInteger(page)||page<1||page>100000)throw new HttpError(400,'Некорректный фильтр.');
           return json(response,200,await store.list({search,status,page}));
+        }
+        const emailMatch=/^\/api\/admin\/leads\/([a-f0-9-]+)\/email$/i.exec(path);
+        if(emailMatch&&uuid.test(emailMatch[1])&&request.method==='PATCH'){
+          const input=await readJson(request);
+          const email=typeof input.email==='string'?input.email.trim().toLowerCase():'';
+          if(validatePaymentField('email',email)||!Number.isInteger(input.version)||typeof input.note!=='string'||input.note.trim().length<20||input.note.length>500||!validBankReference(input.bankReference)||input.verifiedPayer!==true)throw new HttpError(400,'Укажите корректную почту, номер сверенной операции и причину исправления от 20 символов.');
+          await store.correctEmail(emailMatch[1],email,input.version,input.note.trim(),config.adminUsername,normalizeBankReference(input.bankReference));
+          return json(response,200,{ok:true});
         }
         const id=path.slice('/api/admin/leads/'.length);
         if(path.startsWith('/api/admin/leads/')&&uuid.test(id)&&request.method==='PATCH'){
           const input=await readJson(request);
-          if(!statuses.includes(input.status)||!Number.isInteger(input.version)||typeof input.note!=='string'||input.note.trim().length<5||input.note.length>500)throw new HttpError(400,'Укажите статус и комментарий от 5 до 500 символов.');
-          await store.update(id,input.status,input.version,input.note.trim(),config.adminUsername);
+          const reference=typeof input.reference==='string'?normalizeBankReference(input.reference):'';
+          if(!paymentStatuses.includes(input.status)||!Number.isInteger(input.version)||typeof input.note!=='string'||input.note.trim().length<5||input.note.length>500)throw new HttpError(400,'Укажите статус и комментарий от 5 до 500 символов.');
+          if(['confirmed','refunded'].includes(input.status)&&input.verifiedInBank!==true)throw new HttpError(400,'Подтвердите сверку операции в кабинете банка.');
+          if(reference&&!validBankReference(reference))throw new HttpError(400,'Номер банковской операции: от 6 до 80 символов.');
+          if(input.status==='refunded'&&!reference)throw new HttpError(400,'Укажите номер операции возврата из банка.');
+          await store.update(id,input.status,input.version,input.note.trim(),config.adminUsername,reference);
           return json(response,200,{ok:true});
         }
       }

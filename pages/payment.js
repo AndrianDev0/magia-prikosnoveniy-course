@@ -38,6 +38,7 @@ export async function createLegalSnapshot(packet) {
 
 export function createPaymentLead(values, planId, snapshot, now = new Date()) {
   if (!Object.hasOwn(paymentPlans,planId)) throw new Error('invalid-plan');
+  if (typeof values.emailConfirm !== 'string' || values.email.trim().toLowerCase() !== values.emailConfirm.trim().toLowerCase()) throw new Error('email-mismatch');
   for (const field of ['name','email','offer','consent','adult']) {
     if (validatePaymentField(field,values[field])) throw new Error('invalid-fields');
   }
@@ -80,7 +81,7 @@ if (typeof document !== 'undefined') {
     const serverMode=runtime?.mode==='server';
     const runtimeReady=['demo','server'].includes(runtime?.mode);
     const plans = paymentPlans;
-    const fields = ['name','email','offer','consent','adult'];
+    const fields = ['name','email','emailConfirm','offer','consent','adult'];
     const checkboxFields = new Set(['offer','consent','adult']);
     const summary = form.querySelector('.payment-form-error');
     const submit = form.querySelector('.payment-submit');
@@ -125,7 +126,9 @@ if (typeof document !== 'undefined') {
     legalRetry.addEventListener('click', loadLegalDocuments);
     function showError(field) {
       const input = form.elements.namedItem(field);
-      const message = validatePaymentField(field, checkboxFields.has(field) ? input.checked : input.value);
+      const message = field==='emailConfirm'
+        ? (validatePaymentField('email',input.value)||((input.value.trim().toLowerCase()===form.elements.namedItem('email').value.trim().toLowerCase())?'':'Адреса почты не совпадают. Введите их заново.'))
+        : validatePaymentField(field, checkboxFields.has(field) ? input.checked : input.value);
       const error = document.querySelector(`#payment-${field}-error`);
       input.setAttribute('aria-invalid', String(Boolean(message)));
       error.textContent = message;
@@ -195,6 +198,7 @@ if (typeof document !== 'undefined') {
         clearSummary();
         if (field === 'offer' && input.checked) planChangeNote.hidden = true;
         if (field === 'email' && input.value.split('@').length > 2) touched.add(field);
+        if (field === 'email' && touched.has('emailConfirm')) showError('emailConfirm');
         if (touched.has(field)) showError(field);
       });
     });
@@ -221,7 +225,7 @@ if (typeof document !== 'undefined') {
       fields.forEach(field=>form.elements.namedItem(field).disabled=true);
       modal.querySelector('.payment-close').disabled=true;
       try {
-        const values={name:String(data.get('name')),email:String(data.get('email')),offer:data.get('offer') === 'on',consent:data.get('consent') === 'on',adult:data.get('adult') === 'on'};
+        const values={name:String(data.get('name')),email:String(data.get('email')),emailConfirm:String(data.get('emailConfirm')),offer:data.get('offer') === 'on',consent:data.get('consent') === 'on',adult:data.get('adult') === 'on'};
         if(serverMode){
           const response=await fetch('./api/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...values,planId:selectedPlan,legalSnapshot,idempotencyKey}),signal:AbortSignal.timeout(15000)});
           const result=await response.json();
@@ -240,6 +244,7 @@ if (typeof document !== 'undefined') {
             img.addEventListener('error',()=>{img.hidden=true;note.textContent='QR не загрузился. Не переводите деньги по случайным реквизитам; свяжитесь с поддержкой.'});
             payment.append(img,note);
           }else{const note=document.createElement('p');note.textContent='Оплата пока не подключена. Администратор свяжется с вами по указанной почте.';payment.append(note)}
+          const correction=document.createElement('p');correction.textContent=`Если после оплаты заметили ошибку в почте, не оплачивайте повторно. Сообщите номер заявки в поддержку: ${runtime.supportEmail}. Администратор сверит платёж в банке и исправит адрес; доступ автоматически не отправляется.`;payment.append(correction);
           success.querySelector('[data-payment-done]').before(payment);
           success.setAttribute('tabindex','-1');success.focus();modal.scrollTop=0;
           return;
