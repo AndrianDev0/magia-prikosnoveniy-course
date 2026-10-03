@@ -3,6 +3,7 @@ body:has(.course-artwork) { background: radial-gradient(ellipse 540px 600px at 0
 .course-artwork { line-height: normal; background: transparent; }
 .course-artwork::before { display: none; }
 .course-artwork > .artwork-picture { height: 10.1cqw; overflow: hidden; }
+.course-artwork > .artwork-picture .artwork-image { aspect-ratio: auto; }
 .course-artwork + .readable-footer { margin-top: 0; min-height: 0; }
 .course-heading {
   margin: 4cqw auto 0;

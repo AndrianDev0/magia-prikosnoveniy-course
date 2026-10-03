@@ -16,12 +16,13 @@
   <link rel="canonical" href="https://andriandev0.github.io/magia-prikosnoveniy-course/">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <title>Магия прикосновений</title>
-  <link rel="stylesheet" href="./styles.css?v=mobile-profile-v14">
-  <link rel="stylesheet" href="./course/ambient.css?v=responsive-v6">
+  <link rel="stylesheet" href="./styles.css?v=performance-v1">
+  <link rel="stylesheet" href="./course/ambient.css?v=performance-v1">
   <link rel="stylesheet" href="./course/menu.css?v=mobile-profile-v20">
   <link rel="stylesheet" href="./course/tariffs.css?v=review-v18">
   <link rel="stylesheet" href="./course/plan-steps.css?v=responsive-v6">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+  <link rel="preload" href="./course/optimized/miama-nueva.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="./course/fonts.css?v=1">
   <link rel="stylesheet" href="./course/intro-copy.css?v=review-v18">
   <link rel="stylesheet" href="./course/footer.css?v=mobile-compact-v18">
   <link rel="stylesheet" href="./payment.css?v=hosting-ready-v18">
@@ -37,8 +38,7 @@
     <picture class="artwork-picture">
       <source media="(max-width:767px)" srcset="./course/home-mobile-responsive.webp" width="900" height="4277" type="image/webp">
       <source media="(max-width:1024px)" srcset="./course/home-tablet-figma.webp" width="1024" height="3017" type="image/webp">
-      <source media="(max-width:1600px)" srcset="./course/home-laptop-figma.webp" width="1440" height="4243" type="image/webp">
-      <source srcset="./course/home-desktop-figma.webp" width="1920" height="5657" type="image/webp">
+      <source srcset="./course/home-tablet-figma.webp 1024w, ./course/home-laptop-figma.webp 1440w, ./course/home-desktop-figma.webp 1920w" sizes="(min-width:2011px) 1320px, calc(30vw + 716.8px)" width="1920" height="5657" type="image/webp">
       <img class="artwork-image" src="./course/home-desktop-figma.webp" width="1920" height="5657" fetchpriority="high" decoding="async" alt="Курс по тантрическому массажу «Магия прикосновений»">
     </picture>
 
@@ -92,9 +92,9 @@
         <button data-next aria-label="Следующий тариф">→</button>
       </div>
       <div class="carousel-window"><div class="carousel-track">
-        <article class="slide"><button class="mobile-plan-purchase" type="button" data-payment-plan="standard"><img src="./course/plan-standard.png" alt="Тариф Стандарт"></button><button data-plan-open>План курса</button></article>
-        <article class="slide active"><button class="mobile-plan-purchase" type="button" data-payment-plan="vip"><img src="./course/plan-vip.png" alt="Тариф VIP"></button><button data-plan-open>План курса</button></article>
-        <article class="slide"><button class="mobile-plan-purchase" type="button" data-payment-plan="vip-plus"><img src="./course/plan-vip-plus.png" alt="Тариф VIP плюс"><span class="vip-plus-bonus"><strong>+1 очное занятие</strong><span>В течение года с покупки, при наличии занятия и предварительном согласовании.</span></span></button><button data-plan-open>План курса</button></article>
+        <article class="slide"><button class="mobile-plan-purchase" type="button" data-payment-plan="standard"><img src="./course/optimized/plan-standard.webp" width="536" height="682" loading="lazy" decoding="async" alt="Тариф Стандарт"></button><button data-plan-open>План курса</button></article>
+        <article class="slide active"><button class="mobile-plan-purchase" type="button" data-payment-plan="vip"><img src="./course/optimized/plan-vip.webp" width="536" height="862" loading="lazy" decoding="async" alt="Тариф VIP"></button><button data-plan-open>План курса</button></article>
+        <article class="slide"><button class="mobile-plan-purchase" type="button" data-payment-plan="vip-plus"><img src="./course/optimized/plan-vip-plus.webp" width="536" height="1070" loading="lazy" decoding="async" alt="Тариф VIP плюс"><span class="vip-plus-bonus"><strong>+1 очное занятие</strong><span>В течение года с покупки, при наличии занятия и предварительном согласовании.</span></span></button><button data-plan-open>План курса</button></article>
       </div></div>
     </section>
     <button class="mobile-plan-open" data-plan-open aria-label="Открыть план курса"></button>
@@ -156,7 +156,7 @@
   </div>
 
   <dialog class="plan-modal" id="plan-modal" aria-label="План курса">
-    <picture><source media="(max-width:720px)" srcset="./course/plan-modal-mobile-figma.png"><img src="./course/plan-desktop-figma.png" alt="План курса"></picture>
+    <picture><source media="(max-width:720px)" srcset="./course/optimized/plan-modal-mobile-figma.webp" width="969" height="678"><img src="./course/optimized/plan-desktop-figma.webp" width="1649" height="1150" loading="lazy" decoding="async" alt="План курса"></picture>
     <button class="plan-close" aria-label="Продолжить"></button>
   </dialog>
 

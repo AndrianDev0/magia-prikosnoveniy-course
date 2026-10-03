@@ -6,7 +6,7 @@ import { HttpError, readJson, sha256, token, verifyPassword, readSessionCookie, 
 import { paymentStatuses, validBankReference, normalizeBankReference } from './payment-policy.mjs';
 
 const amounts=Object.fromEntries(Object.entries(paymentPlans).map(([id,plan])=>[id,plan.amountRub]));
-const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.svg':'image/svg+xml','.png':'image/png','.jpg':'image/jpeg','.webp':'image/webp','.otf':'font/otf'};
+const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.svg':'image/svg+xml','.png':'image/png','.jpg':'image/jpeg','.webp':'image/webp','.otf':'font/otf','.woff2':'font/woff2'};
 const uuid=/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i;
 export async function createHandler(config,store) {
   const packet=JSON.parse(await readFile(resolve(config.root,'public/course/legal-documents.json'),'utf8'));

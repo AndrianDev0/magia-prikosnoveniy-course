@@ -99,6 +99,9 @@ test('static host exposes only public files and server runtime, with CSP',async 
   const page=await request('/');assert.equal(page.status,200);assert.match(page.headers.get('content-security-policy'),/frame-ancestors 'none'/);
   assert.match(await (await request('/site-runtime.js')).text(),/"mode":"server"/);
   const doc=await request('/document.html?doc=offer');assert.match(await doc.text(),/<script nonce="[a-f0-9]+"/);
+  for(const [path,type] of [['/course/optimized/miama-nueva.woff2','font/woff2'],['/course/optimized/course-header-mobile.webp','image/webp']]){
+    const asset=await request(path);assert.equal(asset.status,200);assert.equal(asset.headers.get('content-type'),type);
+  }
   assert.equal((await request('/api/leads','POST',valid(),{Origin:'https://other.invalid'})).status,403);
   assert.equal((await request('/api/leads','POST',valid(),{'Content-Type':'text/plain'})).status,415);
 });

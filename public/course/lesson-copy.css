@@ -28,7 +28,7 @@
 }
 @font-face {
   font-family: "Miama Nueva Course";
-  src: url("./miama-nueva.otf") format("opentype");
+  src: url("./optimized/miama-nueva.woff2") format("woff2");
   font-style: normal;
   font-weight: 400;
   font-display: swap;

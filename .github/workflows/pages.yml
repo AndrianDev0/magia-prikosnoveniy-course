@@ -36,11 +36,13 @@ jobs:
           node scripts/test-admin-demo.mjs
           node scripts/test-carousel.mjs
           node scripts/check-public-media.mjs
+          node scripts/test-page-assets.mjs
           npm run build
       - name: Assemble static site
         run: |
           mkdir -p _site/course
           cp -r pages/. _site/
+          cp -r public/course/optimized _site/course/
           cp public/course/*.css public/course/*.js public/course/legal-documents.json public/course/miama-nueva.otf _site/course/
           find public/course -maxdepth 1 -type f -name '*-background-*.svg' -exec cp {} _site/course/ \;
           cp public/course/plan-steps.svg public/course/payment-qr-placeholder.svg _site/course/
@@ -54,6 +56,8 @@ jobs:
           touch _site/.nojekyll
           test -s _site/index.html
           test -s _site/course.html
+          test -s _site/course/optimized/miama-nueva.woff2
+          test -s _site/course/optimized/course-header-mobile.webp
           test -s _site/course/home-mobile-responsive.webp
           test -s _site/course/home-tablet-figma.webp
           test -s _site/course/lessons-mobile-responsive.webp

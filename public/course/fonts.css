@@ -1,0 +1,15 @@
+/* Local copies of the existing typefaces avoid a third-party rendering dependency. */
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("./optimized/montserrat-regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("./optimized/montserrat-bold.woff2") format("woff2");
+}
