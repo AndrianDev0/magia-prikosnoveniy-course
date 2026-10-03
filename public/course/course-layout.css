@@ -87,15 +87,19 @@ body:has(.course-artwork) { background: radial-gradient(ellipse 540px 600px at 0
   .course-artwork .course-account { top: 1.5cqw; height: 6.5cqw; min-height: 44px; }
 }
 @media (max-width: 767px) {
+  .course-artwork { background: #482817 url("./optimized/course-glow-mobile.webp") center top / 100% 100% no-repeat; }
   .course-artwork > .artwork-picture { height: 15.5cqw; }
   /* Match the 380px Figma frame, keeping revised copy in normal document flow. */
   .course-heading { margin-top: 11.5cqw; max-width: 94%; font-size: 6cqw; line-height: 1.04; text-wrap: wrap; }
   .course-heading span { display: block; }
   .course-artwork > .course-tagline { margin: 5cqw auto 6cqw; width: 88%; font-size: clamp(12px, 3.16cqw, 20px); line-height: 1.35; }
-  .course-lessons { gap: 8.4cqw; padding-inline: 5.2%; }
+  .course-lessons { gap: 7.895cqw; padding-inline: 5.263%; background: none; }
   .course-lesson h2 { margin-bottom: 2.5cqw; font-size: 6.2cqw; line-height: 1.05; text-wrap: wrap; }
-  .course-lesson > p { margin-top: 3.5cqw; padding-left: 14px; font-size: clamp(12px, 3.42cqw, 20px); line-height: 1.4; }
-  .course-lesson-video { border-radius: 3cqw; }
+  /* Figma: x=35, 12px italic 400; exported lines are spaced 15px apart.
+     Keep revised descriptions in flow rather than clipping to the old boxes. */
+  .course-lesson > p { margin-top: 2.632cqw; padding-left: 3.947cqw; font-size: clamp(12px, 3.158cqw, 20px); font-weight: 400; line-height: 1.25; }
+  .course-lesson:nth-child(-n+3) > p { padding-right: 5.263cqw; }
+  .course-lesson-video { border-radius: 2.632cqw; }
   .course-lesson-video .course-play { width: 44px; }
   .course-artwork .course-home { height: 15cqw; }
 }

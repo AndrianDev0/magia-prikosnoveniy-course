@@ -5,3 +5,10 @@
   font-display: swap;
   src: url("./optimized/montserrat-light-italic.woff2") format("woff2");
 }
+@font-face {
+  font-family: "Montserrat";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("./optimized/montserrat-regular-italic.woff2") format("woff2");
+}

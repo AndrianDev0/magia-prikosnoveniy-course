@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="380" height="2764" viewBox="0 0 380 2764" fill="none">
+  <!-- Background-only derivative of the supplied 380x3107 mobile Figma export.
+       Keep the original glow positions, colours, radius and sRGB blur.
+       The footer starts at y=2764 and has its own existing background. -->
+  <rect width="380" height="2764" fill="#482817"/>
+  <g transform="translate(406.5 2873.5)"><use href="#glow"/></g>
+  <g transform="translate(-30.5 2608.5)"><use href="#glow"/></g>
+  <g transform="translate(296.5 2410.5)"><use href="#glow"/></g>
+  <g transform="translate(106.5 1980.5)"><use href="#glow"/></g>
+  <g transform="translate(395.5 1735.5)"><use href="#glow"/></g>
+  <g transform="translate(7.5 1491.5)"><use href="#glow"/></g>
+  <g transform="translate(269.5 1277.5)"><use href="#glow"/></g>
+  <g transform="translate(123.5 1008.5)"><use href="#glow"/></g>
+  <g transform="translate(368.5 717.5)"><use href="#glow"/></g>
+  <g transform="translate(230.5 363.5)"><use href="#glow"/></g>
+  <g transform="translate(-25.5 146.5)"><use href="#glow"/></g>
+  <defs>
+    <g id="glow" filter="url(#soften)"><circle r="98.5" fill="url(#warm)"/></g>
+    <filter id="soften" x="-198.5" y="-198.5" width="397" height="397" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="50"/></filter>
+    <radialGradient id="warm" cx="0" cy="0" r="98.5" gradientUnits="userSpaceOnUse"><stop offset="0.208809" stop-color="#FFFFC9"/><stop offset="1" stop-color="#FF3B00"/></radialGradient>
+  </defs>
+</svg>

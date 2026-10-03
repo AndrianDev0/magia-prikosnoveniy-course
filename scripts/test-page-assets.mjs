@@ -30,10 +30,17 @@ for(const name of ['index','course']){
     assert.ok((await stat(resolve(root,'public/course/optimized',match[1]))).size>0,match[1]);
   }
 }
+for(const name of ['course-layout.css','fonts-course.css']){
+  const css=await readFile(resolve(root,'public/course',name),'utf8');
+  for(const match of css.matchAll(/\.\/optimized\/([\w.-]+)/g)){
+    assert.ok((await stat(resolve(root,'public/course/optimized',match[1]))).size>0,`Missing CSS asset: ${match[1]}`);
+  }
+}
 for(const [name,maxBytes] of [
   ['course-header-mobile.webp',20000],['course-header-desktop.webp',26000],
   ['lesson-poster-640.webp',30000],['lesson-poster-1280.webp',65000],
   ['lesson-poster-1920.webp',105000],['miama-nueva.woff2',65000],
   ['plan-desktop-figma.webp',100000],['plan-modal-mobile-figma.webp',55000],
+  ['course-glow-mobile.webp',45000],['montserrat-regular-italic.woff2',45000],
 ])assert.ok((await stat(resolve(root,'public/course/optimized',name))).size<=maxBytes,`${name} exceeds its transfer budget`);
 console.log('Page assets: references, local fonts and image/font size budgets passed.');

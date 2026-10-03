@@ -4,6 +4,7 @@ Montserrat is downloaded from the same Google Fonts release used by the site.
 Miama Nueva is the existing project font. Keep all OpenType layout features.
 """
 from io import BytesIO
+import sys
 from pathlib import Path
 from urllib.request import urlopen
 from fontTools import subset
@@ -16,6 +17,7 @@ FONTS = {
     "montserrat-regular": "https://fonts.gstatic.com/s/montserrat/v31/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Ew-.ttf",
     "montserrat-bold": "https://fonts.gstatic.com/s/montserrat/v31/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCuM70w-.ttf",
     "montserrat-light-italic": "https://fonts.gstatic.com/s/montserrat/v31/JTUFjIg1_i6t8kCHKm459Wx7xQYXK0vOoz6jq_p9aX8.ttf",
+    "montserrat-regular-italic": "https://fonts.gstatic.com/s/montserrat/v31/JTUFjIg1_i6t8kCHKm459Wx7xQYXK0vOoz6jq6R9aX8.ttf",
 }
 
 def convert(font, name):
@@ -31,8 +33,14 @@ def convert(font, name):
     font.save(destination)
     print(f"{destination.name}: {destination.stat().st_size} bytes")
 
-convert(TTFont(COURSE / "miama-nueva.otf"), "miama-nueva")
+selected = set(sys.argv[1:])
+if selected - (set(FONTS) | {"miama-nueva"}):
+    raise SystemExit("Unknown font name")
+if not selected or "miama-nueva" in selected:
+    convert(TTFont(COURSE / "miama-nueva.otf"), "miama-nueva")
 for name, url in FONTS.items():
+    if selected and name not in selected:
+        continue
     with urlopen(url, timeout=30) as response:
         convert(TTFont(BytesIO(response.read())), name)
 with urlopen("https://raw.githubusercontent.com/google/fonts/main/ofl/montserrat/OFL.txt", timeout=30) as response:

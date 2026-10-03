@@ -26,3 +26,6 @@ for(const width of [640,1280,1920])await save(sharp(resolve(course,'lesson-poste
 for(const name of ['plan-standard','plan-vip','plan-vip-plus','plan-desktop-figma','plan-modal-mobile-figma']){
   await save(sharp(resolve(course,`${name}.png`)),`${name}.webp`,{quality:90,effort:6});
 }
+// The glow has no fine detail. Render once at its native width instead of
+// making mobile browsers repaint eleven large SVG Gaussian blur filters.
+await save(sharp(resolve(course,'lessons-background-mobile.svg')),'course-glow-mobile.webp',{quality:90,effort:6});
