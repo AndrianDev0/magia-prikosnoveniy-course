@@ -6,6 +6,7 @@
   z-index: 6;
   min-height: var(--footer-height);
   margin-top: calc(-1 * var(--footer-overlap));
+  border-top: 1px solid rgba(255, 244, 237, .65);
   background: radial-gradient(ellipse at 48% 130%, rgba(207, 99, 51, .5), transparent 58%), #482817;
   color: #fff4ed;
   font-family: "Montserrat", Arial, sans-serif;
