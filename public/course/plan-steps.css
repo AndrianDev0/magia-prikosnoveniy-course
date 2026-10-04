@@ -1,15 +1,44 @@
-/* Decoration only: retain the original typography, imagery and button hit area. */
-.figma-plan-picture::after,
-.plan-modal picture::after {
-  content: "";
+/* Thin, even lesson frames follow the exported Figma coordinates. */
+.plan-flow {
   position: absolute;
   inset: 0;
-  background: var(--plan-steps-image) center / 100% 100% no-repeat;
+  z-index: 1;
   pointer-events: none;
 }
-.figma-plan-picture { --plan-steps-image: url("/course/plan-steps.svg"); }
-.plan-modal picture { --plan-steps-image: url("./plan-steps.svg"); }
-
+.plan-frame {
+  position: absolute;
+  border: 1px solid rgba(151, 82, 53, .58);
+  border-radius: 1.6vw;
+  box-shadow: inset 0 0 0 1px rgba(255, 250, 246, .34);
+}
+.plan-frame-1 { left: 3.64%; top: 21%; width: 23.05%; height: 22%; }
+.plan-frame-2 { left: 29.41%; top: 21%; width: 19.41%; height: 22%; }
+.plan-frame-3 { left: 51.55%; top: 21%; width: 23.35%; height: 22%; }
+.plan-frame-4 { left: 77.74%; top: 21%; width: 18.19%; height: 22%; }
+.plan-frame-5 { left: 18.2%; top: 46.5%; width: 19.4%; height: 20%; }
+.plan-frame-6 { left: 41.2%; top: 46.5%; width: 20%; height: 20%; }
+.plan-frame-7 { left: 64.3%; top: 46.5%; width: 18.8%; height: 20%; }
+.plan-arrow {
+  position: absolute;
+  height: 1px;
+  background: rgba(151, 82, 53, .72);
+}
+.plan-arrow::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -4px;
+  width: 8px;
+  height: 8px;
+  border-top: 1px solid rgba(151, 82, 53, .8);
+  border-right: 1px solid rgba(151, 82, 53, .8);
+  transform: rotate(45deg);
+}
+.plan-arrow-1 { left: 26.9%; top: 32%; width: 2.1%; }
+.plan-arrow-2 { left: 49.1%; top: 32%; width: 2.1%; }
+.plan-arrow-3 { left: 75.1%; top: 32%; width: 2.2%; }
+.plan-arrow-4 { left: 37.9%; top: 56.5%; width: 2.8%; }
+.plan-arrow-5 { left: 61.5%; top: 56.5%; width: 2.4%; }
 /* Match the inside of the original Figma button, not an approximate hit box. */
 .course-plan-dialog.figma-plan-dialog .figma-plan-close,
 .plan-modal .plan-close {
