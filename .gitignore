@@ -55,3 +55,7 @@ next-env.d.ts
 /home-desktop-preview.png
 /deploy/payment-assets/
 /deploy/backups/
+
+# Local browser profiles and QA output
+/output/
+*.tsbuildinfo
